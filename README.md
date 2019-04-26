@@ -1,2 +1,2 @@
-# CSharpCVWebsite
-My website written in ASP.NET C#
+# CVWebsite
+My personal website written in pure HTML/JS/CSS
