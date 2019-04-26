@@ -1,0 +1,122 @@
+.contacts {
+	background-color: #1e1e1e;
+}
+
+body {
+	margin: 0px;
+}
+
+.goto {
+	background-color: #1e1e1e;
+	color: #dcdcdc;
+	float: right;
+	border-radius: 5px;
+	position: fixed;
+	right: 10px;
+    bottom: 10px;
+    font-size: 14px;
+    padding: 5px;
+
+    height: 15px;
+    width: 110px;
+
+    transition: .5s;
+	font-family: Consolas;
+}
+.goto:hover {
+    height: 87px;
+    width: 150px;
+}
+.list {
+    float: right;
+    opacity: 0;
+}
+.goto:hover .list {
+    opacity: 1;
+}
+.currentItem {
+    float: right;
+}
+.goto:hover .currentItem {
+    display: none;
+}
+.goto .keyword {
+    opacity: 0;
+    bottom: 15px;
+    float: left;
+    position: fixed;
+}
+.goto:hover .keyword {
+    opacity: 1;
+}
+
+.goto a:link {
+	color: #dcdcdc;
+	text-decoration: none;
+}
+.goto a:hover {
+	color: #569cd6;
+	text-decoration: underline;
+}
+.goto a:visited {
+	color: #dcdcdc;
+	text-decoration: none;
+}
+
+.contacts div {
+	font-family: Consolas;
+	font-size: 14px;
+	margin: 20px;
+	color: #dcdcdc;
+	display: inline-block;
+}
+
+.regString {
+	color: #d69d85;
+	text-decoration: none;
+}
+.string:link {
+	color: #d69d85;
+	text-decoration: none;
+}
+.string:visited {
+	color: #d69d85;
+	text-decoration: none;
+}
+
+.string:hover {
+	color: #569cd6;
+	text-decoration: underline;
+}
+
+.type {
+	color: #4ec9b0;
+}
+
+.keyword {
+	color: #569cd6 !important;
+}
+
+.codeLinks:link {
+	text-decoration: none;
+	color: white;
+}
+.codeLinks:visited {
+	text-decoration: none;
+	color: white;
+}
+
+.codeLinks:hover {
+	color: #569cd6;
+	text-decoration: underline;
+}
+.comment {
+	color: 57a64a;
+}
+.linesNum {
+	color: #2b91af !important;
+}
+
+.intro {
+	background-color: #00a7dc;
+}
