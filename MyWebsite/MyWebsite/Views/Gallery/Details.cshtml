@@ -1,0 +1,18 @@
+﻿
+@{
+    ViewData["Title"] = "Image overview";
+}
+
+<header>
+    <p>&#xE760; <a asp-action="Index" asp-controller="Gallery">Back to gallery</a></p>
+</header>
+
+<article class="image-overview-block">
+    <img src="~/images/Gallery/VectorAvatar.svg" onclick="ToggleImageSize();" id="image" />
+
+    <div>
+        <h1>Image name</h1>
+        <p class="date">Creation date: <a>15-Aug-2019</a></p>
+        <p>Description</p>
+    </div>
+</article>
