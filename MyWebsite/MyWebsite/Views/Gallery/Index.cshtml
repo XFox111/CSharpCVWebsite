@@ -7,6 +7,9 @@
     <h1>My arts</h1>
 </header>
 
-<article>
-
+<article class="gallery">
+    @foreach (Image image in ViewData["Images"] as Image[])
+    {
+        <a asp-action="Details" asp-route-id="@image.FileName"><img title="@image.Title" src="~/images/Gallery/@image.FileName"/></a>
+    }
 </article>

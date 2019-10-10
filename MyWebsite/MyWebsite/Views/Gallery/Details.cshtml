@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewData["Title"] = "Image overview";
+    ViewData["Title"] = (ViewData["CurrentImage"] as Image).Title;
 }
 
 <header>
@@ -8,11 +8,11 @@
 </header>
 
 <article class="image-overview-block">
-    <img src="~/images/Gallery/VectorAvatar.svg" onclick="ToggleImageSize();" id="image" />
+    <img src="~/images/Gallery/@((ViewData["CurrentImage"] as Image).FileName)" onclick="ToggleImageSize();" id="image" />
 
     <div>
-        <h1>Image name</h1>
-        <p class="date">Creation date: <a>15-Aug-2019</a></p>
-        <p>Description</p>
+        <h1>@((ViewData["CurrentImage"] as Image).Title)</h1>
+        <p class="date">Creation date: <a>@((ViewData["CurrentImage"] as Image).CreationDate.ToShortDateString())</a></p>
+        <p>@((ViewData["CurrentImage"] as Image).Description)</p>
     </div>
 </article>
