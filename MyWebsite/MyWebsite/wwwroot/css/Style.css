@@ -119,17 +119,19 @@ article a:visited {
     transform: scale(1.25);
 }
 
-.inline-header {
-    display: inline-block;
-}
 .github-stats {
     margin-top: 20px;
-    float: right;
-    display: none;
+    grid-column: 2 / 2;
 }
 
 .projects-block {
     margin: 0px 10px;
+}
+
+.projects-header {
+    display: grid;
+    margin-bottom: 20px;
+    grid-template-columns: 1fr auto;
 }
 
 .project-item {
