@@ -1,0 +1,35 @@
+﻿
+@{
+    ViewData["Title"] = "My projects";
+}
+
+<header>
+    <div class="inline-header">
+        <h1>My projects</h1>
+        <h3>Here is presented the most of projects I worked on</h3>
+    </div>
+    <iframe src="//githubbadge.appspot.com/xfox111" style="width: 200px; height: 110px;" class="github-stats" frameborder="0"></iframe>
+</header>
+
+<article class="projects-block">
+    @foreach (Project p in ViewData["Images"] as Project[])
+    {
+        <div class="project-item">
+            @if (!string.IsNullOrWhiteSpace(p.ImageName))
+            {
+                <a target="_blank" href="~/images/Projects/@(p.ImageName)"><img src="~/images/Projects/@(p.ImageName)" /></a>
+            }
+            <div class="text">
+                <h1>@p.Title</h1>
+                <p class="description">@p.Description</p>
+                <a href="@(p.Link)" target="_blank">@p.LinkCaption</a>
+                <div>
+                    @foreach (string i in p.Badges)
+                    {
+                        <img class="badge @i" />
+                    }
+                </div>
+            </div>
+        </div>
+    }
+</article>
