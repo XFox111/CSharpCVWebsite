@@ -3,9 +3,15 @@
     var image = document.getElementById("image");
 
     if (image.style.maxHeight == "none")
+    {
         image.style.maxHeight = "50vh";
+        image.style.maxWidth = "initial";
+    }
     else
+    {
         image.style.maxHeight = "none";
+        image.style.maxWidth = "none";
+    }
 }
 
 function UpdateProjects()
