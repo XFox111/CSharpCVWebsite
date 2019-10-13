@@ -17,18 +17,18 @@
         <div class="project-item">
             @if (!string.IsNullOrWhiteSpace(p.ImageName))
             {
-                <a target="_blank" href="~/images/Projects/@(p.ImageName)"><img src="~/images/Projects/@(p.ImageName)" /></a>
+                <!--<a target="_blank" class="thumbnail" href="~/images/Projects/@(p.ImageName)"><img src="~/images/Projects/@(p.ImageName)" /></a>-->
             }
             <div class="text">
                 <h1>@p.Title</h1>
                 <p class="description">@p.Description</p>
                 <a href="@(p.Link)" target="_blank">@p.LinkCaption</a>
-                <div>
-                    @foreach (string i in p.Badges)
-                    {
-                        <img class="badge @i" />
-                    }
-                </div>
+            </div>
+            <div class="badges">
+                @foreach (string i in p.Badges)
+                {
+                    <div class="badge @i"></div>
+                }
             </div>
         </div>
     }
