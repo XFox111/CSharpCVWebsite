@@ -9,6 +9,7 @@ namespace MyWebsite.Controllers
 {
     public class GalleryController : Controller
     {
+        [HttpGet("Arts")]
         public async Task<IActionResult> Index()
         {
             ViewData["Images"] = JsonConvert.DeserializeObject<Image[]>(await new HttpClient().GetStringAsync($"https://{Request.Host}/Gallery.json"));
