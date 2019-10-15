@@ -69,3 +69,20 @@ function UpdateProjects()
         desc.innerHTML = text;
     }
 }
+
+function PrintCV() {
+    var printFrame = window.open("", "", "height=500, width=800");
+
+    printFrame.document.write("<html>");
+    printFrame.document.write(document.head.outerHTML);
+    printFrame.document.write("<body>");
+    printFrame.document.write(document.getElementById("cv").outerHTML);
+    printFrame.document.write("</body>");
+    printFrame.document.write("</html>");
+
+    printFrame.document.close();
+    setTimeout(function () {
+        printFrame.print();
+        printFrame.close();
+    }, 500);
+}

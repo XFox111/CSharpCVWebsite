@@ -10,6 +10,7 @@ namespace MyWebsite.Controllers
         // TODO: Create custom error page
         // TODO: Update Projects.json and Gallery.json
         // TODO: Complete About page
+        // TODO: Add resume file
         public IActionResult Index() =>
             View();
 

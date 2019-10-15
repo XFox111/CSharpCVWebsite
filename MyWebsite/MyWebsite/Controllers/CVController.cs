@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System.Net;
+using SelectPdf;
 
 namespace MyWebsite.Controllers
 {
@@ -10,7 +10,10 @@ namespace MyWebsite.Controllers
 
         public IActionResult Download()
         {
-            byte[] data = new WebClient().DownloadData($"https://{Request.Host}/CV.pdf");
+            HtmlToPdf converter = new HtmlToPdf();
+            PdfDocument doc = converter.ConvertUrl($"https://{Request.Host}/CV");
+            byte[] data = doc.Save();
+            doc.Close();
             return File(data, "application/pdf", "[Michael Gordeev] CV.pdf");
         }
     }

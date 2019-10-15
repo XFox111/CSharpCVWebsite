@@ -5,10 +5,11 @@
 
 <header>
     <h1>My resume</h1>
-    <a class="comment" asp-action="Download">// Download CV (.pdf) &#xE118;</a>
+    <a class="comment" asp-action="Download">// Download CV (.pdf) &#xE118;</a><br />
+    <a class="comment" onclick="PrintCV()">// Print CV &#xE749;</a>
 </header>
 
-<article>
+<article id="cv">
     <h3>Michael (Mikhail) A. Gordeev</h3>
     <hr>
     <p>
@@ -16,6 +17,7 @@
         Russia<br>
         Phone (Russia): +7 (996) 929-19-69<br>
         Email: <a href="mailto:michael.xfox@outlook.com">michael.xfox@outlook.com</a><br>
+        Personal Website: <a href="//xfox111.net/" target="_blank">https://www.xfox111.net/</a>
     </p>
 
     <h4>Overall Summary:</h4>
@@ -73,6 +75,9 @@
         </li>
         <li>
             Database: MySQL, Microsoft Access
+        </li>
+        <li>
+            English knowledge: C1 (Advanced )
         </li>
         <li>
             Very energetic and ready to take new challenges
