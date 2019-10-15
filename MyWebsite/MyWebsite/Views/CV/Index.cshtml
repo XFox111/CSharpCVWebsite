@@ -8,7 +8,7 @@
     <a class="comment" asp-action="Download">// Download CV (.pdf) &#xE118;</a>
 </header>
 
-<article class="info-block">
+<article>
     <h3>Michael (Mikhail) A. Gordeev</h3>
     <hr>
     <p>
@@ -152,30 +152,4 @@
     <p>On request.</p>
 </article>
 
-<div class="contact-me">
-    <code>
-        <var>if</var> (<var class="class">You</var>.InsterestedInMe)<br />
-        <span class="tab"></span><var class="method">ContactMe</var>();<br />
-        <br />
-        <a class="comment">// All links are clickable</a><br />
-        <var>public void</var> <var class="method">ConatactMe</var>()<br />
-        {<br />
-        <span class="tab"></span><var>string</var> email = <a class="string" href="mailto:michael.xfox@outlook.com">"mihcael.xfox@outlook.com"</a>;<br />
-        <span class="tab"></span><var class="class">Link</var>[] socialNetworks = <var>new</var> <var class="class">Link</var>[]<br />
-        <span class="tab"></span>{<br />
-        <span class="tab"></span><span class="tab"></span><var>new</var> <var class="class">Link</var>(<a class="string">"LinkedIn"</a>, <a class="string" href="//linkedin.com/xfox">"https://linkedin.com/xfox"</a>),<br />
-        <span class="tab"></span><span class="tab"></span><var>new</var> <var class="class">Link</var>(<a class="string">"GitHub"</a>, <a class="string" href="//github.com/xfox111">"https://github.com/xfox111"</a>),<br />
-        <span class="tab"></span><span class="tab"></span><var>new</var> <var class="class">Link</var>(<a class="string">"Twitter"</a>, <a class="string" href="//twitter.com/xfox111">"https://twitter.com/xfox111"</a>),<br />
-        <span class="tab"></span><span class="tab"></span><var>new</var> <var class="class">Link</var>(<a class="string">"Vkontakte"</a>, <a class="string" href="//vk.com/xfox.mike">"https://vk.com/xfox.mike"</a>)<br />
-        <span class="tab"></span>}<br />
-        }<br />
-        <br />
-        <a class="comment">// Copyright &copy;2019 Michael "XFox" Gordeev</a>
-    </code>
-
-    <style type="text/css">
-        footer {
-            display: none;
-        }
-    </style>
-</div>
+<partial name="~/Views/Shared/ContactsBlock.cshtml" />

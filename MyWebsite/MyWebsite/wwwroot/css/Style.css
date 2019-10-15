@@ -77,13 +77,14 @@ main {
     min-height: calc(100vh - 130px);
 }
 
-.info-block {
+article, header {
     margin: 0px 50px;
 }
 
-header {
-    margin: 0px 50px;
+article a:visited, article a:link {
+    color: blue;
 }
+
 header a {
     text-decoration: none;
     color: black;
@@ -109,13 +110,6 @@ header a:hover {
     margin: 0px;
 }
 
-article a:visited {
-    color: blue;
-}
-article a:link {
-    color: blue;
-}
-
 .gallery img {
     transition: .25s;
     object-fit: cover;
@@ -128,106 +122,6 @@ article a:link {
     transform: scale(1.25);
 }
 
-.github-stats {
-    margin-top: 20px;
-    grid-column: 2 / 2;
-}
-
-.projects-block {
-    margin: 0px 10px;
-}
-
-.projects-header {
-    display: grid;
-    margin-bottom: 20px;
-    grid-template-columns: 1fr auto;
-}
-
-.project-item {
-    display: grid;
-    grid-template-columns: auto 1fr;
-    grid-template-rows: auto auto;
-    grid-column-gap: 20px;
-
-    background-color: whitesmoke;
-    margin-bottom: 10px;
-}
-.project-item .thumbnail {
-    grid-column: 1/1;
-    grid-row: 1/3;
-}
-.project-item .thumbnail img {
-    max-height: 220px;
-}
-.badges {
-    grid-column: 2/2;
-    grid-row: 2/2; 
-    margin-bottom: 20px;
-    align-self: end;
-}
-
-.project-item .text {
-    grid-column: 2/2;
-    grid-row: 1/1;
-    margin-bottom: 15px;
-}
-
-.text div {
-    margin-top: 20px;
-}
-
-.badge {
-    height: 25px;
-    width: 25px;
-    margin-right: 10px !important;
-    display: inline-block;
-    background-size: contain;
-}
-
-.comment {
+.comment, .comment:visited {
     color: #57a64a;
 }
-.comment:visited {
-    color: #57a64a;
-}
-.tab {
-    margin-right: 25px;
-}
-.contact-me {
-    padding: 30px 50px;
-    background-color: #1e1e1e;
-    color: white;
-}
-code {
-    font: inherit;
-}
-var {
-    color: #569cd6;
-    font: inherit;
-}
-.class {
-    color: #4ec9b0;
-}
-.string {
-    color: #d69d85;
-    text-decoration: none;
-}
-.string:link:hover {
-    text-decoration: underline;
-}
-.string:visited {
-    color: #d69d85;
-    text-decoration: none;
-}
-.method {
-    color: rgb(220, 220, 170);
-}
-
-.csharp { background-image: url(../images/Badges/csharp.png); }
-.dotnet { background-image: url("../images/Badges/dotnet.png"); }
-.xamarin { background-image: url("../images/Badges/xamarin.png"); }
-.unity { background-image: url("../images/Badges/unity.png"); }
-.android { background-image: url("../images/Badges/android.png"); }
-.uwp { background-image: url("../images/Badges/windows.png"); }
-.win32 { background-image: url("../images/Badges/windows.png"); }
-.windows { background-image: url("../images/Badges/windows.png"); }

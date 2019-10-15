@@ -3,7 +3,7 @@
     ViewData["Title"] = "My projects";
 }
 
-<header class="projects-header">
+<header>
     <div>
         <h1>My projects</h1>
         <h3>Here is presented the most of projects I worked on</h3>
@@ -11,20 +11,16 @@
     <iframe src="//githubbadge.appspot.com/xfox111" style="width: 200px; height: 110px;" class="github-stats" frameborder="0"></iframe>
 </header>
 
-<article class="projects-block">
+<article>
     @foreach (Project p in ViewData["Images"] as Project[])
     {
         <div class="project-item">
-            @if (!string.IsNullOrWhiteSpace(p.ImageName))
-            {
-                <!--<a target="_blank" class="thumbnail" href="~/images/Projects/@(p.ImageName)"><img src="~/images/Projects/@(p.ImageName)" /></a>-->
-            }
-            <div class="text">
+            <div>
                 <h1>@p.Title</h1>
-                <p class="description">@p.Description</p>
+                <p>@p.Description</p>
                 <a href="@(p.Link)" target="_blank">@p.LinkCaption</a>
             </div>
-            <div class="badges">
+            <div>
                 @foreach (string i in p.Badges)
                 {
                     <div class="badge @i"></div>
@@ -33,3 +29,5 @@
         </div>
     }
 </article>
+
+<link rel="stylesheet" type="text/css" href="~/css/Projects.css" />

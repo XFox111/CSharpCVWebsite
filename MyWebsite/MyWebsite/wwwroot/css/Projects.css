@@ -1,0 +1,39 @@
+﻿header {
+    display: grid;
+    margin-bottom: 20px;
+    grid-template-columns: 1fr auto;
+}
+
+article {
+    margin: 0px 10px;
+}
+
+.github-stats {
+    margin-top: 20px;
+}
+
+.project-item {
+    display: grid;
+    padding: 0px 20px 20px 20px;
+    grid-template-rows: auto auto;
+    grid-row-gap: 20px;
+    background-color: whitesmoke;
+    margin-bottom: 10px;
+}
+
+.badge {
+    height: 25px;
+    width: 25px;
+    margin-right: 10px;
+    display: inline-block;
+    background-size: contain;
+}
+
+.csharp { background-image: url(../images/Badges/csharp.png); }
+.dotnet { background-image: url("../images/Badges/dotnet.png"); }
+.xamarin { background-image: url("../images/Badges/xamarin.png"); }
+.unity { background-image: url("../images/Badges/unity.png"); }
+.android { background-image: url("../images/Badges/android.png"); }
+.uwp { background-image: url("../images/Badges/windows.png"); }
+.win32 { background-image: url("../images/Badges/windows.png"); }
+.windows { background-image: url("../images/Badges/windows.png"); }
