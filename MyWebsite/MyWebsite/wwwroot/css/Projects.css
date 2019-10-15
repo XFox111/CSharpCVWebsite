@@ -1,7 +1,9 @@
 ﻿header {
     display: grid;
-    margin-bottom: 20px;
     grid-template-columns: 1fr auto;
+    grid-template-rows: auto auto;
+    grid-column-gap: 20px;
+    margin-bottom: 20px;
 }
 
 article {
@@ -40,3 +42,9 @@ article {
 .uwp { background-image: url("../images/Badges/windows.png"); }
 .win32 { background-image: url("../images/Badges/windows.png"); }
 .windows { background-image: url("../images/Badges/windows.png"); }
+
+@media only screen and (max-width: 600px) {
+    .github-stats {
+        grid-row: 2;
+    }
+}
