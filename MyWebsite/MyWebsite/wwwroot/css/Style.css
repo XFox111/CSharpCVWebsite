@@ -16,20 +16,16 @@
     src: url("/fonts/segoeUI.eot?#iefix") format("embedded-opentype"), url("/fonts/segoeUI.otf") format("opentype"), url("/fonts/segoeUI.svg") format("svg"), url("/fonts/segoeUI.ttf") format("truetype"), url("/fonts/segoeUI.woff") format("woff"), url("/fonts/segoeUI.woff2") format("woff2");
 }
 
-body {
-    margin: 0px;
-    font-family: Consolas, 'Segoe MDL2 Assets';
-}
-
+/*Header styles*/
 .navbar {
+    display: grid;
+    grid-template-columns: auto 1fr auto auto;
+    grid-column-gap: 10px;
+    grid-template-rows: auto auto;
     background-color: #343434;
     position: sticky;
     z-index: 10;
-    top: 0%;
-    right: 0%;
-    left: 0%;
     padding: 10px;
-    min-height: 35px;
     font-size: 26px;
 }
 
@@ -37,44 +33,57 @@ body {
     text-decoration: none;
     color: white;
 }
-.navbar a:hover {
-    color: gray;
+.navbar a:hover { 
+    color: gray; 
 }
 
-footer a {
-    text-decoration: none;
-    color: black;
-}
-footer a:hover {
-    color: orangered;
-}
-
-.main-menu {
-    display: inline;
-    list-style: none;
-}
-
+.main-menu { margin: 0px; }
 .main-menu li {
     display: inline-block;
     font-size: 20px;
     margin-right: 20px;
 }
 
-.sideheader {
-    float: right;
+#compact-menu {
+    grid-row: 2/2;
+    list-style: none;
+}
+#compact-menu li {
+    font-size: 20px;
+    margin-top: 10px;
 }
 
+/*Footer styles*/
 footer {
-    padding: 0px 10px;
+    padding: 10px;
     display: grid;
     align-items: center;
     grid-template-columns: 1fr auto auto auto;
     grid-column-gap: 10px;
 }
-footer svg { width: 1.4em; }
+footer a {
+    text-decoration: none;
+    color: black;
+}
+footer a:hover { 
+    color: orangered;
+}
 
+/*Body styles*/
+body {
+    margin: 0px;
+    font-family: Consolas, 'Segoe MDL2 Assets';
+}
 main {
-    min-height: calc(100vh - 130px);
+    min-height: calc(100vh - 115px);    /*Page height minus footer requred space*/
+}
+
+header a {
+    text-decoration: none;
+    color: black;
+}
+header a:hover {
+    text-decoration: underline;
 }
 
 article, header {
@@ -83,43 +92,6 @@ article, header {
 
 article a:visited, article a:link {
     color: blue;
-}
-
-header a {
-    text-decoration: none;
-    color: black;
-}
-header a:hover {
-    color: black;
-    text-decoration: underline;
-}
-
-.image-overview-block img {
-    max-height: 50vh;
-    float: left;
-    display: inline;
-}
-.image-overview-block div {
-    margin: 10px;
-    display: inline-block;
-}
-.image-overview-block div h1 {
-    margin-bottom: 0px;
-}
-.image-overview-block .date {
-    margin: 0px;
-}
-
-.gallery img {
-    transition: .25s;
-    object-fit: cover;
-    max-width: 300px;
-    height: 200px;
-    margin: 2px;
-}
-.gallery img:hover {
-    filter: brightness(125%);
-    transform: scale(1.25);
 }
 
 .comment, .comment:visited {

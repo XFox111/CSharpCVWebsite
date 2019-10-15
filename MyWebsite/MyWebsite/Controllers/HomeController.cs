@@ -6,6 +6,7 @@ namespace MyWebsite.Controllers
 {
     public class HomeController : Controller
     {
+        // TODO: Add more specific OpenGraph meta tags
         public IActionResult Index() =>
             View();
 

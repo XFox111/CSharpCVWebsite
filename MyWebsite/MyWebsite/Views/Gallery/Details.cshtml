@@ -12,7 +12,9 @@
 
     <div>
         <h1>@((ViewData["CurrentImage"] as Image).Title)</h1>
-        <p class="date">Creation date: <a>@((ViewData["CurrentImage"] as Image).CreationDate.ToShortDateString())</a></p>
+        <span>Creation date: @((ViewData["CurrentImage"] as Image).CreationDate.ToShortDateString())</span>
         <p>@((ViewData["CurrentImage"] as Image).Description)</p>
     </div>
 </article>
+
+<link rel="stylesheet" type="text/css" href="~/css/Gallery.css" />
