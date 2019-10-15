@@ -23,7 +23,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
-    <body onload="UpdateProjects()">
+    <body>
         <nav class="navbar">
             <a asp-controller="Home" asp-action="Index">XFox111.NET</a>
 
@@ -35,8 +35,8 @@
                 <li><a asp-controller="Contacts" asp-action="Index">Contacts();</a></li>
             </menu>
 
-            <a asp-controller="Home" asp-action="SwitchLanguage" lang="ru">РУС &#xE12B;</a>
-            <a style="cursor: pointer; display:none;" class="menu-toggle" onclick="ToggleMenu();">&#xE700;</a>
+            <a class="language-switch" asp-controller="Home" asp-action="SwitchLanguage" lang="ru">РУС &#xE12B;</a>
+            <a class="menu-toggle" onclick="ToggleMenu();">&#xE700;</a>
 
             <menu type="toolbar" id="compact-menu" style="display:none">
                 <li><a asp-controller="About" asp-action="Index">AboutMe();</a></li>

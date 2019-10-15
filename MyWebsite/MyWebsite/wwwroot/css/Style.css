@@ -10,12 +10,6 @@
     src: url("/fonts/segoeMLD2assets.eot?#iefix") format("embedded-opentype"), url("/fonts/segoeMLD2assets.otf") format("opentype"), url("/fonts/segoeMLD2assets.svg") format("svg"), url("/fonts/segoeMLD2assets.ttf") format("truetype"), url("/fonts/segoeMLD2assets.woff") format("woff"), url("/fonts/segoeMLD2assets.woff2") format("woff2");
 }
 
-@font-face {
-    font-family: 'Segoe UI';
-    src: url("/fonts/segoeUI.eot");
-    src: url("/fonts/segoeUI.eot?#iefix") format("embedded-opentype"), url("/fonts/segoeUI.otf") format("opentype"), url("/fonts/segoeUI.svg") format("svg"), url("/fonts/segoeUI.ttf") format("truetype"), url("/fonts/segoeUI.woff") format("woff"), url("/fonts/segoeUI.woff2") format("woff2");
-}
-
 /*Header styles*/
 .navbar {
     display: grid;
@@ -44,6 +38,14 @@
     margin-right: 20px;
 }
 
+.language-switch {
+    grid-column: 3/3;
+}
+.menu-toggle {
+    grid-column: 4/4;
+    display: none;
+    cursor: pointer;
+}
 #compact-menu {
     grid-row: 2/2;
     list-style: none;
@@ -96,4 +98,14 @@ article a:visited, article a:link {
 
 .comment, .comment:visited {
     color: #57a64a;
+}
+
+/*Adaptive code*/
+@media only screen and (max-width: 1000px) {
+    .main-menu {
+        display: none;
+    }
+    .menu-toggle {
+        display: initial;
+    }
 }

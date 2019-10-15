@@ -17,7 +17,7 @@
         <div class="project-item">
             <div>
                 <h1>@p.Title</h1>
-                <p>@p.Description</p>
+                <p class="description">@p.Description</p>
                 <a href="@(p.Link)" target="_blank">@p.LinkCaption</a>
             </div>
             <div>
@@ -28,6 +28,7 @@
             </div>
         </div>
     }
+    <script type="text/javascript">UpdateProjects();</script>
 </article>
 
 <link rel="stylesheet" type="text/css" href="~/css/Projects.css" />
