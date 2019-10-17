@@ -1,4 +1,10 @@
-﻿<!DOCTYPE html>
+﻿@using Newtonsoft.Json
+@using System.Net
+@{ 
+    Dictionary<string, Link> links = JsonConvert.DeserializeObject<Dictionary<string, Link>>(new WebClient().DownloadString("Links.json"));
+}
+
+<!DOCTYPE html>
 <html>
 <head>
     <title>@ViewData["Title"] - XFox111.NET</title>
@@ -54,9 +60,12 @@
         <footer>
             <span class="comment">// Copyright &copy;2019 <b>Michael "XFox" Gordeev</b></span>
 
-            <a class="socicon-mailru" href="mailto:michael.xfox@outlook.com" target="_blank" title="E-mail"></a>
-            <a class="socicon-linkedin" href="https://linkedin.com/in/xfox" target="_blank" title="LinkedIn"></a>
-            <a class="socicon-github" href="https://github.com/xfox111" target="_blank" title="GitHub"></a>
+            @{
+                foreach (Link link in new List<Link> { links["email"], links["linkedin"], links["github"] })
+                {
+                    <a class="socicon-@(link.Socicon)" href="@(link.Url)" target="_blank" title="@(link.Title)"></a>
+                }
+            }
         </footer>
     </body>
 </html>

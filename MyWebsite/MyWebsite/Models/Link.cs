@@ -11,5 +11,6 @@ namespace MyWebsite.Models
         public string Socicon { get; set; }
         public string Username { get; set; }
         public string Url { get; set; }
+        public bool CanContactMe { get; set; }
     }
 }
