@@ -1,0 +1,56 @@
+{
+  "email": {
+    "Title": "Email",
+    "Socicon": "outlook",
+    "Username": "michael.xfox@outlook.com",
+    "Url": "mailto:michael.xfox@outlook.com"
+  },
+  "linkedin": {
+    "Title": "LinkedIn",
+    "Socicon": "linkedin",
+    "Username": "@xfox",
+    "Url": "//linkedin.com/in/xfox"
+  },
+  "vk": {
+    "Title": "Vkontakte",
+    "Socicon": "linkedin",
+    "Username": "@xfox",
+    "Url": "//linkedin.com/in/xfox"
+  },
+  "telegram": {
+    "Title": "Telegram",
+    "Socicon": "linkedin",
+    "Username": "@xfox",
+    "Url": "//linkedin.com/in/xfox"
+  },
+  "skype": {
+    "Title": "Skype",
+    "Socicon": "linkedin",
+    "Username": "@xfox",
+    "Url": "//linkedin.com/in/xfox"
+  },
+  "twitter": {
+    "Title": "Twitter",
+    "Socicon": "linkedin",
+    "Username": "@xfox",
+    "Url": "//linkedin.com/in/xfox"
+  },
+  "twitch": {
+    "Title": "Twitch",
+    "Socicon": "linkedin",
+    "Username": "@xfox",
+    "Url": "//linkedin.com/in/xfox"
+  },
+  "youtube": {
+    "Title": "YouTube",
+    "Socicon": "linkedin",
+    "Username": "@xfox",
+    "Url": "//linkedin.com/in/xfox"
+  },
+  "github": {
+    "Title": "GitHub",
+    "Socicon": "linkedin",
+    "Username": "@xfox",
+    "Url": "//linkedin.com/in/xfox"
+  }
+}
