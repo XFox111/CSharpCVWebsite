@@ -27,7 +27,10 @@
 
     @if(!(bool)ViewData["pdfPreview"])
     {
-        <script type="text/javascript">print();</script>
+        <script type="text/javascript">
+            print();
+            close();
+        </script>
     }
 </body>
 </html>
