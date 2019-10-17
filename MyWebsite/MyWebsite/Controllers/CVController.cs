@@ -11,10 +11,18 @@ namespace MyWebsite.Controllers
         public IActionResult Download()
         {
             HtmlToPdf converter = new HtmlToPdf();
-            PdfDocument doc = converter.ConvertUrl($"https://{Request.Host}/CV");
+            converter.Options.MarginTop = 25;
+            converter.Options.MarginBottom = 25;
+            PdfDocument doc = converter.ConvertUrl($"https://{Request.Host}/CV/PrintCV?pdfPreview=true");
             byte[] data = doc.Save();
             doc.Close();
             return File(data, "application/pdf", "[Michael Gordeev] CV.pdf");
+        }
+
+        public IActionResult PrintCV(bool pdfPreview = false)
+        {
+            ViewData["pdfPreview"] = pdfPreview;
+            return View();
         }
     }
 }
