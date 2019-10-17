@@ -4,6 +4,8 @@
 
 .block {
     position: relative;
+    margin-bottom: -9px;
+    z-index: -1;
 }
 .block .content {
     position: absolute;
@@ -11,17 +13,6 @@
 .block .background {
     width: 100%;
 }
-
-/*.goto {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background-color: #1e1e1e;
-    border-radius: 5px;
-    padding: 5px;
-    color: white;
-}*/
-
 
 .intro {
     color: white;
