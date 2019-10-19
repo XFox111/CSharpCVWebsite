@@ -40,11 +40,14 @@
 
 .language-switch {
     grid-column: 3;
+    display: none;
+    user-select: none
 }
 .menu-toggle {
     grid-column: 4;
     display: none;
     cursor: pointer;
+    user-select: none;
 }
 #compact-menu {
     grid-row: 2;
