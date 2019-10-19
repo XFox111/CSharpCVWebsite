@@ -13,7 +13,7 @@ namespace MyWebsite.Controllers
             HtmlToPdf converter = new HtmlToPdf();
             converter.Options.MarginTop = 25;
             converter.Options.MarginBottom = 25;
-            PdfDocument doc = converter.ConvertUrl($"https://{Request.Host}/CV/PrintCV?pdfPreview=true");
+            PdfDocument doc = converter.ConvertUrl($"{Request.Scheme}://{Request.Host}/CV/PrintCV?pdfPreview=true");
             byte[] data = doc.Save();
             doc.Close();
             return File(data, "application/pdf", "[Michael Gordeev] CV.pdf");

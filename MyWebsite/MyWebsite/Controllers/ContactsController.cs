@@ -11,7 +11,7 @@ namespace MyWebsite.Controllers
     {
         public IActionResult Index()
         {
-            Dictionary<string, Link> links = JsonConvert.DeserializeObject<Dictionary<string, Link>>(new WebClient().DownloadString($"https://{Request.Host}/Links.json"));
+            Dictionary<string, Link> links = JsonConvert.DeserializeObject<Dictionary<string, Link>>(new WebClient().DownloadString($"{Request.Scheme}://{Request.Host}/Links.json"));
             ViewData["contactLinks"] = links.Values.ToList().FindAll(i => i.CanContactMe);
             ViewData["otherLinks"] = links.Values.ToList().FindAll(i => !i.CanContactMe);
 

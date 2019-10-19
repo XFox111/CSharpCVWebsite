@@ -10,7 +10,7 @@ namespace MyWebsite.Controllers
     {
         public async Task<IActionResult> Index()
         {
-            Project[] projects = JsonConvert.DeserializeObject<Project[]>(await new HttpClient().GetStringAsync($"https://{Request.Host}/Projects.json"));
+            Project[] projects = JsonConvert.DeserializeObject<Project[]>(await new HttpClient().GetStringAsync($"{Request.Scheme}://{Request.Host}/Projects.json"));
 
             ViewData["Images"] = projects;
 

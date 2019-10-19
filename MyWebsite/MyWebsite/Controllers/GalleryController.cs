@@ -12,7 +12,7 @@ namespace MyWebsite.Controllers
         [HttpGet("Arts")]
         public async Task<IActionResult> Index()
         {
-            ViewData["Images"] = JsonConvert.DeserializeObject<Image[]>(await new HttpClient().GetStringAsync($"https://{Request.Host}/Gallery.json"));
+            ViewData["Images"] = JsonConvert.DeserializeObject<Image[]>(await new HttpClient().GetStringAsync($"{Request.Scheme}://{Request.Host}/Gallery.json"));
 
             return View();
         }

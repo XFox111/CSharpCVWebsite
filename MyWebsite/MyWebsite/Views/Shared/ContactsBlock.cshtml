@@ -1,4 +1,10 @@
-﻿<div class="contact-me">
+﻿@using Newtonsoft.Json
+@using System.Net
+@{
+    Dictionary<string, Link> links = JsonConvert.DeserializeObject<Dictionary<string, Link>>(new WebClient().DownloadString($"{Context.Request.Scheme}://{Context.Request.Host}/Links.json"));
+}
+
+<div class="contact-me">
     <code>
         <var>if</var> (<var class="class">You</var>.InsterestedInMe)<br />
         <span class="t1"></span><var class="method">ContactMe</var>();<br />
@@ -9,10 +15,10 @@
         <span class="t1"></span><var>string</var> email = <a class="string" href="mailto:michael.xfox@outlook.com">"mihcael.xfox@outlook.com"</a>;<br />
         <span class="t1"></span><var class="class">Link</var>[] socialNetworks = <var>new</var> <var class="class">Link</var>[]<br />
         <span class="t1"></span>{<br />
-        <span class="t2"></span><var>new</var> <var class="class">Link</var>(<a class="string">"LinkedIn"</a>, <a class="string" target="_blank" href="//linkedin.com/xfox">"https://linkedin.com/xfox"</a>),<br />
-        <span class="t2"></span><var>new</var> <var class="class">Link</var>(<a class="string">"GitHub"</a>, <a class="string" target="_blank" href="//github.com/xfox111">"https://github.com/xfox111"</a>),<br />
-        <span class="t2"></span><var>new</var> <var class="class">Link</var>(<a class="string">"Twitter"</a>, <a class="string" target="_blank" href="//twitter.com/xfox111">"https://twitter.com/xfox111"</a>),<br />
-        <span class="t2"></span><var>new</var> <var class="class">Link</var>(<a class="string">"Vkontakte"</a>, <a class="string" target="_blank" href="//vk.com/xfox.mike">"https://vk.com/xfox.mike"</a>)<br />
+        <span class="t2"></span><var>new</var> <var class="class">Link</var>(<a class="string">"LinkedIn"</a>, <a class="string" target="_blank" href="@(links["linkedin"].Url)">"https:@(links["linkedin"].Url)"</a>),<br />
+        <span class="t2"></span><var>new</var> <var class="class">Link</var>(<a class="string">"GitHub"</a>, <a class="string" target="_blank" href="@(links["github"].Url)">"https:@(links["github"].Url)"</a>),<br />
+        <span class="t2"></span><var>new</var> <var class="class">Link</var>(<a class="string">"Twitter"</a>, <a class="string" target="_blank" href="@(links["twitter"].Url)">"https:@(links["twitter"].Url)"</a>),<br />
+        <span class="t2"></span><var>new</var> <var class="class">Link</var>(<a class="string">"Vkontakte"</a>, <a class="string" target="_blank" href="@(links["vk"].Url)">"https:@(links["vk"].Url)"</a>)<br />
         <span class="t1"></span>}<br />
         }<br />
         <br />
