@@ -1,6 +1,5 @@
 ﻿@using Newtonsoft.Json
 @using System.Net
-@using System.Web
 @{ 
     Dictionary<string, Link> links = JsonConvert.DeserializeObject<Dictionary<string, Link>>(new WebClient().DownloadString($"{Context.Request.Scheme}://{Context.Request.Host}/Links.json"));
 }

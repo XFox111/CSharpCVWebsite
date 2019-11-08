@@ -1,0 +1,23 @@
+﻿.gallery img {
+    object-fit: cover;
+    max-height: 200px;
+    max-width: 100%;
+    margin: 2px;
+    transition: .25s;
+}
+.gallery img:hover {
+    filter: brightness(125%);
+    transform: scale(1.25);
+}
+
+.image-overview-block img {
+    max-height: 50vh;
+    max-width: 100%;
+    float: left;
+}
+.image-overview-block div {
+    display: inline-block;
+}
+.image-overview-block h1 {
+    margin-bottom: 0px;
+}
