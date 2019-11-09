@@ -17,6 +17,7 @@
 }
 .image-overview-block div {
     display: inline-block;
+    margin-left: 20px;
 }
 .image-overview-block h1 {
     margin-bottom: 0px;
