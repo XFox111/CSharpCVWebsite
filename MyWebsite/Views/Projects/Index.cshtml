@@ -1,0 +1,34 @@
+﻿
+@{
+    ViewData["Title"] = "My projects";
+}
+
+<header>
+    <div>
+        <h1>My projects</h1>
+        <h3>Here is presented the most of projects I worked on</h3>
+    </div>
+    <iframe src="//githubbadge.appspot.com/xfox111" class="github-stats" frameborder="0"></iframe>
+</header>
+
+<article>
+    @foreach (Project p in ViewData["Images"] as Project[])
+    {
+        <div class="project-item">
+            <div>
+                <h1>@p.Title</h1>
+                <p class="description">@p.Description</p>
+                <a href="@(p.Link)" target="_blank">@p.LinkCaption</a>
+            </div>
+            <div>
+                @foreach (string i in p.Badges)
+                {
+                    <div class="badge @i"></div>
+                }
+            </div>
+        </div>
+    }
+    <script type="text/javascript">UpdateProjects();</script>
+</article>
+
+<link rel="stylesheet" type="text/css" href="~/css/Projects.css" />

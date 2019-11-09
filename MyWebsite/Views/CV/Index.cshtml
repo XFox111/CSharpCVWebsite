@@ -1,0 +1,14 @@
+﻿
+@{
+    ViewData["Title"] = "Curriculum vitae";
+}
+
+<header>
+    <h1>My resume</h1>
+    <a class="comment" asp-action="Download">// Download CV (.pdf) &#xE118;</a><br />
+    <a class="comment" asp-action="PrintCV" target="_blank">// Print CV &#xE749;</a>
+</header>
+
+<partial name="~/Views/CV/CVContent.cshtml" />
+
+<partial name="~/Views/Shared/ContactsBlock.cshtml" />
