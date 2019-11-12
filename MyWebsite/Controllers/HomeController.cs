@@ -10,7 +10,9 @@ namespace MyWebsite.Controllers
         // TODO: Create custom error page
         // TODO: Update Projects.json and Gallery.json
         // TODO: Complete About page
-        // TODO: Make language switchable
+        // TODO: Localize application
+        // TODO: Make authorization system and ability to update website through GUI
+        // TODO: Consider a database connection
         public IActionResult Index() =>
             View();
 
