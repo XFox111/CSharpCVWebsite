@@ -42,6 +42,7 @@ article {
 .uwp { background-image: url("../images/Badges/windows.png"); }
 .win32 { background-image: url("../images/Badges/windows.png"); }
 .windows { background-image: url("../images/Badges/windows.png"); }
+.ios { background-image: url("../images/Badges/ios.png"); }
 
 @media only screen and (max-width: 600px) {
     .github-stats {

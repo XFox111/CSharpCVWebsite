@@ -11,21 +11,13 @@
     <p>
         @foreach(Link link in ViewData["contactLinks"] as List<Link>)
         {
-            <a class="socicon-@(link.Socicon)"></a> @(link.Title) <a href="@(link.Url)">@(link.Username)</a>
-            @if((ViewData["contactLinks"] as List<Link>).LastOrDefault() != link)
-            {
-                <br />
-            }
+            <a class="socicon-@(link.Socicon)"></a> @(link.Title) <a href="@(link.Url)" target="_blank">@(link.Username)</a><br />
         }
     </p>
     <p>
         @foreach (Link link in ViewData["otherLinks"] as List<Link>)
         {
-            <a class="socicon-@(link.Socicon)"></a> @(link.Title) <a href="@(link.Url)">@(link.Username)</a>
-            @if ((ViewData["otherLinks"] as List<Link>).LastOrDefault() != link)
-            {
-                <br />
-            }
+            <a class="socicon-@(link.Socicon)"></a> @(link.Title) <a href="@(link.Url)" target="_blank">@(link.Username)</a><br />
         }
     </p>
 </article>
