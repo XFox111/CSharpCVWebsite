@@ -17,9 +17,13 @@
     grid-column-gap: 10px;
     grid-template-rows: auto auto;
     background-color: #343434;
-    position: sticky;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
     z-index: 10;
     padding: 10px;
+    min-height: 33px;
     font-size: 26px;
 }
 
@@ -31,31 +35,24 @@
     color: gray; 
 }
 
-.main-menu { margin: 0px; }
+.main-menu {
+    margin: 26px auto 26px auto;
+    grid-row: 2;
+    list-style: none;
+}
 .main-menu li {
-    display: inline-block;
     font-size: 20px;
-    margin-right: 20px;
+    margin-top: 10px;
 }
 
 .language-switch {
     grid-column: 3;
-    display: none;
     user-select: none
 }
 .menu-toggle {
     grid-column: 4;
-    display: none;
     cursor: pointer;
     user-select: none;
-}
-#compact-menu {
-    grid-row: 2;
-    list-style: none;
-}
-#compact-menu li {
-    font-size: 20px;
-    margin-top: 10px;
 }
 
 /*Footer styles*/
@@ -77,10 +74,13 @@ footer a:hover {
 /*Body styles*/
 body {
     margin: 0px;
+    margin-top: 53px;
     font-family: Consolas, 'Segoe MDL2 Assets';
-}
-main {
-    min-height: calc(100vh - 115px);    /*Page height minus footer requred space*/
+
+    /*This stuff is necessary for sticky footer*/
+    display: grid;
+    grid-template-rows: 1fr auto;
+    height: calc(100vh - 53px);
 }
 
 header a {
@@ -104,11 +104,19 @@ article a:visited, article a:link {
 }
 
 /*Adaptive code*/
-@media only screen and (max-width: 1000px) {
+@media only screen and (min-width: 1000px) {
     .main-menu {
-        display: none;
+        display: initial !important;
+        grid-row: 1;
+        grid-column: 2;
+        margin: 0px;
+    }
+    .main-menu li {
+        display: inline-block;
+        margin-right: 10px;
+        margin-top: 0px;
     }
     .menu-toggle {
-        display: initial;
+        display: none;
     }
 }

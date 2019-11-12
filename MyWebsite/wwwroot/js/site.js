@@ -1,6 +1,6 @@
 ﻿function ToggleMenu()
 {
-    var menu = document.getElementById("compact-menu");
+    var menu = document.getElementsByClassName("main-menu")[0];
 
     if (menu.style.display == "none")
         menu.style.display = "initial";

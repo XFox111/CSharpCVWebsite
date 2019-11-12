@@ -33,7 +33,7 @@
         <nav class="navbar">
             <a asp-controller="Home" asp-action="Index">XFox111.NET</a>
 
-            <menu type="toolbar" class="main-menu">
+            <menu type="toolbar" class="main-menu" style="display:none">
                 <li><a asp-controller="About" asp-action="Index">AboutMe();</a></li>
                 <li><a asp-controller="CV" asp-action="Index">CV();</a></li>
                 <li><a asp-controller="Projects" asp-action="Index">Projects();</a></li>
@@ -43,14 +43,6 @@
 
             <a class="language-switch" asp-controller="Home" asp-action="SwitchLanguage" lang="ru">РУС &#xE12B;</a>
             <a class="menu-toggle" onclick="ToggleMenu();">&#xE700;</a>
-
-            <menu type="toolbar" id="compact-menu" style="display:none">
-                <li><a asp-controller="About" asp-action="Index">AboutMe();</a></li>
-                <li><a asp-controller="CV" asp-action="Index">CV();</a></li>
-                <li><a asp-controller="Projects" asp-action="Index">Projects();</a></li>
-                <li><a asp-controller="Gallery" asp-action="Index">Arts();</a></li>
-                <li><a asp-controller="Contacts" asp-action="Index">Contacts();</a></li>
-            </menu>
         </nav>
 
         <main>
@@ -58,7 +50,7 @@
         </main>
 
         <footer>
-            <span class="comment">// Copyright &copy;2019 <b>Michael "XFox" Gordeev</b></span>
+            <span class="comment">// Copyright &copy;@(DateTime.Today.Year) <b>Michael "XFox" Gordeev</b></span>
 
             @{
                 foreach (Link link in new List<Link> { links["email"], links["linkedin"], links["github"] })
