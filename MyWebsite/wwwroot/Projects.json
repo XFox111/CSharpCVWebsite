@@ -6,17 +6,22 @@
     "Link": "//foxtube.xfox111.net",
     "LinkCaption": "Learn more...",
     "Badges": [
-      "csharp", "dotnet", "uwp"
+      "csharp",
+      "dotnet", 
+      "uwp"
     ]
   },
   {
     "Title": "My Bonch",
     "Description": "",
-    "ImageName": "",
+    "ImageName": "Bonch.jpg",
     "Link": "",
     "LinkCaption": "Availavle soon...",
     "Badges": [
-      "csharp", "xamarin", "uwp", "android"/*, "ios"*/
+      "csharp",
+      "xamarin",
+      "uwp",
+      "android"
     ]
   },
   {
@@ -38,7 +43,10 @@
     "Link": "",
     "LinkCaption": "",
     "Badges": [
-      "csharp", "unity", "windows", "android"
+      "csharp",
+      "unity",
+      "windows", 
+      "android"
     ]
   },
   {
@@ -48,7 +56,10 @@
     "Link": "https://github.com/XFox111/mismartalarm",
     "LinkCaption": "View on GitHub",
     "Badges": [
-      "csharp", "xamarin", "uwp", "android"
+      "csharp",
+      "xamarin",
+      "uwp", 
+      "android"
     ]
   },
   {
@@ -58,7 +69,9 @@
     "Link": "https://github.com/XFox111/youtubescraper",
     "LinkCaption": "View on GitHub",
     "Badges": [
-      "csharp", "dotnet", "uwp"
+      "csharp",
+      "dotnet", 
+      "uwp"
     ]
   },
   {
