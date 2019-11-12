@@ -16,10 +16,12 @@ function ToggleImageSize()
     {
         image.style.maxHeight = "50vh";
         image.style.maxWidth = "100%";
+        image.style.cursor = "zoom-in";
     }
     else
     {
         image.style.maxHeight = "none";
         image.style.maxWidth = "none";
+        image.style.cursor = "zoom-out";
     }
 }
