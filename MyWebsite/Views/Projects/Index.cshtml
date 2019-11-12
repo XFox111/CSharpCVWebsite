@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = "My projects";
 }
 
@@ -12,23 +11,27 @@
 </header>
 
 <article>
-    @foreach (Project p in ViewData["Images"] as Project[])
+    @foreach (Project p in ViewData["Projects"] as Project[])
     {
         <div class="project-item">
             <div>
                 <h1>@p.Title</h1>
-                <p class="description">@p.Description</p>
+                <p class="description">
+                    @foreach(string line in p.Description.Split("<br />"))
+                    {
+                        @line<br />
+                    }
+                </p>
                 <a href="@(p.Link)" target="_blank">@p.LinkCaption</a>
             </div>
             <div>
                 @foreach (string i in p.Badges)
                 {
-                    <div class="badge @i"></div>
+                    <div class="badge @i" title="@((ViewData["Badges"] as dynamic)[i])"></div>
                 }
             </div>
         </div>
     }
-    <script type="text/javascript">UpdateProjects();</script>
 </article>
 
 <link rel="stylesheet" type="text/css" href="~/css/Projects.css" />
