@@ -41,6 +41,13 @@
     "Url": "//twitter.com/xfox111",
     "CanContactMe": "false"
   },
+  "reddit": {
+    "Title": "Reddit",
+    "Socicon": "reddit",
+    "Username": "@xfox111",
+    "Url": "//reddit.com/user/xfox111",
+    "CanContactMe": "false"
+  },
   "twitch": {
     "Title": "Twitch",
     "Socicon": "twitch",
