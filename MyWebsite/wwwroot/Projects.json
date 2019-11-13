@@ -1,7 +1,7 @@
 [
   {
     "Title": "FoxTube",
-    "Description": "This is my first big project. And the first one published in Microsoft Store.<br />This is a Windows client application for YouTube",
+    "Description": "This is my first big project. And the first one published in Microsoft Store.\nThis is a Windows client application for YouTube",
     "ImageName": "FoxTube.png",
     "Link": "//foxtube.xfox111.net",
     "LinkCaption": "Learn more...",
@@ -27,7 +27,7 @@
   },
   {
     "Title": "MotionDecoder",
-    "Description": "This project is used to analyze videos from security cameras and shows short clips which contain detected motions.<br />I made this projects during scientific projects competition in big data division.",
+    "Description": "This project is used to analyze videos from security cameras and shows short clips which contain detected motions.\nI made this projects during scientific projects competition in big data division.",
     "ImageName": "MotionDecoder.png",
     "Link": "//github.com/XFox111/motiondecoder",
     "LinkCaption": "View on GitHub",
@@ -77,7 +77,7 @@
   },
   {
     "Title": "GZipCompression",
-    "Description": "Console program which splits files on 1MB blocks and compresses them in multi-thread.<br />I made this program as intro challange in Veeam Software",
+    "Description": "Console program which splits files on 1MB blocks and compresses them in multi-thread.\nI made this program as intro challange in Veeam Software",
     "ImageName": "",
     "Link": "https://github.com/XFox111/gzipcompression",
     "LinkCaption": "View on GitHub",

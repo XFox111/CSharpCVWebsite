@@ -17,7 +17,7 @@
             <div>
                 <h1>@p.Title</h1>
                 <p class="description">
-                    @foreach(string line in p.Description.Split("<br />"))
+                    @foreach(string line in p.Description.Split("\n"))
                     {
                         @line<br />
                     }

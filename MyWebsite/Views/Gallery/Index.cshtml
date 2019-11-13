@@ -8,7 +8,7 @@
 </header>
 
 <article class="info-block gallery">
-    @foreach (Image image in ViewData["Images"] as Image[])
+    @foreach (Image image in Model)
     {
         <a asp-action="Details" asp-route-id="@image.FileName"><img title="@image.Title" src="~/images/Gallery/@image.FileName"/></a>
     }

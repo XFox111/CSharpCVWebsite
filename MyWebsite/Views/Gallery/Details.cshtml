@@ -1,7 +1,7 @@
 ﻿
 @{
-    ViewData["Title"] = (ViewData["CurrentImage"] as Image).Title;
-    Image image = ViewData["CurrentImage"] as Image;
+    ViewData["Title"] = Model.Title;
+    Image image = Model;
 }
 
 <header>
@@ -15,7 +15,7 @@
         <h1>@image.Title</h1>
         <span>Creation date: @image.CreationDate.ToShortDateString()</span>
         <p>
-            @foreach(string line in image.Description.Split("<br />"))
+            @foreach(string line in image.Description.Split("\n"))
             {
                 @line<br />
             }

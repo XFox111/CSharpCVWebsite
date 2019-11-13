@@ -12,16 +12,13 @@ namespace MyWebsite.Controllers
         [HttpGet("Arts")]
         public async Task<IActionResult> Index()
         {
-            ViewData["Images"] = JsonConvert.DeserializeObject<Image[]>(await new HttpClient().GetStringAsync($"{Request.Scheme}://{Request.Host}/Gallery.json"));
-
-            return View();
+            return View(JsonConvert.DeserializeObject<Image[]>(await new HttpClient().GetStringAsync($"{Request.Scheme}://{Request.Host}/Gallery.json")));
         }
 
+        [HttpGet("Image")]
         public async Task<IActionResult> Details(string id)
         {
-            ViewData["CurrentImage"] = JsonConvert.DeserializeObject<Image[]>(await new HttpClient().GetStringAsync($"https://{Request.Host}/Gallery.json")).First(i => i.FileName == id);
-
-            return View();
+            return View(JsonConvert.DeserializeObject<Image[]>(await new HttpClient().GetStringAsync($"https://{Request.Host}/Gallery.json")).First(i => i.FileName == id));
         }
             
     }
