@@ -1,0 +1,62 @@
+﻿input {
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid black;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+select {
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 10px;
+    width: 100%;
+    -moz-appearance: none; /* Firefox */
+    -webkit-appearance: none; /* Safari and Chrome */
+}
+
+button {
+    margin: 10px;
+    border-radius: 10px;
+    border: 0px;
+    padding: 10px 20px;
+    background-color: #343434;
+    color: white;
+}
+
+textarea {
+    resize: none;
+    width: 100%;
+    border-radius: 10px;
+    border: 1px solid black;
+    padding: 10px;
+    box-sizing: border-box;
+    height: 200px;
+    font-family: Consolas;
+}
+
+.select-container::after {
+    content: '>';
+    transform: rotate(90deg);
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    right: 11px;
+    top: 11px;
+    position: absolute;
+    pointer-events: none;
+}
+
+.select-container {
+    position: relative;
+}
+
+form {
+    max-width: 50%;
+}
+
+@media only screen and (max-width: 700px) {
+    form  {
+        max-width: initial;
+    }
+}

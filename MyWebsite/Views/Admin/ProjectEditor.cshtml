@@ -1,0 +1,35 @@
+﻿
+@{
+    ViewData["Title"] = "Project editor";
+    Project project = ViewData["Project"] as Project;
+}
+
+<header>
+    <h1>Project editor</h1>
+    <h2>@project.Title</h2>
+</header>
+
+<article>
+    <form>
+        <label for="langSelector">Language:</label>
+        <div class="select-container">
+            <select id="langSelector">
+                <option>English</option>
+                <option>Russian</option>
+            </select>
+        </div>
+
+        <label for="title">Title:</label>
+        <input id="title" placeholder="Title" type="text" value="@project.Title"/>
+
+        <label for="description">Description:</label>
+        <textarea id="description" placeholder="Description" type="text">@project.Description</textarea>
+
+        <label for="thumbnail">Thumbnail:</label>
+        <input id="thumbnail" placeholder="Thumbnail" type="file" />
+
+        <button>Submit</button>
+    </form>
+</article>
+
+<link rel="stylesheet" type="text/css" href="~/css/Admin.css" />
