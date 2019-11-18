@@ -2,7 +2,6 @@
 [![Build Status](https://dev.azure.com/xfox111/MyWebsite/_apis/build/status/XFox111.CVWebsite?branchName=master)](https://dev.azure.com/xfox111/MyWebsite/_build/latest?definitionId=5&branchName=master)
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 ![GitHub repo size](https://img.shields.io/github/repo-size/xfox111/CVWebsite?label=Repository%20size)
-![GitHub commit activity](https://img.shields.io/github/commit-activity/m/xfox111/CVWebsite?label=Commits%20activity)
 
 ![Twitter Follow](https://img.shields.io/twitter/follow/xfox111?style=social)
 ![GitHub followers](https://img.shields.io/github/followers/xfox111?label=Follow%20@xfox111&style=social)
