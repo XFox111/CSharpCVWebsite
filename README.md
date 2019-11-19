@@ -16,8 +16,6 @@ My personal website written in ASP.NET Core MVC 5 with Razor pages
 - Contact information
 
 ## Live version
-![Website](https://img.shields.io/website?down_message=offline&label=XFox111.NET&up_message=online&url=https%3A%2F%2Fxfox111.net%2FSiteInfo)
-
 Check out my website on https://xfox111.net/
 
 ## Get started
