@@ -1,0 +1,22 @@
+﻿@{
+    ViewData["Title"] = "Contact info";
+}
+
+<header>
+    <h1>Contact information</h1>
+</header>
+
+<article>
+    <p>
+        @foreach (Link link in Startup.Database.Links.Where(i => i.CanContactMe))
+        {
+            <a class="socicon-@(link.Name)"></a> @(link.Title) <a href="@(link.Url)" target="_blank">@(link.Username)</a><br />
+        }
+    </p>
+    <p>
+        @foreach (Link link in Startup.Database.Links.Where(i => !i.CanContactMe))
+        {
+            <a class="socicon-@(link.Name)"></a> @(link.Title) <a href="@(link.Url)" target="_blank">@(link.Username)</a><br />
+        }
+    </p>
+</article>

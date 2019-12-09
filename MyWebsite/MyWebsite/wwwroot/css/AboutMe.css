@@ -1,0 +1,37 @@
+﻿article {
+    margin: 0px;
+}
+
+.block {
+    position: relative;
+    margin-bottom: -10px;
+    z-index: -1;
+}
+.block .content {
+    position: absolute;
+}
+.block .background {
+    width: 100%;
+}
+
+.intro {
+    color: white;
+    background-color: #00a7dc;
+    font-size: 36px;
+    text-shadow: 2px 2px 1px black;
+}
+.intro .content {
+    bottom: 50px;
+    left: 50px;
+    max-width: 65%;
+}
+
+.sut {
+    color: white;
+    background-color: #ff8000;
+    font-size: 28px;
+    text-shadow: 2px 2px 1px black;
+}
+.sut .content {
+    margin: 50px 50px;
+}

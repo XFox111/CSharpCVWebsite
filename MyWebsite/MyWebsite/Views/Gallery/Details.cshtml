@@ -1,0 +1,20 @@
+﻿@model Image;
+@{
+    ViewData["Title"] = Model.Title;
+}
+
+<header>
+    <p>&#xE760; <a asp-action="Index" asp-controller="Gallery">Back to gallery</a></p>
+</header>
+
+<article class="image-overview-block">
+    <img src="~/images/Gallery/@Model.FileName" onclick="ToggleImageSize();" id="image" />
+
+    <div>
+        <h1>@Model.Title</h1>
+        <span>Creation date: @Model.CreationDate.ToShortDateString()</span>
+        <p>@Model.Description</p>
+    </div>
+</article>
+
+<link rel="stylesheet" type="text/css" href="~/css/Gallery.css" />

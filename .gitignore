@@ -9,3 +9,9 @@
 /MyWebsite/MyWebsite/bin/Release/netcoreapp2.1
 /MyWebsite/bin
 /MyWebsite/obj
+/MyWebsite/MyWebsite/bin/Debug/netcoreapp3.1
+/MyWebsite.old/.vs/MyWebsite
+/MyWebsite.old/MyWebsite/bin/Debug/netcoreapp2.1
+/MyWebsite.old/MyWebsite/obj/Debug/netcoreapp2.1
+/MyWebsite.old/MyWebsite/obj
+/MyWebsite.old/obj/Debug/netcoreapp2.1

@@ -1,0 +1,21 @@
+﻿@{
+    ViewData["Title"] = "My artworks";
+}
+
+<header>
+    <h1>My arts</h1>
+</header>
+
+<article class="info-block gallery">
+    @if (Startup.Database.Gallery.Count() > 0)
+        foreach (Image image in Startup.Database.Gallery)
+        {
+            <a asp-action="Details" asp-route-id="@image.FileName"><img title="@image.Title" src="~/images/Gallery/@image.FileName" /></a>
+        }
+    else
+    {
+        <h3>No content available</h3>
+    }
+</article>
+
+<link rel="stylesheet" type="text/css" href="~/css/Gallery.css" />
