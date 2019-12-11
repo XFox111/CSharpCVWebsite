@@ -1,4 +1,4 @@
-﻿@model Image;
+﻿@model Image
 @{
     ViewData["Title"] = Model.Title;
 }
@@ -13,7 +13,9 @@
     <div>
         <h1>@Model.Title</h1>
         <span>Creation date: @Model.CreationDate.ToShortDateString()</span>
-        <p>@Model.Description</p>
+        <p>
+            @Html.Raw(Model.Description)
+        </p>
     </div>
 </article>
 

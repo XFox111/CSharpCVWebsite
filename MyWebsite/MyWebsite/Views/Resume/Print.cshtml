@@ -1,0 +1,23 @@
+﻿@model Resume
+@{
+    Layout = null;
+    ViewData["Title"] = "Print";
+}
+
+@Html.Raw(Model.Content)
+
+<link rel="stylesheet" type="text/css" href="~/css/Style.css" />
+
+<style>
+    body {
+        margin-top: 0px;
+    }
+</style>
+
+<script type="text/javascript">
+    window.print();
+    window.onfocus = function ()
+    {
+        window.location = "/Resume";
+    }
+</script>

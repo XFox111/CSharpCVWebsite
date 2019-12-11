@@ -1,8 +1,6 @@
-﻿using System.Collections.Generic;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using MyWebsite.Models;
-using System.Linq;
 
 namespace MyWebsite.Controllers
 {
@@ -16,6 +14,10 @@ namespace MyWebsite.Controllers
 
         [Route("Contacts")]
         public IActionResult Contacts() =>
+            View();
+
+        [Route("Projects")]
+        public IActionResult Projects() =>
             View();
 
         [Route("Error")]

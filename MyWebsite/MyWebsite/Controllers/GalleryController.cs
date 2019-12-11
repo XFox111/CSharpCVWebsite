@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MyWebsite.Models;
-using System.Threading.Tasks;
 using System.Linq;
 
 namespace MyWebsite.Controllers
@@ -13,7 +12,7 @@ namespace MyWebsite.Controllers
         public IActionResult Index() =>
             View();
 
-        public async Task<IActionResult> Details(string id) =>
+        public IActionResult Details(string id) =>
             View(Startup.Database.Gallery.FirstOrDefault(i => i.FileName == id));
     }
 }

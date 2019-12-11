@@ -1,0 +1,55 @@
+﻿@model IEnumerable<MyWebsite.Models.Link>
+
+@{
+    ViewData["Title"] = "Contacts - Admin panel";
+}
+
+<header>
+    <h1>Contact links list</h1>
+    <p>&#xE760; <a asp-action="Index" asp-controller="Admin" asp-area="">Back to admin panel</a></p>
+</header>
+
+<article>
+    <p>
+        <a class="comment" asp-action="Create">// + Create New</a>
+    </p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Title</th>
+                <th>Username</th>
+                <th>URL</th>
+                <th>Contact link</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.OrderByDescending(i => i.CanContactMe))
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Title)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Username)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Url)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CanContactMe)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.Name }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.Name })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</article>
+
+<link type="text/css" rel="stylesheet" href="~/css/Admin.css" />

@@ -72,10 +72,15 @@ footer a:hover {
 }
 
 /*Body styles*/
+html {
+    overflow: hidden;
+}
+
 body {
+    overflow: auto;
     margin: 0px;
     margin-top: 53px;
-    font-family: Consolas, 'Segoe MDL2 Assets';
+    font-family: 'Consolas', 'Segoe MDL2 Assets';
 
     /*This stuff is necessary for sticky footer*/
     display: grid;
@@ -100,7 +105,7 @@ article a:visited, article a:link {
 }
 
 .comment, .comment:visited {
-    color: #57a64a;
+    color: #57a64a !important;
 }
 
 /*Adaptive code*/

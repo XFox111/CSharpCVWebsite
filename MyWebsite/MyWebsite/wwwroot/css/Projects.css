@@ -34,16 +34,6 @@ article {
     background-size: contain;
 }
 
-.csharp { background-image: url(../images/Badges/csharp.png); }
-.dotnet { background-image: url("../images/Badges/dotnet.png"); }
-.xamarin { background-image: url("../images/Badges/xamarin.png"); }
-.unity { background-image: url("../images/Badges/unity.png"); }
-.android { background-image: url("../images/Badges/android.png"); }
-.uwp { background-image: url("../images/Badges/windows.png"); }
-.win32 { background-image: url("../images/Badges/windows.png"); }
-.windows { background-image: url("../images/Badges/windows.png"); }
-.ios { background-image: url("../images/Badges/ios.png"); }
-
 @media only screen and (max-width: 600px) {
     .github-stats {
         grid-row: 2;

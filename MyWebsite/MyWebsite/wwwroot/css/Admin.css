@@ -4,6 +4,7 @@
     border: 1px solid black;
     width: 100%;
     box-sizing: border-box;
+    margin-bottom: 10px;
 }
 
 select {
@@ -53,6 +54,26 @@ textarea {
 
 form {
     max-width: 50%;
+}
+
+.admin-menu a {
+    font-size: 16pt;
+}
+
+.logout, .logout:link, .logout:link:visited {
+    font-size: 16pt;
+    color: red !important;
+}
+
+.validation-summary-errors {
+    color: red;
+}
+
+th {
+    text-align: left;
+}
+table {
+    width: 100%;
 }
 
 @media only screen and (max-width: 700px) {

@@ -2,26 +2,27 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace MyWebsite.Models
+namespace MyWebsite.Areas.API.Models
 {
-    public class Image
+    public class MetricsPackage
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }
+
         [Required]
         [Column(TypeName = "varchar(100)")]
         public string Title { get; set; }
+
         [Required]
-        [Column(TypeName = "varchar(255)")]
-        public string Description { get; set; }
+        [Column(TypeName = "mediumtext")]
+        public string Content { get; set; }
+
         [Required]
-        public DateTime CreationDate { get; set; }
+        [Column(TypeName = "varchar(5)")]
+        public string Version { get; set; }
+
         [Required]
-        [Column(TypeName = "varchar(20)")]
-        public string FileName { get; set; }
-        [Required]
-        [Column(TypeName = "varchar(10)")]
-        public string Language { get; set; }
+        public DateTime TimeStamp { get; set; }
     }
 }

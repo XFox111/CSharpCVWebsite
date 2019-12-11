@@ -29,7 +29,7 @@
 
         <menu type="toolbar" class="main-menu" style="display:none">
             <li><a asp-controller="About" asp-action="Index">AboutMe();</a></li>
-            <li><a asp-controller="CV" asp-action="Index">CV();</a></li>
+            <li><a asp-controller="Resume" asp-action="Index">CV();</a></li>
             <li><a asp-controller="Projects" asp-action="Index">Projects();</a></li>
             <li><a asp-controller="Gallery" asp-action="Index">Arts();</a></li>
             <li><a asp-controller="Contacts" asp-action="Index">Contacts();</a></li>
@@ -44,9 +44,9 @@
     </main>
 
     <footer>
-        <span class="comment">// Copyright &copy;@(DateTime.Today.Year) <b>Michael "XFox" Gordeev</b></span>
+        <span class="comment">// Copyright &copy;@(DateTime.Today.Year) Michael "XFox" Gordeev</span>
 
-        @foreach (Link link in from i in Startup.Database.Links where new string[] { "outlook", "linkedin", "github" }.Contains(i.Name) orderby i.Name descending select i)
+        @foreach (Link link in Startup.Database.Links.Where(i => i.DisplayInFooter).OrderBy(i => i.Id))
         {
             <a class="socicon-@(link.Name)" href="@(link.Url)" target="_blank" title="@(link.Title)"></a>
         }

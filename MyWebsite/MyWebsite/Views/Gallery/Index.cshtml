@@ -6,9 +6,9 @@
     <h1>My arts</h1>
 </header>
 
-<article class="info-block gallery">
+<article class="gallery">
     @if (Startup.Database.Gallery.Count() > 0)
-        foreach (Image image in Startup.Database.Gallery)
+        foreach (Image image in Startup.Database.Gallery.OrderByDescending(i => i.CreationDate))
         {
             <a asp-action="Details" asp-route-id="@image.FileName"><img title="@image.Title" src="~/images/Gallery/@image.FileName" /></a>
         }

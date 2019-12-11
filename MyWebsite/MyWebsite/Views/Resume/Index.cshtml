@@ -1,0 +1,17 @@
+﻿@model Resume
+@{
+    ViewData["Title"] = "My resume";
+}
+
+<header>
+    <h1>My resume</h1>
+
+    <a class="comment" asp-action="Download">// Download CV (.pdf) &#xE118;</a><br />
+    <a class="comment" asp-action="Print">// Print CV &#xE749;</a>
+</header>
+
+<article>
+    @Html.Raw(Model.Content)
+</article>
+
+<partial name="~/Views/Shared/ContactsBlock.cshtml" />

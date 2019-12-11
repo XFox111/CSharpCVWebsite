@@ -1,0 +1,23 @@
+﻿
+@{
+    ViewData["Title"] = "Admin panel";
+}
+
+<header>
+    <h1>Administration</h1>
+</header>
+
+<article>
+    <p class="admin-menu">
+        <a asp-action="Artworks" class="comment">// Artworks</a><br />
+        <a asp-action="Projects" class="comment">// Projects</a><br />
+        <a asp-action="Badges" class="comment">// Badges</a><br />
+        <a asp-action="Resume" class="comment">// Resume</a><br />
+        <a asp-action="Contacts" class="comment">// Contact links</a><br />
+    </p>
+    <p>
+        <a asp-action="Logout" class="logout">&#xE875; Logout</a>
+    </p>
+</article>
+
+<link type="text/css" rel="stylesheet" href="~/css/Admin.css" />

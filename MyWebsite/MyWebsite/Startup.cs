@@ -5,6 +5,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using MyWebsite.Models;
+using MyWebsite.Areas.API.Models;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Http;
 
 namespace MyWebsite
 {
@@ -22,9 +25,14 @@ namespace MyWebsite
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            string connection = Configuration.GetConnectionString("DefaultConnection");
             services.AddDbContext<DatabaseContext>(options =>
-                options.UseSqlServer(connection));
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddDbContext<FoxTubeDatabaseContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("FoxTubeAPI")));
+
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options =>
+                options.LoginPath = new PathString("/Admin/Login"));
 
             services.AddControllersWithViews();
         }
@@ -45,6 +53,7 @@ namespace MyWebsite
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
@@ -53,6 +62,10 @@ namespace MyWebsite
                     name: "projects",
                     areaName: "Projects",
                     pattern: "Projects/{controller=Projects}/{action=Index}/{id?}");
+                endpoints.MapAreaControllerRoute(
+                    name: "admin",
+                    areaName: "Admin",
+                    pattern: "Admin/{controller}/{action=Index}/{id?}");
                 endpoints.MapAreaControllerRoute(
                     name: "api",
                     areaName: "API",

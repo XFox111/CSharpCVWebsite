@@ -1,0 +1,45 @@
+﻿@using MyWebsite.Models;
+@model Link;
+@{
+    ViewData["Title"] = "Edit link";
+}
+
+<header>
+    <h1>Edit contact link</h1>
+    <p>&#xE760; <a asp-action="Index">Back to the list</a></p>
+</header>
+
+<article>
+    <form asp-action="Edit">
+        <div asp-validation-summary="ModelOnly" class="validation-summary-errors"></div>
+        <div>
+            <label asp-for="Name"></label>
+            <input asp-for="Name" />
+            <span asp-validation-for="Name"></span>
+        </div>
+        <div>
+            <label asp-for="Title"></label>
+            <input asp-for="Title" />
+            <span asp-validation-for="Title"></span>
+        </div>
+        <div>
+            <label asp-for="Username"></label>
+            <input asp-for="Username" />
+            <span asp-validation-for="Username"></span>
+        </div>
+        <div>
+            <label asp-for="Url"></label>
+            <input asp-for="Url" />
+            <span asp-validation-for="Url"></span>
+        </div>
+        <div>
+            <label asp-for="CanContactMe">@Html.DisplayNameFor(model => model.CanContactMe)</label>
+            <input style="width:auto" type="checkbox" asp-for="CanContactMe" />
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Save"/>
+        </div>
+    </form>
+</article>
+
+<link type="text/css" rel="stylesheet" href="~/css/Admin.css" />
