@@ -46,10 +46,12 @@
     <footer>
         <span class="comment">// Copyright &copy;@(DateTime.Today.Year) Michael "XFox" Gordeev</span>
 
-        @foreach (Link link in Startup.Database.Links.Where(i => i.DisplayInFooter).OrderBy(i => i.Id))
-        {
-            <a class="socicon-@(link.Name)" href="@(link.Url)" target="_blank" title="@(link.Title)"></a>
-        }
+        <div>
+            @foreach (Link link in Startup.Database.Links.Where(i => i.DisplayInFooter).OrderBy(i => i.Order))
+            {
+                <a class="socicon-@(link.Name)" href="@(link.Url)" target="_blank" title="@(link.Title)"></a>
+            }
+        </div>
     </footer>
 </body>
 </html>

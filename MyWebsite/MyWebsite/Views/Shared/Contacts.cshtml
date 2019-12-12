@@ -8,13 +8,13 @@
 
 <article>
     <p>
-        @foreach (Link link in Startup.Database.Links.Where(i => i.CanContactMe).OrderBy(i => i.Id))
+        @foreach (Link link in Startup.Database.Links.Where(i => i.CanContactMe).OrderBy(i => i.Order))
         {
             <a class="socicon-@(link.Name)"></a> @(link.Title) <a href="@(link.Url)" target="_blank">@(link.Username)</a><br />
         }
     </p>
     <p>
-        @foreach (Link link in Startup.Database.Links.Where(i => !i.CanContactMe).OrderBy(i => i.Id))
+        @foreach (Link link in Startup.Database.Links.Where(i => !i.CanContactMe).OrderBy(i => i.Order))
         {
             <a class="socicon-@(link.Name)"></a> @(link.Title) <a href="@(link.Url)" target="_blank">@(link.Username)</a><br />
         }

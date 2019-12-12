@@ -1,0 +1,51 @@
+﻿@model MyWebsite.Models.Link
+
+@{
+    ViewData["Title"] = "Edit link";
+}
+
+<header>
+    <p>&#xE760; <a asp-action="Index">Back to the list</a></p>
+    <h1>Edit link</h1>
+</header>
+
+<article>
+    <form asp-action="Edit">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div>
+            <label asp-for="Name"></label>
+            <input asp-for="Name" type="text" class="readonly" readonly />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <div>
+            <label asp-for="Order"></label>
+            <input asp-for="Order" type="number" />
+            <span asp-validation-for="Order" class="text-danger"></span>
+        </div>
+        <div>
+            <label asp-for="Title"></label>
+            <input asp-for="Title" type="text" />
+            <span asp-validation-for="Title" class="text-danger"></span>
+        </div>
+        <div>
+            <label asp-for="Username"></label>
+            <input asp-for="Username" type="text" />
+            <span asp-validation-for="Username" class="text-danger"></span>
+        </div>
+        <div>
+            <label asp-for="Url"></label>
+            <input asp-for="Url" type="text" />
+            <span asp-validation-for="Url" class="text-danger"></span>
+        </div>
+        <label>
+            <input type="checkbox" class="checkbox" asp-for="CanContactMe" /> @Html.DisplayNameFor(model => model.CanContactMe)
+        </label>
+        <label>
+            <input type="checkbox" class="checkbox" asp-for="DisplayInFooter" /> @Html.DisplayNameFor(model => model.DisplayInFooter)
+        </label>
+
+        <input type="submit" value="Save" class="btn" />
+    </form>
+</article>
+
+<link type="text/css" rel="stylesheet" href="~/css/Admin.css" />

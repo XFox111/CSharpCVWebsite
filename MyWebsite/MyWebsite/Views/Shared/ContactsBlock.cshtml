@@ -1,6 +1,6 @@
 ﻿@{
     Link email = Startup.Database.Links.FirstOrDefault(i => i.Name == "outlook");
-    List<Link> links = Startup.Database.Links.Where(i => new string[] { "linkedin", "github", "twitter", "vkontakte" }.Contains(i.Name)).OrderBy(i => i.Id).ToList();
+    List<Link> links = Startup.Database.Links.Where(i => new string[] { "linkedin", "github", "twitter", "vkontakte" }.Contains(i.Name)).OrderBy(i => i.Order).ToList();
 }
 
 <div class="contact-me">

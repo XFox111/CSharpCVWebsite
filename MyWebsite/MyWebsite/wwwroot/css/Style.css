@@ -60,7 +60,7 @@ footer {
     padding: 10px;
     display: grid;
     align-items: center;
-    grid-template-columns: 1fr auto auto auto;
+    grid-template-columns: 1fr auto;
     grid-column-gap: 10px;
 }
 footer a {
@@ -102,6 +102,24 @@ article, header {
 
 article a:visited, article a:link {
     color: blue;
+}
+
+.btn {
+    background-color: #343434;
+    color: white;
+}
+
+.btn-danger {
+    background-color: red;
+    color: white;
+}
+
+.checkbox {
+    width: auto;
+}
+
+.readonly {
+    background-color: lightgray;
 }
 
 .comment, .comment:visited {

@@ -1,0 +1,30 @@
+﻿@model MyWebsite.Models.Link
+
+@{
+    ViewData["Title"] = "Delete link";
+}
+
+<header>
+    <p>&#xE760; <a asp-action="Index">Back to the list</a></p>
+    <h1>Delete link</h1>
+    <h3>Are you sure you want to delete this?</h3>
+</header>
+
+<article>
+    <p class="form-group">
+        <b>@Html.DisplayNameFor(model => model.Name):</b> @Html.DisplayFor(model => model.Name)<br />
+        <b>@Html.DisplayNameFor(model => model.Order):</b> @Html.DisplayFor(model => model.Order)<br />
+        <b>@Html.DisplayNameFor(model => model.Title):</b> @Html.DisplayFor(model => model.Title)<br />
+        <b>@Html.DisplayNameFor(model => model.Username):</b> @Html.DisplayFor(model => model.Username)<br />
+        <b>@Html.DisplayNameFor(model => model.Url):</b> @Html.DisplayFor(model => model.Url)<br />
+        <b>@Html.DisplayNameFor(model => model.CanContactMe):</b> @Html.DisplayFor(model => model.CanContactMe)<br />
+        <b>@Html.DisplayNameFor(model => model.DisplayInFooter):</b> @Html.DisplayFor(model => model.DisplayInFooter)
+    </p>
+
+    <form asp-action="Delete">
+        <input hidden asp-for="Name" />
+        <input type="submit" value="Delete" class="btn-danger" />
+    </form>
+</article>
+
+<link type="text/css" rel="stylesheet" href="~/css/Admin.css" />

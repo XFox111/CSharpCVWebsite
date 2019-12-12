@@ -1,11 +1,12 @@
 ﻿@model IEnumerable<MyWebsite.Models.Link>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Links list";
 }
 
 <header>
-    <h1>Index</h1>
+    <p>&#xE760; <a asp-action="Index" asp-controller="Admin" asp-area="">Back to main menu</a></p>
+    <h1>Links list</h1>
     <p>
         <a asp-action="Create" class="comment">// + Create New</a>
     </p>
@@ -16,7 +17,7 @@
         <thead>
             <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.Id)
+                    @Html.DisplayNameFor(model => model.Order)
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.Name)
@@ -40,11 +41,11 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var item in Model)
+            @foreach (var item in Model.OrderBy(i => i.Order))
             {
                 <tr>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Id)
+                        @Html.DisplayFor(modelItem => item.Order)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Name)
@@ -65,8 +66,8 @@
                         @Html.DisplayFor(modelItem => item.DisplayInFooter)
                     </td>
                     <td>
-                        @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                        @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                        @Html.ActionLink("Edit", "Edit", new { id=item.Name }) |
+                        @Html.ActionLink("Delete", "Delete", new { id=item.Name })
                     </td>
                 </tr>
             }
