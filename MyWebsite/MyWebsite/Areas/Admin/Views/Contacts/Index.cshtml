@@ -1,32 +1,51 @@
 ﻿@model IEnumerable<MyWebsite.Models.Link>
 
 @{
-    ViewData["Title"] = "Contacts - Admin panel";
+    ViewData["Title"] = "Index";
 }
 
 <header>
-    <h1>Contact links list</h1>
-    <p>&#xE760; <a asp-action="Index" asp-controller="Admin" asp-area="">Back to admin panel</a></p>
+    <h1>Index</h1>
+    <p>
+        <a asp-action="Create" class="comment">// + Create New</a>
+    </p>
 </header>
 
 <article>
-    <p>
-        <a class="comment" asp-action="Create">// + Create New</a>
-    </p>
     <table class="table">
         <thead>
             <tr>
-                <th>Name</th>
-                <th>Title</th>
-                <th>Username</th>
-                <th>URL</th>
-                <th>Contact link</th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Id)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Title)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Username)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Url)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CanContactMe)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DisplayInFooter)
+                </th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
-            @foreach (var item in Model.OrderByDescending(i => i.CanContactMe))
+            @foreach (var item in Model)
             {
                 <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Id)
+                    </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Name)
                     </td>
@@ -43,8 +62,11 @@
                         @Html.DisplayFor(modelItem => item.CanContactMe)
                     </td>
                     <td>
-                        @Html.ActionLink("Edit", "Edit", new { id = item.Name }) |
-                        @Html.ActionLink("Delete", "Delete", new { id = item.Name })
+                        @Html.DisplayFor(modelItem => item.DisplayInFooter)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                        @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
                     </td>
                 </tr>
             }

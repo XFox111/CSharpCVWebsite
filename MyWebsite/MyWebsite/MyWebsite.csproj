@@ -5,6 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="wwwroot\projects-assets\**" />
+    <Content Remove="wwwroot\projects-assets\**" />
+    <EmbeddedResource Remove="wwwroot\projects-assets\**" />
+    <None Remove="wwwroot\projects-assets\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="Areas\Admin\NewFile.txt" />
   </ItemGroup>
 
@@ -18,7 +25,6 @@
 
   <ItemGroup>
     <Folder Include="Areas\Admin\Views\Shared\" />
-    <Folder Include="wwwroot\projects-assets\FoxTube\" />
   </ItemGroup>
 
 
