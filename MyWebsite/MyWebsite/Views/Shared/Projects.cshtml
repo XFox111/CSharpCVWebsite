@@ -12,7 +12,7 @@
 </header>
 
 <article>
-    @foreach (Project project in Startup.Database.Projects)
+    @foreach (Project project in Startup.Database.Projects.OrderByDescending(i => i.Id))
     {
         <div class="project-item">
             <div>

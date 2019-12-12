@@ -1,7 +1,6 @@
-﻿@using Newtonsoft.Json
-@using System.Net
-@{
-    Dictionary<string, Link> links = JsonConvert.DeserializeObject<Dictionary<string, Link>>(new WebClient().DownloadString($"{Context.Request.Scheme}://{Context.Request.Host}/Links.json"));
+﻿@{
+    Link email = Startup.Database.Links.FirstOrDefault(i => i.Name == "outlook");
+    List<Link> links = Startup.Database.Links.Where(i => new string[] { "linkedin", "github", "twitter", "vkontakte" }.Contains(i.Name)).OrderBy(i => i.Id).ToList();
 }
 
 <div class="contact-me">
@@ -12,13 +11,16 @@
         <a class="comment">// All links are clickable</a><br />
         <var>public void</var> <var class="method">ConatactMe</var>()<br />
         {<br />
-        <span class="t1"></span><var>string</var> email = <a class="string" href="mailto:michael.xfox@outlook.com">"mihcael.xfox@outlook.com"</a>;<br />
+        @if(email != null)
+        {
+            <span><span class="t1"></span><var>string</var> email = <a class="string" href="@email.Url">"@email.Username"</a>;</span><br />
+        }
         <span class="t1"></span><var class="class">Link</var>[] socialNetworks = <var>new</var> <var class="class">Link</var>[]<br />
         <span class="t1"></span>{<br />
-        <span class="t2"></span><var>new</var> <var class="class">Link</var>(<a class="string">"LinkedIn"</a>, <a class="string" target="_blank" href="@(links["linkedin"].Url)">"https:@(links["linkedin"].Url)"</a>),<br />
-        <span class="t2"></span><var>new</var> <var class="class">Link</var>(<a class="string">"GitHub"</a>, <a class="string" target="_blank" href="@(links["github"].Url)">"https:@(links["github"].Url)"</a>),<br />
-        <span class="t2"></span><var>new</var> <var class="class">Link</var>(<a class="string">"Twitter"</a>, <a class="string" target="_blank" href="@(links["twitter"].Url)">"https:@(links["twitter"].Url)"</a>),<br />
-        <span class="t2"></span><var>new</var> <var class="class">Link</var>(<a class="string">"Vkontakte"</a>, <a class="string" target="_blank" href="@(links["vk"].Url)">"https:@(links["vk"].Url)"</a>)<br />
+        @foreach(Link link in links)
+        {
+            <span><span class="t2"></span><var>new</var> <var class="class">Link</var>(<a class="string">"@(link.Title)"</a>, <a class="string" target="_blank" href="@(link.Url)">"https:@(link.Url)"</a>),</span><br />
+        }
         <span class="t1"></span>}<br />
         }<br />
         <br />

@@ -7,8 +7,7 @@ namespace MyWebsite.Models
     public class Project
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public Guid Id { get; set; }
+        public decimal Id { get; set; }
 
         [Required]
         [Column(TypeName = "varchar(100)")]
