@@ -1,0 +1,71 @@
+﻿@using System.IO;
+@model MyWebsite.Models.Badge
+@{
+    ViewData["Title"] = "Edit badge";
+    List<SelectListItem> files = new List<SelectListItem>();
+    foreach (string path in Directory.GetFiles(Directory.GetCurrentDirectory() + "/wwwroot/images/Badges"))
+    {
+        string fileName = System.IO.Path.GetFileNameWithoutExtension(path);
+        files.Add(new SelectListItem(fileName, fileName));
+    }
+}
+
+<header>
+    <p>&#xE760; <a asp-action="Index">Back to the list</a></p>
+    <h1>Edit project badge</h1>
+</header>
+
+<article>
+    <form asp-action="Edit" oninput="UpdatePreview();">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div>
+            <label asp-for="Name"></label>
+            <input asp-for="Name" type="text" class="readonly" readonly />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <div>
+            <label asp-for="Description"></label>
+            <input asp-for="Description" type="text" />
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+        <div>
+            <label asp-for="Image"></label>
+            <div class="image-selector">
+                <select asp-for="Image" asp-items="files" onchange="UpdatePreview();"></select>
+                <span>.png</span>
+            </div>
+            <span asp-validation-for="Image" class="text-danger"></span>
+        </div>
+        <div>
+            <label>Preview:</label>
+            <div class="badge" id="preview"></div>
+        </div>
+
+        <input type="submit" value="Save" class="btn" />
+    </form>
+</article>
+
+<link type="text/css" rel="stylesheet" href="~/css/Admin.css" />
+<style type="text/css">
+    .badge {
+        height: 50px;
+        width: 50px;
+        margin: 10px 0px;
+        background-size: contain;
+    }
+    .image-selector {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        align-items: center;
+    }
+</style>
+
+<script type="text/javascript">
+    UpdatePreview();
+    function UpdatePreview()
+    {
+        var preview = document.getElementById("preview");
+        preview.title = document.getElementById("Description").value;
+        preview.style.backgroundImage = "url(/images/Badges/" + document.getElementById("Image").value + ".png)";
+    }
+</script>

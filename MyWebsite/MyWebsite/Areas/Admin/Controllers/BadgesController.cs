@@ -1,27 +1,29 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MyWebsite.Models;
+using System.IO;
 
 namespace MyWebsite.Areas.Admin.Controllers
 {
     [Area("Admin")]
     [Authorize]
-    public class ContactsController : Controller
+    public class BadgesController : Controller
     {
-        public ContactsController(DatabaseContext context) =>
-            Startup.Database = context;
+        public BadgesController(DatabaseContext context) =>
+               Startup.Database = context;
 
         public IActionResult Index() =>
-            View(Startup.Database.Links);
+            View(Startup.Database.Badges);
 
         [HttpGet]
         public IActionResult Edit(string id) =>
-            View(Startup.Database.Links.Find(id));
+            View(Startup.Database.Badges.Find(id));
 
         [HttpPost]
-        public IActionResult Edit(Link model)
+        public IActionResult Edit(Badge model)
         {
-            Startup.Database.Links.Update(model);
+            Startup.Database.Badges.Update(model);
             Startup.Database.SaveChanges();
 
             return RedirectToAction("Index");
@@ -29,12 +31,12 @@ namespace MyWebsite.Areas.Admin.Controllers
 
         [HttpGet]
         public IActionResult Delete(string id) =>
-            View(Startup.Database.Links.Find(id));
+            View(Startup.Database.Badges.Find(id));
 
         [HttpPost]
-        public IActionResult Delete(Link link)
+        public IActionResult Delete(Badge model)
         {
-            Startup.Database.Links.Remove(link);
+            Startup.Database.Badges.Remove(model);
             Startup.Database.SaveChanges();
 
             return RedirectToAction("Index");
@@ -45,15 +47,15 @@ namespace MyWebsite.Areas.Admin.Controllers
             View();
 
         [HttpPost]
-        public IActionResult Create(Link link)
+        public IActionResult Create(Badge model)
         {
             if (!ModelState.IsValid)
             {
                 ModelState.AddModelError("Error", "Invalid data");
-                return View(link);
+                return View(model);
             }
 
-            Startup.Database.Links.Add(link);
+            Startup.Database.Badges.Add(model);
             Startup.Database.SaveChanges();
 
             return RedirectToAction("Index");
