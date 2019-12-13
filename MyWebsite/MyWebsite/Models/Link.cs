@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Globalization;
 
 namespace MyWebsite.Models
 {
@@ -14,10 +15,18 @@ namespace MyWebsite.Models
         [Required]
         [DisplayName("Order")]
         public int Order { get; set; }
+
+        [DisplayName("Title")]
+        public string Title => CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ru" && !string.IsNullOrWhiteSpace(RussianTitle) ? RussianTitle : EnglishTitle;
+
         [Required]
         [Column(TypeName = "varchar(20)")]
-        [DisplayName("Title")]
-        public string Title { get; set; }
+        [DisplayName("Title (en)")]
+        public string EnglishTitle { get; set; }
+        [Column(TypeName = "varchar(20)")]
+        [DisplayName("Title (ru)")]
+        public string RussianTitle { get; set; }
+
         [Required]
         [Column(TypeName = "varchar(50)")]
         [DisplayName("Username")]
