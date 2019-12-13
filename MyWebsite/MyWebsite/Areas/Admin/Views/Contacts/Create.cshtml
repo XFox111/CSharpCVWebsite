@@ -14,7 +14,7 @@
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div>
             <label asp-for="Name"></label>
-            <input asp-for="Name" type="text"/>
+            <input asp-for="Name" type="text" />
             <span asp-validation-for="Name" class="text-danger"></span>
         </div>
         <div>
@@ -37,12 +37,11 @@
             <input asp-for="Url" type="text" />
             <span asp-validation-for="Url" class="text-danger"></span>
         </div>
-        <label>
-            <input type="checkbox" class="checkbox" asp-for="CanContactMe" /> @Html.DisplayNameFor(model => model.CanContactMe)
-        </label>
-        <label>
-            <input type="checkbox" class="checkbox" asp-for="DisplayInFooter" /> @Html.DisplayNameFor(model => model.DisplayInFooter)
-        </label>
+
+        <label asp-for="CanContactMe"></label>
+        <input type="checkbox" class="checkbox" asp-for="CanContactMe" /> <br />
+        <label asp-for="DisplayInFooter"></label>
+        <input type="checkbox" class="checkbox" asp-for="DisplayInFooter" />
 
         <input type="submit" value="Create" class="btn" />
     </form>

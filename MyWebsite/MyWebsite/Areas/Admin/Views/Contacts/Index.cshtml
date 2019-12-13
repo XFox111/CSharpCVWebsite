@@ -1,5 +1,4 @@
 ﻿@model IEnumerable<MyWebsite.Models.Link>
-
 @{
     ViewData["Title"] = "Links list";
 }
@@ -44,21 +43,11 @@
             @foreach (var item in Model.OrderBy(i => i.Order))
             {
                 <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Order)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Name)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Title)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Username)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Url)
-                    </td>
+                    <td>@item.Order</td>
+                    <td>@item.Name</td>
+                    <td>@item.Title</td>
+                    <td>@item.Username</td>
+                    <td>@item.Url</td>
                     <td>
                         @Html.DisplayFor(modelItem => item.CanContactMe)
                     </td>
@@ -66,8 +55,8 @@
                         @Html.DisplayFor(modelItem => item.DisplayInFooter)
                     </td>
                     <td>
-                        @Html.ActionLink("Edit", "Edit", new { id=item.Name }) |
-                        @Html.ActionLink("Delete", "Delete", new { id=item.Name })
+                        <a asp-action="Edit" asp-route-id="@item.Name">Edit</a> | 
+                        <a asp-action="Delete" asp-route-id="@item.Name">Delete</a>
                     </td>
                 </tr>
             }
