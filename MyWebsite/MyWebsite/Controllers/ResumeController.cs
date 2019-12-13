@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MyWebsite.Models;
 using SelectPdf;
+using System.Globalization;
 
 namespace MyWebsite.Controllers
 {
@@ -10,10 +11,10 @@ namespace MyWebsite.Controllers
             Startup.Database = context;
 
         public IActionResult Index() =>
-            View(Startup.Database.Resume.Find("en-US"));
+            View(Startup.Database.Resume.Find(CultureInfo.CurrentUICulture.Name));
 
         public IActionResult Print() =>
-            View(Startup.Database.Resume.Find("en-US"));
+            View(Startup.Database.Resume.Find(CultureInfo.CurrentUICulture.Name));
 
         public IActionResult Download()
         {

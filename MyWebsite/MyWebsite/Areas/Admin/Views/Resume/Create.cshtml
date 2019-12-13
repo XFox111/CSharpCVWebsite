@@ -1,0 +1,39 @@
+﻿@model MyWebsite.Models.Resume
+
+@{
+    ViewData["Title"] = "Create resume";
+}
+
+<header>
+    <p>&#xE760; <a asp-action="Index">Back to the list</a></p>
+    <h1>Create resume</h1>
+</header>
+
+<article>
+    <form asp-action="Create">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div>
+            <label asp-for="Language"></label>
+            <input type="text" asp-for="Language"/>
+            <span asp-validation-for="Language" class="text-danger"></span>
+        </div>
+        <div>
+            <label asp-for="Content"></label>
+            <textarea asp-for="Content" spellcheck="false"></textarea>
+            <span asp-validation-for="Content" class="text-danger"></span>
+        </div>
+        <br />
+        <input type="submit" value="Save" />
+    </form>
+</article>
+
+<link type="text/css" rel="stylesheet" href="~/css/Admin.css" />
+<style type="text/css">
+    form {
+        max-width: initial;
+    }
+
+    textarea {
+        min-height: 500px;
+    }
+</style>
