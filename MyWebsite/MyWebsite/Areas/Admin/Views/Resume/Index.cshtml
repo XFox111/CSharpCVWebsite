@@ -1,0 +1,44 @@
+﻿@model IEnumerable<MyWebsite.Models.Resume>
+
+@{
+    ViewData["Title"] = "Resumes";
+}
+
+<header>
+    <p>&#xE760; <a asp-action="Index" asp-controller="Admin" asp-area="">Back to main menu</a></p>
+    <h1>Resumes list</h1>
+    <p>
+        <a asp-action="Create" class="comment">// + Create New</a>
+    </p>
+</header>
+
+<article>
+    <table>
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Language)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.LastUpdate)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Language</td>
+                    <td>@item.LastUpdate</td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Language">Edit</a> |
+                        <a asp-action="Delete" asp-route-id="@item.Language">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</article>
+
+<link type="text/css" rel="stylesheet" href="~/css/Admin.css" />
