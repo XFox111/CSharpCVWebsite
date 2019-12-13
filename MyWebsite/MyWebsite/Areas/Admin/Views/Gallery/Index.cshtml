@@ -1,0 +1,46 @@
+﻿@model IEnumerable<MyWebsite.Models.Image>
+@{
+    ViewData["Title"] = "Gallery";
+}
+
+<header>
+    <p>&#xE760; <a asp-action="Index" asp-controller="Admin" asp-area="">Back to main menu</a></p>
+    <h1>Gallery</h1>
+    <p>
+        <a asp-action="Upload" class="comment">// + Upload new</a>
+    </p>
+</header>
+
+<article>
+    <table>
+        @foreach (Image item in Model)
+        {
+            <tr>
+                <td>
+                    <img title="@item.Title" src="~/images/Gallery/@item.FileName" />
+                </td>
+                <td>
+                    <div>
+                        <h3>@item.Title</h3>
+                        <span>ID: @item.Id</span> | 
+                        <span>File name: @item.FileName</span> | 
+                        <span>Language: @item.Language</span><br />
+                        <span>Creation date: @item.CreationDate.ToShortDateString()</span><br />
+                        <span>
+                            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                        </span>
+                        <p>@Html.Raw(item.Description)</p>
+                    </div>
+                </td>
+            </tr>
+        }
+    </table>
+</article>
+
+<link type="text/css" rel="stylesheet" href="~/css/Admin.css" />
+<style type="text/css">
+    img {
+        height: 200px;
+    }
+</style>
