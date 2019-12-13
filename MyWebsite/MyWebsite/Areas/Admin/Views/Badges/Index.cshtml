@@ -1,5 +1,4 @@
 ﻿@model IEnumerable<MyWebsite.Models.Badge>
-
 @{
     ViewData["Title"] = "Badges list";
 }
@@ -36,18 +35,12 @@
                     <td>
                         <div class="badge" style="background-image: url(/images/Badges/@(item.Image).png)" title="@(item.Description)"></div>
                     </td>
+                    <td>@item.Name</td>
+                    <td>@item.Description</td>
+                    <td>@item.Image</td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Name)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Description)
-                    </td>
-                    <td>
-                        @(Html.DisplayFor(modelItem => item.Image)).png
-                    </td>
-                    <td>
-                        @Html.ActionLink("Edit", "Edit", new { id=item.Name }) |
-                        @Html.ActionLink("Delete", "Delete", new { id=item.Name })
+                        <a asp-action="Edit" asp-route-id="@item.Name">Edit</a> |
+                        <a asp-action="Delete" asp-route-id="@item.Name">Delete</a>
                     </td>
                 </tr>
             }

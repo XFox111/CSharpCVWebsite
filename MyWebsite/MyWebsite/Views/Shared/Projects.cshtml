@@ -25,7 +25,7 @@
             <div>
                 @foreach (string badge in project.Badges.Split(','))
                 {
-                    <div class="badge" style="background-image: url(../images/Badges/@(badges.FirstOrDefault(i => i.Name == badge).Image).png)" title="@(badges.FirstOrDefault(i => i.Name == badge).Description)"></div>
+                    <div class="badge" style="background-image: url(../images/Badges/@(badges.FirstOrDefault(i => i.Name == badge)?.Image).png)" title="@(badges.FirstOrDefault(i => i.Name == badge)?.Description)"></div>
                 }
             </div>
         </div>
