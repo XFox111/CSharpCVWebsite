@@ -35,12 +35,12 @@
     color: gray; 
 }
 
-.main-menu {
+#main-menu {
     margin: 26px auto 26px auto;
     grid-row: 2;
     list-style: none;
 }
-.main-menu li {
+#main-menu li {
     font-size: 20px;
     margin-top: 10px;
 }
@@ -128,13 +128,13 @@ article a:visited, article a:link {
 
 /*Adaptive code*/
 @media only screen and (min-width: 1000px) {
-    .main-menu {
+    #main-menu {
         display: initial !important;
         grid-row: 1;
         grid-column: 2;
         margin: 0px;
     }
-    .main-menu li {
+    #main-menu li {
         display: inline-block;
         margin-right: 10px;
         margin-top: 0px;
