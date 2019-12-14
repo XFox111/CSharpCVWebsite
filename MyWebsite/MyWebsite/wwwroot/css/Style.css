@@ -1,4 +1,9 @@
-﻿@font-face {
+﻿/*
+    This file contains main layout styles which applies to every View. In some views this rules are overrided in separate CSS files
+*/
+
+/*Declaring fonts*/
+@font-face {
     font-family: 'Consolas';
     src: url("/fonts/consolas.eot");
     src: url("/fonts/consolas.eot?#iefix") format("embedded-opentype"), url("/fonts/consolas.otf") format("opentype"), url("/fonts/consolas.svg") format("svg"), url("/fonts/consolas.ttf") format("truetype"), url("/fonts/consolas.woff") format("woff"), url("/fonts/consolas.woff2") format("woff2");
@@ -11,9 +16,9 @@
 }
 
 /*Header styles*/
-.navbar {
+nav {
     display: grid;
-    grid-template-columns: auto 1fr auto auto;
+    grid-template-columns: auto 1fr auto;
     grid-column-gap: 10px;
     grid-template-rows: auto auto;
     background-color: #343434;
@@ -27,32 +32,46 @@
     font-size: 26px;
 }
 
-.navbar a {
+nav a {
     text-decoration: none;
     color: white;
 }
-.navbar a:hover { 
+nav a:hover { 
     color: gray; 
 }
-
-#main-menu {
+nav div {
+    grid-column: 3;
+    user-select: none;
+    cursor: pointer;
+}
+menu {
     margin: 26px auto 26px auto;
     grid-row: 2;
     list-style: none;
 }
-#main-menu li {
+menu li {
     font-size: 20px;
     margin-top: 10px;
 }
 
-.language-switch {
-    grid-column: 3;
-    user-select: none
-}
-.menu-toggle {
-    grid-column: 4;
-    cursor: pointer;
-    user-select: none;
+/*Adaptive code*/
+@media only screen and (min-width: 1000px) {
+    menu {
+        display: initial !important;
+        grid-row: 1;
+        grid-column: 2;
+        margin: 0px;
+    }
+
+        menu li {
+            display: inline-block;
+            margin-right: 10px;
+            margin-top: 0px;
+        }
+
+    #menu-toggle {
+        display: none;
+    }
 }
 
 /*Footer styles*/
@@ -78,8 +97,10 @@ html {
 
 body {
     overflow: auto;
+
     margin: 0px;
     margin-top: 53px;
+
     font-family: 'Consolas', 'Segoe MDL2 Assets';
 
     /*This stuff is necessary for sticky footer*/
@@ -104,42 +125,6 @@ article a:visited, article a:link {
     color: blue;
 }
 
-.btn {
-    background-color: #343434;
-    color: white;
-}
-
-.btn-danger {
-    background-color: red;
-    color: white;
-}
-
-.checkbox {
-    width: auto;
-}
-
-.readonly {
-    background-color: lightgray;
-}
-
 .comment, .comment:visited {
     color: #57a64a !important;
-}
-
-/*Adaptive code*/
-@media only screen and (min-width: 1000px) {
-    #main-menu {
-        display: initial !important;
-        grid-row: 1;
-        grid-column: 2;
-        margin: 0px;
-    }
-    #main-menu li {
-        display: inline-block;
-        margin-right: 10px;
-        margin-top: 0px;
-    }
-    .menu-toggle {
-        display: none;
-    }
 }

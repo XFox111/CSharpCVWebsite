@@ -1,4 +1,5 @@
-﻿@{
+﻿@model IEnumerable<Link>
+@{
     ViewData["Title"] = "Contact info";
 }
 
@@ -8,13 +9,13 @@
 
 <article>
     <p>
-        @foreach (Link link in Startup.Database.Links.Where(i => i.CanContactMe).OrderBy(i => i.Order))
+        @foreach (Link link in Model.Where(i => i.CanContactMe))
         {
             <a class="socicon-@(link.Name)"></a> @(link.Title) <a href="@(link.Url)" target="_blank">@(link.Username)</a><br />
         }
     </p>
     <p>
-        @foreach (Link link in Startup.Database.Links.Where(i => !i.CanContactMe).OrderBy(i => i.Order))
+        @foreach (Link link in Model.Where(i => !i.CanContactMe))
         {
             <a class="socicon-@(link.Name)"></a> @(link.Title) <a href="@(link.Url)" target="_blank">@(link.Username)</a><br />
         }

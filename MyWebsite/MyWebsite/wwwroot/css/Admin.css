@@ -85,6 +85,24 @@ table {
     color: red;
 }
 
+.btn {
+    background-color: #343434;
+    color: white;
+}
+
+.btn-danger {
+    background-color: red;
+    color: white;
+}
+
+.checkbox {
+    width: auto;
+}
+
+.readonly {
+    background-color: lightgray;
+}
+
 @media only screen and (max-width: 700px) {
     form  {
         max-width: initial;

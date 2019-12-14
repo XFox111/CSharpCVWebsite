@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using MyWebsite.Models;
 
@@ -14,7 +15,7 @@ namespace MyWebsite.Controllers
 
         [Route("Contacts")]
         public IActionResult Contacts() =>
-            View();
+            View(Startup.Database.Links.OrderBy(i => i.Order));
 
         [Route("Projects")]
         public IActionResult Projects() =>

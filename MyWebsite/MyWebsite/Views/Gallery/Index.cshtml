@@ -1,4 +1,5 @@
-﻿@{
+﻿@model IEnumerable<Image>
+@{
     ViewData["Title"] = "My artworks";
 }
 
@@ -7,8 +8,8 @@
 </header>
 
 <article class="gallery">
-    @if (Startup.Database.Gallery.Count() > 0)
-        foreach (Image image in Startup.Database.Gallery.OrderByDescending(i => i.CreationDate))
+    @if (Model.Count() > 0)
+        foreach (Image image in Model.OrderByDescending(i => i.CreationDate))
         {
             <a asp-action="Details" asp-route-id="@image.FileName"><img title="@image.Title" src="~/images/Gallery/@image.FileName" /></a>
         }

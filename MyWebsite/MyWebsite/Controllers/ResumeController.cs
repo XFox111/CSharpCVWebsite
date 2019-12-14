@@ -11,10 +11,10 @@ namespace MyWebsite.Controllers
             Startup.Database = context;
 
         public IActionResult Index() =>
-            View(Startup.Database.Resume.Find(CultureInfo.CurrentUICulture.Name));
+            View(Startup.Database.Resume.Find(CultureInfo.CurrentUICulture.Name) ?? Startup.Database.Resume.Find("en-US"));
 
         public IActionResult Print() =>
-            View(Startup.Database.Resume.Find(CultureInfo.CurrentUICulture.Name));
+            View(Startup.Database.Resume.Find(CultureInfo.CurrentUICulture.Name) ?? Startup.Database.Resume.Find("en-US"));
 
         public IActionResult Download()
         {
@@ -25,7 +25,7 @@ namespace MyWebsite.Controllers
             converter.Options.MarginRight = 25;
             PdfDocument doc = converter.ConvertHtmlString( 
                 $@"<html style=""margin-top: -50px"">
-                        {Startup.Database.Resume.Find("en-US").Content}
+                        {(Startup.Database.Resume.Find(CultureInfo.CurrentUICulture.Name) ?? Startup.Database.Resume.Find("en-US")).Content}
 
                         <link rel=""stylesheet"" type=""text/css"" href=""{Request.Scheme}://{Request.Host}/css/Style.css"" />
                     </html>");

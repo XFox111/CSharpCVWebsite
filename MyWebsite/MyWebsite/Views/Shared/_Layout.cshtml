@@ -4,7 +4,7 @@
         <title>@ViewData["Title"] - XFox111.NET</title>
         <link rel="shortcut icon" href="~/images/favicon.png" type="image/png" />
 
-        <link rel="stylesheet" type="text/css" href="~/css/style.css" />
+        <link rel="stylesheet" type="text/css" href="~/css/Style.css" />
         <link rel="stylesheet" href="https://d1azc1qln24ryf.cloudfront.net/114779/Socicon/style-cf.css?9ukd8d">
 
         <script src="~/js/site.js" type="text/javascript"></script>
@@ -20,6 +20,7 @@
             }
         </script>
 
+        <!-- TODO: Make OpenGraph tags more specific for each page -->
         <meta name="author" content="Michael 'XFox' Gordeev" />
         <meta name="description" content="Hi, my name is Michael. I'm C# Developer and this is my personal website. Here you can find info about me, my projects and more. Check it out!" />
 
@@ -35,7 +36,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     </head>
     <body>
-        <nav class="navbar">
+        <nav>
             <a asp-controller="Home" asp-action="Index" asp-area="">XFox111.NET</a>
 
             <menu type="toolbar" id="main-menu" style="display:none">
@@ -46,8 +47,10 @@
                 <li><a asp-area="" asp-controller="Contacts" asp-action="Index">Contacts();</a></li>
             </menu>
 
-            <a class="language-switch" asp-controller="Home" asp-action="SwitchLanguage" lang="ru">РУС &#xE12B;</a>
-            <a class="menu-toggle" onclick="ToggleMenu();">&#xE700;</a>
+            <div>
+                <a asp-controller="Home" asp-action="SwitchLanguage" lang="ru">РУС &#xE12B;</a>
+                <a id="menu-toggle" onclick="ToggleMenu();">&#xE700;</a>
+            </div>
         </nav>
 
         <main>

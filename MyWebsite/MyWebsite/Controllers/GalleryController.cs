@@ -10,7 +10,7 @@ namespace MyWebsite.Controllers
             Startup.Database = context;
 
         public IActionResult Index() =>
-            View();
+            View(Startup.Database.Gallery);
 
         public IActionResult Details(string id) =>
             View(Startup.Database.Gallery.FirstOrDefault(i => i.FileName == id));
