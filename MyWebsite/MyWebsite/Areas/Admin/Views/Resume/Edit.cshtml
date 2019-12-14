@@ -19,6 +19,8 @@
         <div>
             <label asp-for="Content"></label>
             <textarea asp-for="Content" spellcheck="false"></textarea>
+            <a class="comment" onclick="CopyToClipboard()" href="#">// &#xE16D; Copy to clipboard</a>
+            <span style="display: none" id="copied"> - Done</span><br />
             <span asp-validation-for="Content" class="text-danger"></span>
         </div>
         <br />
@@ -35,3 +37,14 @@
         min-height: 500px;
     }
 </style>
+<script type="text/javascript">
+    async function CopyToClipboard() {
+        text = document.getElementById("Content");
+        text.select();
+        document.execCommand("copy");
+        window.getSelection().removeAllRanges();
+        document.getElementById("copied").style.display = "initial";
+        await delay(3000);
+        document.getElementById("copied").style.display = "none";
+    }
+</script>

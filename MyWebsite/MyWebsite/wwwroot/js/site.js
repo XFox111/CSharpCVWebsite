@@ -1,4 +1,5 @@
-﻿function ToggleMenu()
+﻿const delay = ms => new Promise(res => setTimeout(res, ms));
+function ToggleMenu()
 {
     var menu = document.getElementsByClassName("main-menu")[0];
 
