@@ -3,24 +3,30 @@
     List<Link> links = Startup.Database.Links.Where(i => new string[] { "linkedin", "github", "twitter", "vkontakte" }.Contains(i.Name)).OrderBy(i => i.Order).ToList();
 }
 
-<div class="contact-me">
+<div id="contact-me">
     <var>if</var> (<var class="class">You</var>.InsterestedInMe)<br />
-    <span class="t1"></span><var class="method">ContactMe</var>();<br />
+    <div>
+        <var class="method">ContactMe</var>();<br />
+    </div>
     <br />
     <a class="comment">// All links are clickable</a><br />
     <var>public void</var> <var class="method">ConatactMe</var>()<br />
     {<br />
-    @if (email != null)
-    {
-        <span><span class="t1"></span><var>string</var> email = <a class="string" href="@email.Url">"@email.Username"</a>;</span><br />
-    }
-    <span class="t1"></span><var class="class">Link</var>[] socialNetworks = <var>new</var> <var class="class">Link</var>[]<br />
-    <span class="t1"></span>{<br />
-    @foreach (Link link in links)
-    {
-        <span><span class="t2"></span><var>new</var> <var class="class">Link</var>(<a class="string">"@(link.Title)"</a>, <a class="string" target="_blank" href="@(link.Url)">"https:@(link.Url)"</a>),</span><br />
-    }
-    <span class="t1"></span>}<br />
+     <div>
+         @if (email != null)
+         {
+             <span><var>string</var> email = <a href="@email.Url">@email.Username</a>;<br /></span>
+         }
+         <var class="class">Link</var>[] socialNetworks = <var>new</var> <var class="class">Link</var>[]<br />
+         {<br />
+          <div>
+              @foreach (Link link in links)
+              {
+                  <span><img /><img /><var>new</var> <var class="class">Link</var>(<a>@(link.Title)</a>, <a target="_blank" href="@(link.Url)">https:@(link.Url)</a>),</span><br />
+              }
+          </div>
+         }<br />
+     </div>
     }<br />
     <br />
     <a class="comment">// Copyright &copy;@(DateTime.Today.Year) Michael "XFox" Gordeev</a>

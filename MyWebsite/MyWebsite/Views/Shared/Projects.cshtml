@@ -1,4 +1,5 @@
-﻿@{
+﻿@model IEnumerable<Project>
+@{
     ViewData["Title"] = "My projects";
     List<Badge> badges = Startup.Database.Badges.ToList();
 }
@@ -12,7 +13,7 @@
 </header>
 
 <article>
-    @foreach (Project project in Startup.Database.Projects.OrderByDescending(i => i.Id))
+    @foreach (Project project in Model)
     {
         <div class="project-item">
             <div>
@@ -22,10 +23,10 @@
                 </p>
                 <a href="@(project.Link)" target="_blank">@project.LinkCaption</a>
             </div>
-            <div>
+            <div class="badge-placeholder">
                 @foreach (string badge in project.Badges.Split(','))
                 {
-                    <div class="badge" style="background-image: url(../images/Badges/@(badges.FirstOrDefault(i => i.Name == badge)?.Image).png)" title="@(badges.FirstOrDefault(i => i.Name == badge)?.Description)"></div>
+                    <div style="background-image: url(../images/Badges/@(badges.FirstOrDefault(i => i.Name == badge)?.Image).png)" title="@(badges.FirstOrDefault(i => i.Name == badge)?.Description)"></div>
                 }
             </div>
         </div>

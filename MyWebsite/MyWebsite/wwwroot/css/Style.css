@@ -2,129 +2,155 @@
     This file contains main layout styles which applies to every View. In some views this rules are overrided in separate CSS files
 */
 
-/*Declaring fonts*/
-@font-face {
-    font-family: 'Consolas';
-    src: url("/fonts/consolas.eot");
-    src: url("/fonts/consolas.eot?#iefix") format("embedded-opentype"), url("/fonts/consolas.otf") format("opentype"), url("/fonts/consolas.svg") format("svg"), url("/fonts/consolas.ttf") format("truetype"), url("/fonts/consolas.woff") format("woff"), url("/fonts/consolas.woff2") format("woff2");
+/* Declaring fonts */
+@font-face
+{
+	font-family: 'Consolas';
+	src: url("/fonts/consolas.eot");
+	src: url("/fonts/consolas.eot?#iefix") format("embedded-opentype"), url("/fonts/consolas.otf") format("opentype"), url("/fonts/consolas.svg") format("svg"), url("/fonts/consolas.ttf") format("truetype"), url("/fonts/consolas.woff") format("woff"), url("/fonts/consolas.woff2") format("woff2");
 }
 
-@font-face {
-    font-family: 'Segoe MDL2 Assets';
-    src: url("/fonts/segoeMLD2assets.eot");
-    src: url("/fonts/segoeMLD2assets.eot?#iefix") format("embedded-opentype"), url("/fonts/segoeMLD2assets.otf") format("opentype"), url("/fonts/segoeMLD2assets.svg") format("svg"), url("/fonts/segoeMLD2assets.ttf") format("truetype"), url("/fonts/segoeMLD2assets.woff") format("woff"), url("/fonts/segoeMLD2assets.woff2") format("woff2");
+@font-face
+{
+	font-family: 'Segoe MDL2 Assets';
+	src: url("/fonts/segoeMLD2assets.eot");
+	src: url("/fonts/segoeMLD2assets.eot?#iefix") format("embedded-opentype"), url("/fonts/segoeMLD2assets.otf") format("opentype"), url("/fonts/segoeMLD2assets.svg") format("svg"), url("/fonts/segoeMLD2assets.ttf") format("truetype"), url("/fonts/segoeMLD2assets.woff") format("woff"), url("/fonts/segoeMLD2assets.woff2") format("woff2");
 }
 
-/*Header styles*/
-nav {
-    display: grid;
-    grid-template-columns: auto 1fr auto;
-    grid-column-gap: 10px;
-    grid-template-rows: auto auto;
-    background-color: #343434;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 10;
-    padding: 10px;
-    min-height: 33px;
-    font-size: 26px;
+/* Header styles */
+nav
+{
+	display: grid;
+	grid-template-columns: auto 1fr auto;
+	grid-column-gap: 10px;
+	grid-template-rows: auto auto;
+	background-color: #343434;
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	z-index: 10;
+	padding: 10px;
+	min-height: 33px;
+	font-size: 26px;
 }
 
-nav a {
-    text-decoration: none;
-    color: white;
-}
-nav a:hover { 
-    color: gray; 
-}
-nav div {
-    grid-column: 3;
-    user-select: none;
-    cursor: pointer;
-}
-menu {
-    margin: 26px auto 26px auto;
-    grid-row: 2;
-    list-style: none;
-}
-menu li {
-    font-size: 20px;
-    margin-top: 10px;
+	nav a
+	{
+		text-decoration: none;
+		color: white;
+	}
+
+		nav a:hover
+		{
+			color: gray;
+		}
+
+	nav div
+	{
+		grid-column: 3;
+		user-select: none;
+		cursor: pointer;
+	}
+
+menu
+{
+	margin: 26px auto 26px auto;
+	grid-row: 2;
+	list-style: none;
 }
 
-/*Adaptive code*/
-@media only screen and (min-width: 1000px) {
-    menu {
-        display: initial !important;
-        grid-row: 1;
-        grid-column: 2;
-        margin: 0px;
-    }
+	menu li
+	{
+		font-size: 20px;
+		margin-top: 10px;
+	}
 
-        menu li {
-            display: inline-block;
-            margin-right: 10px;
-            margin-top: 0px;
-        }
+/* Adaptive code */
+@media only screen and (min-width: 1000px)
+{
+	menu
+	{
+		display: initial !important;
+		grid-row: 1;
+		grid-column: 2;
+		margin: 0px;
+	}
 
-    #menu-toggle {
-        display: none;
-    }
+		menu li
+		{
+			display: inline-block;
+			margin-right: 10px;
+			margin-top: 0px;
+		}
+
+	#menu-toggle
+	{
+		display: none;
+	}
 }
 
-/*Footer styles*/
-footer {
-    padding: 10px;
-    display: grid;
-    align-items: center;
-    grid-template-columns: 1fr auto;
-    grid-column-gap: 10px;
-}
-footer a {
-    text-decoration: none;
-    color: black;
-}
-footer a:hover { 
-    color: orangered;
+/* Footer styles */
+footer
+{
+	padding: 10px;
+	display: grid;
+	align-items: center;
+	grid-template-columns: 1fr auto;
+	grid-column-gap: 10px;
 }
 
-/*Body styles*/
-html {
-    overflow: hidden;
+	footer a
+	{
+		text-decoration: none;
+		color: black;
+	}
+
+		footer a:hover
+		{
+			color: orangered;
+		}
+
+/* Body styles */
+html
+{
+	overflow: hidden;
 }
 
-body {
-    overflow: auto;
-
-    margin: 0px;
-    margin-top: 53px;
-
-    font-family: 'Consolas', 'Segoe MDL2 Assets';
-
-    /*This stuff is necessary for sticky footer*/
-    display: grid;
-    grid-template-rows: 1fr auto;
-    height: calc(100vh - 53px);
+body
+{
+	overflow: auto;
+	margin: 0px;
+	margin-top: 53px;
+	font-family: 'Consolas', 'Segoe MDL2 Assets';
+	/* This stuff is necessary for sticky footer */
+	display: grid;
+	grid-template-rows: 1fr auto;
+	height: calc(100vh - 53px);
 }
 
-header a {
-    text-decoration: none;
-    color: black;
-}
-header a:hover {
-    text-decoration: underline;
+header a
+{
+	text-decoration: none;
+	color: black;
 }
 
-article, header {
-    margin: 0px 50px;
+	header a:hover
+	{
+		text-decoration: underline;
+	}
+
+article, header
+{
+	margin: 0px 50px;
 }
 
-article a:visited, article a:link {
-    color: blue;
-}
+	article a:visited, article a:link
+	{
+		color: blue;
+	}
 
-.comment, .comment:visited {
-    color: #57a64a !important;
+.comment, .comment:visited
+{
+	color: #57a64a !important;
 }

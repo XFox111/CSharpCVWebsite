@@ -17,8 +17,6 @@ namespace MyWebsite.Models
         public string Description { get; set; }
 
         [Column(TypeName = "varchar(50)")]
-        public string ImageName { get; set; }
-        [Column(TypeName = "varchar(50)")]
         public string Link { get; set; }
         [Column(TypeName = "varchar(50)")]
         public string LinkCaption { get; set; }

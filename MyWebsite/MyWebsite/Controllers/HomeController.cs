@@ -19,11 +19,11 @@ namespace MyWebsite.Controllers
 
         [Route("Projects")]
         public IActionResult Projects() =>
-            View();
+            View(Startup.Database.Projects.OrderByDescending(i => i.Id));
 
         [Route("Error")]
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error() =>
-            View("Views/Shared/Error.cshtml", new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
     }
 }
