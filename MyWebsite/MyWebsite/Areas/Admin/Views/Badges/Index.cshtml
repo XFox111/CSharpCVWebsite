@@ -20,7 +20,10 @@
                     @Html.DisplayNameFor(model => model.Name)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Description)
+                    @Html.DisplayNameFor(model => model.EnglishDescription)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.RussianDescription)
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.Image)
@@ -36,7 +39,8 @@
                         <div class="badge" style="background-image: url(/images/Badges/@(item.Image).png)" title="@(item.Description)"></div>
                     </td>
                     <td>@item.Name</td>
-                    <td>@item.Description</td>
+                    <td>@item.EnglishDescription</td>
+                    <td>@item.RussianDescription</td>
                     <td>@item.Image</td>
                     <td>
                         <a asp-action="Edit" asp-route-id="@item.Name">Edit</a> |

@@ -1,0 +1,29 @@
+﻿<div>
+	<label>Preview:</label>
+	<div class="badge" id="preview"></div>
+</div>
+<style type="text/css">
+	.badge
+	{
+		height: 50px;
+		width: 50px;
+		margin: 10px 0px;
+		background-size: contain;
+	}
+
+	.image-selector
+	{
+		display: grid;
+		grid-template-columns: 1fr auto;
+		align-items: center;
+	}
+</style>
+<script type="text/javascript">
+	UpdatePreview();
+	function UpdatePreview()
+	{
+		var preview = document.getElementById("preview");
+		preview.title = document.getElementById("EnglishDescription").value;
+		preview.style.backgroundImage = "url(/images/Badges/" + document.getElementById("Image").value + ".png)";
+	}
+</script>

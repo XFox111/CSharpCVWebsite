@@ -20,13 +20,18 @@
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div>
             <label asp-for="Name"></label>
-            <input asp-for="Name" type="text"/>
+            <input asp-for="Name" type="text" />
             <span asp-validation-for="Name" class="text-danger"></span>
         </div>
         <div>
-            <label asp-for="Description"></label>
-            <input asp-for="Description" type="text" />
-            <span asp-validation-for="Description" class="text-danger"></span>
+            <label asp-for="EnglishDescription"></label>
+            <input asp-for="EnglishDescription" type="text" />
+            <span asp-validation-for="EnglishDescription" class="text-danger"></span>
+        </div>
+        <div>
+            <label asp-for="RussianDescription"></label>
+            <input asp-for="RussianDescription" type="text" />
+            <span asp-validation-for="RussianDescription" class="text-danger"></span>
         </div>
         <div>
             <label asp-for="Image"></label>
@@ -36,36 +41,10 @@
             </div>
             <span asp-validation-for="Image" class="text-danger"></span>
         </div>
-        <div>
-            <label>Preview:</label>
-            <div class="badge" id="preview"></div>
-        </div>
+        <partial name="Preview.cshtml" />
 
         <input type="submit" value="Create" class="btn" />
     </form>
 </article>
 
 <link type="text/css" rel="stylesheet" href="~/css/Admin.css" />
-<style type="text/css">
-    .badge {
-        height: 50px;
-        width: 50px;
-        margin: 10px 0px;
-        background-size: contain;
-    }
-
-    .image-selector {
-        display: grid;
-        grid-template-columns: 1fr auto;
-        align-items: center;
-    }
-</style>
-
-<script type="text/javascript">
-    UpdatePreview();
-    function UpdatePreview() {
-        var preview = document.getElementById("preview");
-        preview.title = document.getElementById("Description").value;
-        preview.style.backgroundImage = "url(/images/Badges/" + document.getElementById("Image").value + ".png)";
-    }
-</script>
