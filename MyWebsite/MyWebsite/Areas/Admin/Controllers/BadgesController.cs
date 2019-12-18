@@ -21,8 +21,22 @@ namespace MyWebsite.Areas.Admin.Controllers
             View(Startup.Database.Badges.Find(id));
 
         [HttpPost]
-        public IActionResult Edit(Badge model)
+        public IActionResult Edit(Badge model, IFormFile file = null)
         {
+            if(file != null)
+            {
+                System.Drawing.Image image = System.Drawing.Image.FromStream(file.OpenReadStream());
+                if (image.Width != 64 || image.Height != 64 || !file.FileName.ToLower().EndsWith(".png"))
+                {
+                    ViewData["UploadException"] = "error";
+                    return View(Startup.Database.Badges.Find(model.Name));
+                }
+                using (var stream = System.IO.File.Create(Directory.GetCurrentDirectory() + "/wwwroot/images/Badges/" + file.FileName))
+                    file.CopyTo(stream);
+
+                return Redirect(Request.Path.Value);
+            }
+
             Startup.Database.Badges.Update(model);
             Startup.Database.SaveChanges();
 
@@ -47,8 +61,22 @@ namespace MyWebsite.Areas.Admin.Controllers
             View();
 
         [HttpPost]
-        public IActionResult Create(Badge model)
+        public IActionResult Create(Badge model, IFormFile file = null)
         {
+            if (file != null)
+            {
+                System.Drawing.Image image = System.Drawing.Image.FromStream(file.OpenReadStream());
+                if (image.Width != 64 || image.Height != 64 || !file.FileName.ToLower().EndsWith(".png"))
+                {
+                    ViewData["UploadException"] = "error";
+                    return View(Startup.Database.Badges.Find(model.Name));
+                }
+                using (var stream = System.IO.File.Create(Directory.GetCurrentDirectory() + "/wwwroot/images/Badges/" + file.FileName))
+                    file.CopyTo(stream);
+
+                return Redirect(Request.Path.Value);
+            }
+
             if (!ModelState.IsValid)
             {
                 ModelState.AddModelError("Error", "Invalid data");

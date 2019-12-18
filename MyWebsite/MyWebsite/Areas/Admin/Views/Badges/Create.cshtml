@@ -45,6 +45,13 @@
 
         <input type="submit" value="Create" class="btn" />
     </form>
+    <hr />
+    <h2>Upload badge image</h2>
+    <form method="post" enctype="multipart/form-data">
+        <input type="file" accept="image/png" name="file" />
+        <label for="file" style="@(ViewData.Keys.Contains("UploadException") ? "color: red" : "")">File must be a 64x64 PNG image</label>
+        <input type="submit" value="Upload image" class="btn" />
+    </form>
 </article>
 
 <link type="text/css" rel="stylesheet" href="~/css/Admin.css" />
