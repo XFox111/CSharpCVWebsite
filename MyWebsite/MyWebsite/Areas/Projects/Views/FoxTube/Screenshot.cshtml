@@ -1,0 +1,60 @@
+﻿@using System.IO
+@using System.Globalization
+@model ScreenshotViewModel
+@{
+	ViewData["Title"] = "Screenshot";
+	Layout = "_Layout.cshtml";
+}
+
+<article class="image-overview-block">
+	<p class="controls">
+		&#xE15C; <a asp-action="Index" class="back">Back to description</a>
+		@if (Model.Previous != null)
+		{
+			@:| &#xE760;
+			<a asp-action="Screenshot" asp-route-id="@Model.Previous" class="back">Previous</a>
+		}
+		@if (Model.Next != null)
+		{
+			@:| &#xE761;
+			<a asp-action="Screenshot" asp-route-id="@Model.Next" class="back">Next</a>
+		}
+	</p>
+
+	<p class="title">
+		<b>@Model.Current</b>
+	</p>
+
+	<img src="@Model.Paths[Model.Position]" id="image" onclick="ToggleImageSize();"/>
+</article>
+
+@section Imports {
+	<link rel="stylesheet" type="text/css" href="~/css/Gallery.css" />
+	<style type="text/css">
+		#image {
+			max-height: initial;
+		}
+		.controls {
+			display: inline-block;
+		}
+		.title {
+			float: right;
+		}
+	</style>
+
+	<script type="text/javascript">
+        function ToggleImageSize()
+        {
+            var image = document.getElementById("image");
+
+            if (image.style.cursor == "zoom-out")
+                image.style = "";
+            else
+            {
+                image.style.maxHeight = "none";
+                image.style.maxWidth = "none";
+                image.style.cursor = "zoom-out";
+            }
+        }
+	</script>
+}

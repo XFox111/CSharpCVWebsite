@@ -1,18 +1,21 @@
-﻿@model Resume
+﻿@model ResumeViewModel
 @{
-    ViewData["Title"] = "My resume";
+	ViewData["Title"] = "My resume";
 }
 
 <header>
-    <h1>My resume</h1>
-    <p>Last update: @Model?.LastUpdate</p>
+	<h1>My resume</h1>
+	<p>Last update: @Model?.Resume.LastUpdate</p>
 
-    <a class="comment" asp-action="Download">// Download CV (.pdf) &#xE118;</a><br />
-    <a class="comment" asp-action="Print">// Print CV &#xE749;</a>
+	<a class="comment" asp-action="Download">// Download CV (.pdf) &#xE118;</a><br />
+	<a class="comment" asp-action="Print">// Print CV &#xE749;</a>
 </header>
 
 <article>
-    @Html.Raw(Model?.Content)
+	@Html.Raw(Model?.Resume.Content)
 </article>
 
-<partial name="~/Views/Shared/ContactsBlock.cshtml" />
+@section Footer
+{
+	<partial name="~/Views/Shared/ContactsBlock.cshtml" />
+}

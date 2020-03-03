@@ -33,10 +33,10 @@ namespace MyWebsite.Areas.API.Models
 
 
         // Media
-        [Column(TypeName = "varchar(255")]
+        [Column(TypeName = "varchar(255)")]
         public string Icon { get; set; } = "https://xfox111.net/projects-assets/FoxTube/DefaultIcon.png";
 
-        [Column(TypeName = "varchar(255")]
+        [Column(TypeName = "varchar(255)")]
         public string HeroImage { get; set; } = "https://xfox111.net/projects-assets/FoxTube/DefaultHero.png";
 
         [Column(TypeName = "varchar(255)")]

@@ -1,4 +1,4 @@
-﻿@model MyWebsite.Models.Resume
+﻿@model MyWebsite.Models.ResumeModel
 @{
     ViewData["Title"] = "Delete resume";
 }
@@ -11,7 +11,7 @@
 
 <article>
     <p class="form-group">
-        <b>@Html.DisplayNameFor(model => model.Language):</b> @Model.Language<br />
+        <b>@Html.DisplayNameFor(model => model.Language):</b> @(new System.Globalization.CultureInfo(Model.Language).DisplayName)<br />
         <b>@Html.DisplayNameFor(model => model.LastUpdate):</b> @Model.LastUpdate<br />
     </p>
 

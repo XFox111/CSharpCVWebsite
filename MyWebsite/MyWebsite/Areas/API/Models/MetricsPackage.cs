@@ -15,7 +15,7 @@ namespace MyWebsite.Areas.API.Models
         public string Title { get; set; }
 
         [Required]
-        [Column(TypeName = "mediumtext")]
+        [Column(TypeName = "varchar(max)")]
         public string Content { get; set; }
 
         [Required]
@@ -23,6 +23,6 @@ namespace MyWebsite.Areas.API.Models
         public string Version { get; set; }
 
         [Required]
-        public DateTime TimeStamp { get; set; }
+        public DateTime TimeStamp { get; set; } = DateTime.Now;
     }
 }

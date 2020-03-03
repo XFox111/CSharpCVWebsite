@@ -1,0 +1,100 @@
+﻿@model ScreenshotViewModel
+@{
+    ViewData["Title"] = "Meet FoxTube!";
+    Layout = "_Layout.cshtml";
+}
+
+<header>
+    <div id="mspb-c71suduiy4sa" class="9NCQQXJTDLFH"></div>
+</header>
+
+<article>
+    <div class="description">
+
+        <p>&#xE760; <a asp-action="Index" asp-controller="Projects" asp-area="" class="back">Back to other projects</a></p>
+
+        <h1>Available on</h1>
+        <a>Requires Windows 10 April 2018 Update or higher</a>
+        <ul>
+            <li>PC</li>
+            <li>Surface Hub</li>
+            <li>HoloLens</li>
+        </ul>
+
+        <h1>Trailer</h1>
+        <div>
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/Mio9FbxmbhM" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+
+        <h1>Description</h1>
+        <p>
+            YouTube client for Windows 10 family devices. It's fast and convenient. It also supports live streams and 8K videos! Frequent updates will make you sure that all problems will be purged as soon as possible
+        </p>
+
+        <h1>Features</h1>
+        <ul>
+            <li>New fresh view for YouTube</li>
+            <li>But so familiar...</li>
+            <li>Faster browsing: up to 40% faster than through You-know-who (Google Chrome)!</li>
+            <li>Nice dark theme for vampires</li>
+            <li>Picture-in-picture mode for hard workers</li>
+            <li>Download videos! Spread communism!*</li>
+            <li>8K support for big ones</li>
+            <li>Fox on logo!</li>
+        </ul>
+
+        <h1>Screenshots</h1>
+        <div class="gallery">
+            @for (int i = 0; i < Model.Paths.Count; i++)
+            {
+                <a asp-action="Screenshot" asp-route-id="@Model.Names[i]"><img src="@Model.Paths[i]" title="@Model.Names[i]"></a>
+            }
+        </div>
+        <link rel="stylesheet" type="text/css" href="~/css/Gallery.css" />
+
+
+        <h1>Useufl links</h1>
+        <ul>
+            <li><a asp-action="Privacy">Privacy policy</a></li>
+            <li><a target="_blank" href="//youtube.com/t/privacy">YouTube privacy policy</a></li>
+            <li><a target="_blank" href="//youtube.com/t/terms">YouTube terms of use</a></li>
+            <li><a target="_blank" href="//youtube.com/t/community_guidelines">YouTube community guidelines</a></li>
+        </ul>
+
+        <h1>Credits</h1>
+        <h2>Demo footage content</h2>
+        <h3>Trailer</h3>
+        <ul>
+            <li><a target="_blank" href="//microsoft.com/">Microsoft</a> (Soundtrack: <a target="_blank" href="//www.youtube.com/watch?v=dwK422sLD-s">Introducing Microsoft Surface Laptop 2</a>)</li>
+            <li><a target="_blank" href="//www.youtube.com/user/skullkruncher13">JT Music</a> (Comparasion video: <a target="_blank" href="//www.youtube.com/watch?v=AGfa24afEBM">METRO EXODUS SONG by JT Music (feat. Andrea Storm Kaden)</a>)</li>
+        </ul>
+        <h3>Screenshots and live</h3>
+        <ul>
+            <li><a target="_blank" href="//windowscentral.com/">Windows Central</a></li>
+            <li><a target="_blank" href="//www.youtube.com/user/ouramazingspace/about">Space Videos</a></li>
+            <li><a target="_blank" href="//www.youtube.com/channel/UCS3pqiugq53HFPYiWLPtdeA">MSReview</a></li>
+            <li><a target="_blank" href="//www.youtube.com/channel/UC6cqazSR6CnVMClY0bJI0Lg">BadComedian</a></li>
+            <li><a target="_blank" href="//www.youtube.com/channel/UCf31Gf5nCU8J6eUlr7QSU0w">Marmok</a></li>
+            <li><a target="_blank" href="//www.youtube.com/channel/UCK7OXr0m5mnM1z9p7n_Bwfw">DAGames</a></li>
+            <li><a target="_blank" href="//www.youtube.com/user/RandomEncountersEnt">Random Ecounters</a></li>
+            <li><a target="_blank" href="//www.youtube.com/channel/UCuXYmUOJSbEH1x88WUV1aMg">TheNafig</a></li>
+        </ul>
+
+        <p>
+            © @(DateTime.Today.Year) Michael Gordeev<br />
+            © @(DateTime.Today.Year) YouTube LLC
+        </p>
+    </div>
+</article>
+
+@section Imports {
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Calibri:400,700,400italic,700italic" />
+    <link rel="stylesheet" type="text/css" href="~/css/Gallery.css" />
+    <script src="https://storebadge.azureedge.net/src/badge-1.8.4.js"></script>
+    <script>
+        mspb({ productId: '9NCQQXJTDLFH', badgeType: 'large' }, function (badge)
+        {
+            document.getElementById('mspb-c71suduiy4sa').innerHTML = badge;
+        });
+    </script>
+}

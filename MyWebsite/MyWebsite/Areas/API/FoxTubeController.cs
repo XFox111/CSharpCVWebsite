@@ -1,50 +1,44 @@
 ﻿using System;
 using System.Linq;
-using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using MyWebsite.Areas.API.Models;
+using System.Globalization;
+using MyWebsite.Models.Databases;
 
 namespace MyWebsite.Areas.API
 {
-    [Route("API/[controller]")]
-    [Area("API")]
     [ApiController]
+    [Route("API/[controller]")]
     public class FoxTubeController : ControllerBase
     {
-        FoxTubeDatabaseContext db;
+        readonly FoxTubeDatabaseContext db;
         public FoxTubeController(FoxTubeDatabaseContext context) =>
             db = context;
 
-        [HttpPost("AddMetrics")]
-        public string AddMetrics()
+        [HttpPost]
+        [Route("AddMetrics")]
+        public IActionResult AddMetrics(MetricsPackage package)
         {
-            MetricsPackage metrics = new MetricsPackage
-            {
-                Title = Request.Form["Title"],
-                Content = Request.Form["Content"],
-                Version = Request.Form["Version"],
-                TimeStamp = DateTime.Now
-            };
-
-            db.Metrics.Add(metrics);
+            Guid id = db.Metrics.Add(package).Entity.Id;
             db.SaveChanges();
 
-            return db.Metrics.FirstOrDefault(i => i.TimeStamp == metrics.TimeStamp)?.Id.ToString();
+            return Accepted(value: id.ToString());
         }
 
-        [HttpGet("Messages")]
-        public object Messages(bool toast = false, DateTime? publishedAfter = null, string lang = "en-US")
+        [HttpGet]
+        [Route("Messages")]
+        public IActionResult Messages(bool toast = false, DateTime? publishedAfter = null, string lang = "en-US")
         {
-            if(toast)
+            if (toast)
             {
-                Message message = publishedAfter.HasValue ? 
-                    db.Messages.FirstOrDefault(i => i.PublishedAt >= publishedAfter && i.PublishedAt <= DateTime.Now && i.Language == lang) : 
+                Message message = publishedAfter.HasValue ?
+                    db.Messages.FirstOrDefault(i => i.PublishedAt >= publishedAfter && i.PublishedAt <= DateTime.Now && i.Language == lang) :
                     db.Messages.OrderByDescending(i => i.PublishedAt).FirstOrDefault();
 
                 if (message == null)
                     return NoContent();
 
-                return $@"<toast activationType='foreground' launch='inbox|{message.Id}'>
+                return Ok($@"<toast activationType='foreground' launch='inbox|{message.Id}'>
                             <visual>
                                 <binding template='ToastGeneric'>
                                     <image placement='hero' src='{message.HeroImage}'/>
@@ -53,29 +47,23 @@ namespace MyWebsite.Areas.API
                                     <text hint-maxLines='5'>{message.Description}</text>
                                 </binding>
                             </visual>
-                        </toast>";
+                        </toast>");
             }
             else
-            {
-                List<Message> messages = db.Messages.Where(i => i.PublishedAt <= DateTime.Now).ToList();
-
-                return messages;
-            }
+                return Ok(db.Messages.Where(i => i.PublishedAt <= DateTime.Now).ToList());
         }
 
-        [HttpGet("Changelogs")]
-        public object Changelogs(bool toast = false, string version = null, string lang = "en-US")
+        [HttpGet]
+        [Route("Changelogs")]
+        public IActionResult Changelogs(string version, bool toast = false, string lang = "en-US")
         {
-            if (string.IsNullOrWhiteSpace(version))
-                throw new ArgumentNullException("You must specify required version number");
-
-            if(toast)
+            if (toast)
             {
                 Changelog changelog = db.Changelogs.FirstOrDefault(i => i.Version == version && i.Language == lang);
                 if (changelog == null)
                     return NoContent();
 
-                return $@"<toast activationType='foreground' launch='changelog|{changelog.Id}'>
+                return Ok($@"<toast activationType='foreground' launch='changelog|{changelog.Id}'>
                             <visual>
                                 <binding template='ToastGeneric'>
                                     <image placement='hero' src='{changelog.HeroImage}'/>
@@ -84,26 +72,18 @@ namespace MyWebsite.Areas.API
                                     <text>{changelog.Title}</text>
                                 </binding>
                             </visual>
-                        </toast>";
+                        </toast>");
             }
             else
-            {
-                List<Changelog> changelogs = db.Changelogs.Where(i => !IsVersionGreater(i.Version, version)).ToList();
-
-                return changelogs;
-            }
+                return Ok(db.Changelogs.Where(i => !IsVersionGreater(i.Version, version)).ToList());
         }
 
         private static bool IsVersionGreater(string versionOne, string versionTwo)
         {
-            string[] v1 = versionOne.Split('.');
-            string[] v2 = versionTwo.Split('.');
+            versionOne = versionOne.Replace(".", "", StringComparison.InvariantCulture);
+            versionTwo = versionTwo.Replace(".", "", StringComparison.InvariantCulture);
 
-            for (int i = 0; i < v1.Length && i < v2.Length; i++)
-                if (byte.Parse(v1[i]) > byte.Parse(v2[i]))
-                    return true;
-
-            return false;
+            return short.Parse(versionOne, NumberStyles.Integer, CultureInfo.InvariantCulture) > short.Parse(versionTwo, NumberStyles.Integer, CultureInfo.InvariantCulture);
         }
     }
 }

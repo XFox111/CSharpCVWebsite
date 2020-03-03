@@ -1,22 +1,25 @@
-﻿@model IEnumerable<Image>
+﻿@model ArtworkViewModel
 @{
-    ViewData["Title"] = "My artworks";
+	ViewData["Title"] = "My artworks";
 }
 
 <header>
-    <h1>My arts</h1>
+	<h1>My arts</h1>
 </header>
 
 <article class="gallery">
-    @if (Model.Count() > 0)
-        foreach (Image image in Model.OrderByDescending(i => i.CreationDate))
-        {
-            <a asp-action="Details" asp-route-id="@image.FileName"><img title="@image.Title" src="~/images/Gallery/@image.FileName" /></a>
-        }
-    else
-    {
-        <p class="comment">// No content available</p>
-    }
+	@if (Model.Images.Count > 0)
+		foreach (ImageModel image in Model.Images)
+		{
+			<a asp-action="Details" asp-route-id="@image.FileName"><img title="@image.Title" src="~/images/Gallery/@image.FileName" /></a>
+		}
+	else
+	{
+		<p class="comment">// No content available</p>
+	}
 </article>
 
-<link rel="stylesheet" type="text/css" href="~/css/Gallery.css" />
+@section Imports
+{
+	<link rel="stylesheet" type="text/css" href="~/css/Gallery.css" />
+}

@@ -1,0 +1,64 @@
+﻿@model MyWebsite.Models.ProjectModel
+@{
+    ViewData["Title"] = "New Project";
+}
+
+<header>
+    <p>&#xE760; <a asp-action="Index">Back to the list</a></p>
+    <h1>Create new project</h1>
+</header>
+
+<article>
+    <form asp-action="Create">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div>
+            <label asp-for="Id"></label>
+            <input asp-for="Id" type="number"/>
+            <span asp-validation-for="Id" class="text-danger"></span>
+        </div>
+        <div>
+            <label asp-for="EnglishTitle"></label>
+            <input asp-for="EnglishTitle" type="text"/>
+            <span asp-validation-for="EnglishTitle" class="text-danger"></span>
+        </div>
+        <div>
+            <label asp-for="RussianTitle"></label>
+            <input asp-for="RussianTitle" type="text"/>
+            <span asp-validation-for="RussianTitle" class="text-danger"></span>
+        </div>
+        <div>
+            <label asp-for="EnglishDescription"></label>
+            <textarea asp-for="EnglishDescription"></textarea>
+            <span asp-validation-for="EnglishDescription" class="text-danger"></span>
+        </div>
+        <div>
+            <label asp-for="RussianDescription"></label>
+            <textarea asp-for="RussianDescription"></textarea>
+            <span asp-validation-for="RussianDescription" class="text-danger"></span>
+        </div>
+        <div>
+            <label asp-for="Link"></label>
+            <input asp-for="Link" type="url"/>
+            <span asp-validation-for="Link" class="text-danger"></span>
+        </div>
+        <div>
+            <label asp-for="EnglishLinkCaption"></label>
+            <input asp-for="EnglishLinkCaption" type="text"/>
+            <span asp-validation-for="EnglishLinkCaption" class="text-danger"></span>
+        </div>
+        <div>
+            <label asp-for="RussianLinkCaption"></label>
+            <input asp-for="RussianLinkCaption" type="text"/>
+            <span asp-validation-for="RussianLinkCaption" class="text-danger"></span>
+        </div>
+        <div>
+            <label asp-for="Badges"></label>
+            <input asp-for="Badges" type="text" />
+            <span asp-validation-for="Badges" class="text-danger"></span>
+        </div>
+
+        <input type="submit" value="Create" class="btn" />
+    </form>
+</article>
+
+<link type="text/css" rel="stylesheet" href="~/css/Admin.css" />

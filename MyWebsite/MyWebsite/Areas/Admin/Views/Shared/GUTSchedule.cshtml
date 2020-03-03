@@ -1,0 +1,22 @@
+﻿@model CustomData
+@{
+	ViewData["Title"] = "GUTSchedule";
+}
+
+<header>
+    <p>&#xE760; <a asp-action="Index" asp-controller="Admin" asp-area="">Back to main menu</a></p>
+	<h1>GUTSchedule</h1>
+</header>
+
+<article>
+	<form asp-action="Index">
+		<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+		<input asp-for="Key" hidden />
+		<label asp-for="Value">First work day in the semester: (Current: @Model.Value)</label>
+		<input type="number" asp-for="Value" />
+		<span asp-validation-for="Value" class="text-danger"></span>
+		<input type="submit" value="Update" class="btn"/>
+	</form>
+</article>
+
+<link href="~/css/Admin.css" type="text/css" rel="stylesheet" />

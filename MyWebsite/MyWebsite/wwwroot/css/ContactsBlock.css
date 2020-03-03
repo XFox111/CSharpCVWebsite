@@ -1,51 +1,53 @@
 ﻿footer
 {
-	display: none;
-}
-
-#contact-me
-{
+	display: initial;
 	padding: 30px 50px;
 	margin: 0px;
 	background-color: #1e1e1e;
 	color: white;
 }
 
-	#contact-me var
+	footer var
 	{
 		color: #569cd6;
 		font: inherit;
 	}
 
-	#contact-me .class
+	footer .class
 	{
 		color: #4ec9b0;
 	}
 
-	#contact-me .method
+	footer .method
 	{
 		color: #dcdcaa;
 	}
 
-	#contact-me div
+	footer div
 	{
 		margin-left: 25px;
 	}
 
-	#contact-me span a,
-	#contact-me span a:visited
+	footer span a,
+	footer span a:link,
+	footer span a:visited
 	{
 		color: #d69d85;
 		text-decoration: none;
 	}
 
-		#contact-me span a:before,
-		#contact-me span a:after
+		footer span a:before,
+		footer span a:after
 		{
 			content: "\"";
 		}
 
-		#contact-me span a:link:hover
+		footer span a:link:hover
 		{
 			text-decoration: underline;
+		}
+
+		footer span a:hover
+		{
+			color: #d69d85;
 		}

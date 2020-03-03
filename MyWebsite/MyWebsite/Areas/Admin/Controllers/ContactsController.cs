@@ -1,41 +1,42 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using MyWebsite.Controllers;
 using MyWebsite.Models;
+using MyWebsite.Models.Databases;
 
 namespace MyWebsite.Areas.Admin.Controllers
 {
     [Area("Admin")]
     [Authorize]
-    public class ContactsController : Controller
+    public class ContactsController : ExtendedController
     {
-        public ContactsController(DatabaseContext context) =>
-            Startup.Database = context;
+        public ContactsController(DatabaseContext context) : base(context) { }
 
         public IActionResult Index() =>
-            View(Startup.Database.Links);
+            View(Database.Links);
 
         [HttpGet]
         public IActionResult Edit(string id) =>
-            View(Startup.Database.Links.Find(id));
+            View(Database.Links.Find(id));
 
         [HttpPost]
-        public IActionResult Edit(Link model)
+        public IActionResult Edit(LinkModel model)
         {
-            Startup.Database.Links.Update(model);
-            Startup.Database.SaveChanges();
+            Database.Links.Update(model);
+            Database.SaveChanges();
 
             return RedirectToAction("Index");
         }
 
         [HttpGet]
         public IActionResult Delete(string id) =>
-            View(Startup.Database.Links.Find(id));
+            View(Database.Links.Find(id));
 
         [HttpPost]
-        public IActionResult Delete(Link link)
+        public IActionResult Delete(LinkModel model)
         {
-            Startup.Database.Links.Remove(link);
-            Startup.Database.SaveChanges();
+            Database.Links.Remove(model);
+            Database.SaveChanges();
 
             return RedirectToAction("Index");
         }
@@ -45,16 +46,16 @@ namespace MyWebsite.Areas.Admin.Controllers
             View();
 
         [HttpPost]
-        public IActionResult Create(Link link)
+        public IActionResult Create(LinkModel model)
         {
             if (!ModelState.IsValid)
             {
                 ModelState.AddModelError("Error", "Invalid data");
-                return View(link);
+                return View(model);
             }
 
-            Startup.Database.Links.Add(link);
-            Startup.Database.SaveChanges();
+            Database.Links.Add(model);
+            Database.SaveChanges();
 
             return RedirectToAction("Index");
         }

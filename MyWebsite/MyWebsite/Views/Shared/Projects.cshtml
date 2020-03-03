@@ -1,36 +1,45 @@
-﻿@model IEnumerable<Project>
+﻿@model ProjectsViewModel
 @{
-    ViewData["Title"] = "My projects";
-    List<Badge> badges = Startup.Database.Badges.ToList();
+	ViewData["Title"] = "My projects";
 }
 
 <header>
-    <div>
-        <h1>My projects</h1>
-        <h3>Here is presented the most of projects I worked on</h3>
-    </div>
-    <iframe src="//githubbadge.appspot.com/xfox111" class="github-stats" frameborder="0"></iframe>
+	<div>
+		<h1>My projects</h1>
+		<h3>Here is presented the most of projects I worked on</h3>
+	</div>
+	<iframe src="//githubbadge.appspot.com/xfox111" class="github-stats" frameborder="0"></iframe>
 </header>
 
 <article>
-    @foreach (Project project in Model)
-    {
-        <div class="project-item">
-            <div>
-                <h1>@project.Title</h1>
-                <p class="description">
-                    @Html.Raw(project.Description)
-                </p>
-                <a href="@(project.Link)" target="_blank">@project.LinkCaption</a>
-            </div>
-            <div class="badge-placeholder">
-                @foreach (string badge in project.Badges.Split(','))
-                {
-                    <div style="background-image: url(../images/Badges/@(badges.FirstOrDefault(i => i.Name == badge)?.Image).png)" title="@(badges.FirstOrDefault(i => i.Name == badge)?.Description)"></div>
-                }
-            </div>
-        </div>
-    }
+	@if (Model.Projects.Count() > 0)
+	{
+		@foreach (ProjectModel project in Model.Projects)
+		{
+			<div class="project-item">
+				<div>
+					<h1>@project.Title</h1>
+					<p>
+						@Html.Raw(project.Description)
+					</p>
+					<a href="@(project.Link)" target="_blank">@project.LinkCaption</a>
+				</div>
+				<div class="badge-placeholder">
+					@foreach (string b in project.Badges.Split(','))
+					{
+						BadgeModel badge = Model.Badges.FirstOrDefault(i => i.Name == b);
+						<div style="background-image: url('../images/Badges/@(badge?.Image).png')" title="@(badge?.Description)"></div>
+					}
+				</div>
+			</div>
+		}
+	}
+	else
+	{
+		<p style="margin: 0px 40px" class="comment">// No content available</p>
+	}
 </article>
 
-<link rel="stylesheet" type="text/css" href="~/css/Projects.css" />
+@section Imports {
+	<link rel="stylesheet" type="text/css" href="~/css/Projects.css" />
+}

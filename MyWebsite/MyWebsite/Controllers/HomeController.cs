@@ -1,29 +1,33 @@
 ﻿using System.Diagnostics;
-using System.Linq;
 using Microsoft.AspNetCore.Mvc;
-using MyWebsite.Models;
+using MyWebsite.Models.Databases;
+using MyWebsite.ViewModels;
 
 namespace MyWebsite.Controllers
 {
-    public class HomeController : Controller
-    {
-        public HomeController(DatabaseContext context) =>
-            Startup.Database = context;
+	public class HomeController : ExtendedController
+	{
+		public HomeController(DatabaseContext context) : base(context) { }
 
-        public IActionResult Index() =>
-            View();
+		[Route("")]
+		public IActionResult Index() =>
+			View();
 
-        [Route("Contacts")]
-        public IActionResult Contacts() =>
-            View(Startup.Database.Links.OrderBy(i => i.Order));
+		[Route("Contacts")]
+		public IActionResult Contacts() =>
+			View();
 
-        [Route("Projects")]
-        public IActionResult Projects() =>
-            View(Startup.Database.Projects.OrderByDescending(i => i.Id));
+		[Route("Projects")]
+		public IActionResult Projects() =>
+			View(new ProjectsViewModel(Database));
 
-        [Route("Error")]
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error() =>
-            View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-    }
+		[Route("Construction")]
+		public IActionResult Construction() =>
+			View();
+
+		[Route("Error")]
+		[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+		public IActionResult Error() =>
+			View(new ErrorViewModel(Database) { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+	}
 }

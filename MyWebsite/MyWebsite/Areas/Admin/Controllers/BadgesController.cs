@@ -1,57 +1,52 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using MyWebsite.Controllers;
 using MyWebsite.Models;
+using MyWebsite.Models.Databases;
+using System;
+using System.Globalization;
 using System.IO;
 
 namespace MyWebsite.Areas.Admin.Controllers
 {
     [Area("Admin")]
     [Authorize]
-    public class BadgesController : Controller
+    public class BadgesController : ExtendedController
     {
-        public BadgesController(DatabaseContext context) =>
-               Startup.Database = context;
+        public BadgesController(DatabaseContext context) : base(context) { }
 
         public IActionResult Index() =>
-            View(Startup.Database.Badges);
+            View(Database.Badges);
 
         [HttpGet]
         public IActionResult Edit(string id) =>
-            View(Startup.Database.Badges.Find(id));
+            View(Database.Badges.Find(id));
 
         [HttpPost]
-        public IActionResult Edit(Badge model, IFormFile file = null)
+        public IActionResult Edit(BadgeModel model, IFormFile file = null)
         {
-            if(file != null)
-            {
-                System.Drawing.Image image = System.Drawing.Image.FromStream(file.OpenReadStream());
-                if (image.Width != 64 || image.Height != 64 || !file.FileName.ToLower().EndsWith(".png"))
-                {
-                    ViewData["UploadException"] = "error";
-                    return View(Startup.Database.Badges.Find(model.Name));
-                }
-                using (var stream = System.IO.File.Create(Directory.GetCurrentDirectory() + "/wwwroot/images/Badges/" + file.FileName))
-                    file.CopyTo(stream);
+            if (model == null)
+                throw new ArgumentNullException(nameof(model));
 
-                return Redirect(Request.Path.Value);
-            }
+            if (file != null)
+                UploadFile(file, model);
 
-            Startup.Database.Badges.Update(model);
-            Startup.Database.SaveChanges();
+            Database.Badges.Update(model);
+            Database.SaveChanges();
 
             return RedirectToAction("Index");
         }
 
         [HttpGet]
         public IActionResult Delete(string id) =>
-            View(Startup.Database.Badges.Find(id));
+            View(Database.Badges.Find(id));
 
         [HttpPost]
-        public IActionResult Delete(Badge model)
+        public IActionResult Delete(BadgeModel model)
         {
-            Startup.Database.Badges.Remove(model);
-            Startup.Database.SaveChanges();
+            Database.Badges.Remove(model);
+            Database.SaveChanges();
 
             return RedirectToAction("Index");
         }
@@ -61,21 +56,13 @@ namespace MyWebsite.Areas.Admin.Controllers
             View();
 
         [HttpPost]
-        public IActionResult Create(Badge model, IFormFile file = null)
+        public IActionResult Create(BadgeModel model, IFormFile file = null)
         {
-            if (file != null)
-            {
-                System.Drawing.Image image = System.Drawing.Image.FromStream(file.OpenReadStream());
-                if (image.Width != 64 || image.Height != 64 || !file.FileName.ToLower().EndsWith(".png"))
-                {
-                    ViewData["UploadException"] = "error";
-                    return View(Startup.Database.Badges.Find(model.Name));
-                }
-                using (var stream = System.IO.File.Create(Directory.GetCurrentDirectory() + "/wwwroot/images/Badges/" + file.FileName))
-                    file.CopyTo(stream);
+            if (model == null)
+                throw new ArgumentNullException(nameof(model));
 
-                return Redirect(Request.Path.Value);
-            }
+            if (file != null)
+                return UploadFile(file, model);
 
             if (!ModelState.IsValid)
             {
@@ -83,10 +70,24 @@ namespace MyWebsite.Areas.Admin.Controllers
                 return View(model);
             }
 
-            Startup.Database.Badges.Add(model);
-            Startup.Database.SaveChanges();
+            Database.Badges.Add(model);
+            Database.SaveChanges();
 
             return RedirectToAction("Index");
+        }
+
+        private IActionResult UploadFile(IFormFile file, BadgeModel model)
+        {
+            System.Drawing.Image image = System.Drawing.Image.FromStream(file.OpenReadStream());
+            if (image.Width != 64 || image.Height != 64 || !file.FileName.EndsWith(".PNG", true, CultureInfo.InvariantCulture))
+            {
+                ViewData["UploadException"] = "error";
+                return View(model);
+            }
+            using (var stream = System.IO.File.Create(Directory.GetCurrentDirectory() + "/wwwroot/images/Badges/" + file.FileName))
+                file.CopyTo(stream);
+
+            return Redirect(Request.Path.Value);
         }
     }
 }

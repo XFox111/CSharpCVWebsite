@@ -1,4 +1,4 @@
-﻿@model MyWebsite.Models.Resume
+﻿@model MyWebsite.Models.ResumeModel
 
 @{
     ViewData["Title"] = "Edit resume";
@@ -7,24 +7,24 @@
 <header>
     <p>&#xE760; <a asp-action="Index">Back to the list</a></p>
     <h1>Edit resume</h1>
+    <p>
+        Language: @(new System.Globalization.CultureInfo(Model.Language).DisplayName)<br />
+        Previously updated on @Model.LastUpdate
+    </p>
 </header>
 
 <article>
     <form asp-action="Edit">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="text" asp-for="Language" hidden />
         <div>
-            <label asp-for="Language"></label>
-            <input type="text" asp-for="Language" readonly class="readonly" />
-        </div>
-        <div>
-            <label asp-for="Content"></label>
             <textarea asp-for="Content" spellcheck="false"></textarea>
             <a class="comment" onclick="CopyToClipboard()" href="#">// &#xE16D; Copy to clipboard</a>
             <span style="display: none" id="copied"> - Done</span><br />
             <span asp-validation-for="Content" class="text-danger"></span>
         </div>
         <br />
-        <input type="submit" value="Save" />
+        <input type="submit" value="Save" class=" btn" />
     </form>
 </article>
 
@@ -44,7 +44,7 @@
         document.execCommand("copy");
         window.getSelection().removeAllRanges();
         document.getElementById("copied").style.display = "initial";
-        await delay(3000);
+        await new Promise(res => setTimeout(res, 3000));
         document.getElementById("copied").style.display = "none";
     }
 </script>

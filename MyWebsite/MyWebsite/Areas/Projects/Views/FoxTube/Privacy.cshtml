@@ -1,0 +1,30 @@
+﻿@model ResumeViewModel
+@{
+    ViewData["Title"] = "Privacy policy";
+    Layout = "_Layout.cshtml";
+}
+
+<header>
+    <p>&#xE760; <a asp-action="Index">Back to description</a></p>
+    <h1>FoxTube privacy policy</h1>
+    <p>Last update: @Model?.Resume.LastUpdate</p>
+</header>
+
+<article>
+    @Html.Raw(Model?.Resume.Content)
+</article>
+
+@section Imports {
+    <style type="text/css">
+        header, article {
+            margin: 0px 50px;
+        }
+        header a {
+            color: black;
+            text-decoration: none;
+        }
+        header a:hover {
+            text-decoration: underline;
+        }
+    </style>
+}

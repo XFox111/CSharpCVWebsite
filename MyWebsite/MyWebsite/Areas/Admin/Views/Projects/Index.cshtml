@@ -1,0 +1,79 @@
+﻿@model (IEnumerable<MyWebsite.Models.ProjectModel> projects, IEnumerable<MyWebsite.Models.BadgeModel> badges)
+@{
+    ViewData["Title"] = "Projects";
+}
+
+<header>
+    <p>&#xE760; <a asp-action="Index" asp-controller="Admin" asp-area="">Back to main menu</a></p>
+    <h1>Projects list</h1>
+    <p>
+        <a asp-action="Create" class="comment">// + Add New</a>
+    </p>
+</header>
+
+<article>
+    <table>
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.projects.First().Id)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.projects.First().EnglishTitle)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.projects.First().RussianTitle)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.projects.First().Link)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.projects.First().Badges)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.projects.OrderByDescending(i => i.Id))
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.EnglishTitle</td>
+                    <td>@item.RussianTitle</td>
+                    <td>@item.Link</td>
+                    <td>        
+                        <div class="badge-placeholder">
+                            @foreach (string badge in item.Badges.Split(','))
+                            {
+                                <div style="background-image: @("../images/Badges/" + Model.badges.FirstOrDefault(i => i.Name == badge)?.Image + ".png")" title="@(Model.badges.FirstOrDefault(i => i.Name == badge)?.Description)"></div>
+                            }
+                        </div>
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</article>
+
+<link type="text/css" rel="stylesheet" href="~/css/Admin.css" />
+<style type="text/css">
+    .badge-placeholder
+    {
+	    display: grid;
+	    grid-column-gap: 10px;
+	    grid-auto-columns: max-content;
+	    grid-auto-flow: column;
+    }
+
+	    .badge-placeholder div
+	    {
+		    height: 25px;
+		    width: 25px;
+		    display: inline-block;
+		    background-size: contain;
+	    }
+</style>

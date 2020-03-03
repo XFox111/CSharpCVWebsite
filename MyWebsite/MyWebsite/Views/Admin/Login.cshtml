@@ -1,27 +1,30 @@
-﻿@model LoginModel;
+﻿@model CredentialViewModel
 @{
-    ViewData["Title"] = "Login";
+	ViewData["Title"] = "Login";
 }
 
 <header>
-    <h1>Administration panel - Login</h1>
+	<h1>Administration panel - Login</h1>
 </header>
 
 <article>
-    <form asp-action="Login" asp-antiforgery="true">
-        <div asp-validation-summary="All" class="validation-error"></div>
-        <div>
-            <label asp-for="Email">E-mail</label>
-            <input type="email" asp-for="Email" />
-            <span asp-validation-for="Email"></span>
-        </div>
-        <div>
-            <label asp-for="Password">Password</label>
-            <input type="password" asp-for="Password" />
-            <span asp-validation-for="Password"></span>
-        </div>
-        <input class="btn" style="margin-top:10px" type="submit" value="Login" />
-    </form>
+	<form asp-action="Login" asp-antiforgery="true">
+		<div asp-validation-summary="All" class="validation-error"></div>
+		<div>
+			<label asp-for="Credential.Email">E-mail</label>
+			<input type="email" asp-for="Credential.Email" />
+			<span asp-validation-for="Credential.Email"></span>
+		</div>
+		<div>
+			<label asp-for="Credential.Password">Password</label>
+			<input type="password" asp-for="Credential.Password" />
+			<span asp-validation-for="Credential.Password"></span>
+		</div>
+		<input class="btn" style="margin-top:10px" type="submit" value="Login" />
+	</form>
 </article>
 
-<link type="text/css" rel="stylesheet" href="~/css/Admin.css" />
+@section Imports
+{
+	<link type="text/css" rel="stylesheet" href="~/css/Admin.css" />
+}

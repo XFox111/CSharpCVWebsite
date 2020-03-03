@@ -1,4 +1,4 @@
-﻿@model IEnumerable<MyWebsite.Models.Link>
+﻿@model IEnumerable<MyWebsite.Models.LinkModel>
 @{
     ViewData["Title"] = "Links list";
 }
@@ -15,9 +15,7 @@
     <table>
         <thead>
             <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Order)
-                </th>
+                <th>Reorder</th>
                 <th>
                     @Html.DisplayNameFor(model => model.Name)
                 </th>
@@ -45,8 +43,8 @@
         <tbody>
             @foreach (var item in Model.OrderBy(i => i.Order))
             {
-                <tr>
-                    <td>@item.Order</td>
+                <tr draggable="true" ondragover="onDragOver(event);">
+                    <td>&#xE700;</td>
                     <td>@item.Name</td>
                     <td>@item.EnglishTitle</td>
                     <td>@item.RussianTitle</td>
@@ -69,3 +67,9 @@
 </article>
 
 <link type="text/css" rel="stylesheet" href="~/css/Admin.css" />
+<script type="text/javascript">
+	function onDragOver(event)
+	{
+		this.style.marginTop = '20px';
+	}
+</script>

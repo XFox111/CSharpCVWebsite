@@ -1,43 +1,54 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using MyWebsite.Controllers;
 using MyWebsite.Models;
+using MyWebsite.Models.Databases;
 using System;
 
 namespace MyWebsite.Areas.Admin.Controllers
 {
     [Authorize]
     [Area("Admin")]
-    public class ResumeController : Controller
+    public class ResumeController : ExtendedController
     {
-        public ResumeController(DatabaseContext context) =>
-            Startup.Database = context;
+        public ResumeController(DatabaseContext context) : base(context) { }
 
         public IActionResult Index() =>
-            View(Startup.Database.Resume);
+            View(Database.Resume);
 
         [HttpGet]
         public IActionResult Edit(string id) =>
-            View(Startup.Database.Resume.Find(id));
+            View(Database.Resume.Find(id));
 
         [HttpPost]
-        public IActionResult Edit(Resume model)
+        public IActionResult Edit(ResumeModel model)
         {
+            if (model == null)
+                throw new ArgumentNullException(nameof(model));
+
+            if (!ModelState.IsValid)
+            {
+                ModelState.AddModelError("Error", "Invalid data");
+                return View(model);
+            }
+
             model.LastUpdate = DateTime.Now;
-            Startup.Database.Resume.Update(model);
-            Startup.Database.SaveChanges();
+
+            Database.Resume.Update(model);
+            Database.SaveChanges();
 
             return RedirectToAction("Index");
         }
 
         [HttpGet]
         public IActionResult Delete(string id) =>
-            View(Startup.Database.Resume.Find(id));
+            View(Database.Resume.Find(id));
 
         [HttpPost]
-        public IActionResult Delete(Resume model)
+        public IActionResult Delete(ResumeModel model)
         {
-            Startup.Database.Resume.Remove(model);
-            Startup.Database.SaveChanges();
+            Database.Resume.Remove(model);
+            Database.SaveChanges();
 
             return RedirectToAction("Index");
         }
@@ -47,17 +58,21 @@ namespace MyWebsite.Areas.Admin.Controllers
             View();
 
         [HttpPost]
-        public IActionResult Create(Resume model)
+        public IActionResult Create(ResumeModel model)
         {
-            model.LastUpdate = DateTime.Now;
+            if (model == null)
+                throw new ArgumentNullException(nameof(model));
+
             if (!ModelState.IsValid)
             {
                 ModelState.AddModelError("Error", "Invalid data");
                 return View(model);
             }
 
-            Startup.Database.Resume.Add(model);
-            Startup.Database.SaveChanges();
+            model.LastUpdate = DateTime.Now;
+
+            Database.Resume.Add(model);
+            Database.SaveChanges();
 
             return RedirectToAction("Index");
         }

@@ -1,5 +1,5 @@
-﻿@model MyWebsite.Models.Resume
-
+﻿@using System.Globalization
+@model MyWebsite.Models.ResumeModel
 @{
     ViewData["Title"] = "Create resume";
 }
@@ -23,7 +23,7 @@
             <span asp-validation-for="Content" class="text-danger"></span>
         </div>
         <br />
-        <input type="submit" value="Save" />
+        <input type="submit" value="Save" class="btn"/>
     </form>
 </article>
 

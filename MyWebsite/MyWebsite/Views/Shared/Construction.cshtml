@@ -1,0 +1,118 @@
+﻿@model ViewModelBase
+@using Microsoft.AspNetCore.Http
+@{
+	Layout = null;
+	HttpRequest request = ViewContext.HttpContext.Request;
+}
+
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+	<title>Ready - XFox111</title>
+	<base href="~/assets/Construction/" />
+
+	<link rel="stylesheet" type="text/css" href="Construction.css">
+	<script type="text/javascript" src="Construction.js"></script>
+
+	<meta name="author" content="Michael 'XFox' Gordeev">
+	<meta name="description" content="Hi, my name is Michael. I'm C# Developer and this is my personal website. Here you can find info about me, my projects and more. Check it out!">
+
+	<meta property="og:type" content="website">
+	<meta property="og:locale" content="en_US">
+	<meta property="og:image" content="//xfox111.net/pics/me.jpg">
+	<meta property="og:description" content="Hi, my name is Michael. I'm C# Developer and this is my personal website. Here you can find info about me, my projects and more. Check it out!">
+	<meta property="og:title" content="Michael 'XFox' Gordeev - Personal website">
+
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+<body onload="Load();">
+	<nav>
+		<div>
+			<span>Output</span>
+			<div></div>
+			<div>
+				<div class="btn hide" title="Window Position"></div>
+				<div class="btn maximize" title="Maximize"></div>
+				<div class="btn close" title="Close"></div>
+			</div>
+		</div>
+		<div>
+			<span>Show output from:</span>
+			<select>
+				<option selected>Build</option>
+			</select>
+			<img draggable="false" src="Images/tools.png" />
+		</div>
+	</nav>
+
+	<main id="output">
+		<p>1>------ Build started: Project: xfox111.net, Configuration: Any CPU ------</p>
+		<p>1>  xfox111.net -> @request.Scheme://@request.Host/MyWebsite.dll </p>
+		<p>2>------ Deploy started: Project: xfox111.net, Configuration: Any CPU ------</p>
+		<p>Updating the layout...</p>
+		<p>Copying files: Total &#x3C;1 mb to layout...</p>
+		<p>Checking whether required frameworks are installed...</p>
+		<p>Registering the website to run from layout...</p>
+		<br />
+
+		<p class="err">========== Deployment failed ==========</p>
+		<p>Error message:</p>
+		<p class="err">========== Site is under construction ==========</p>
+		<br />
+
+		<p>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/‾\<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;\<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;_&nbsp;&nbsp;\<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;/&nbsp;\&nbsp;&nbsp;\<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;\&nbsp;&nbsp;\<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\&nbsp;&nbsp;\<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;&nbsp;╭-╮\&nbsp;&nbsp;\<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;/&nbsp;----╰-╯&nbsp;\&nbsp;&nbsp;\<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;/&nbsp;///&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;\&nbsp;&nbsp;\<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;/&nbsp;///&nbsp;&nbsp;/||&nbsp;&nbsp;&nbsp;&nbsp;\&nbsp;&nbsp;\<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;/&nbsp;||&nbsp;&nbsp;___\&nbsp;&nbsp;\<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;/&nbsp;^&nbsp;\՟||_/&nbsp;&nbsp;&nbsp;\\&nbsp;&nbsp;\<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;/&nbsp;/&nbsp;|&nbsp;\&nbsp;-/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\\&nbsp;&nbsp;\<br />
+			&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;/&nbsp;/&nbsp;&nbsp;|&nbsp;|&nbsp;/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\\&nbsp;&nbsp;\<br />
+			&nbsp;&nbsp;/&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;/_/&nbsp;&nbsp;&nbsp;|_|/_________\\&nbsp;&nbsp;\<br />
+			&nbsp;/&nbsp;&nbsp;/_________________________\&nbsp;&nbsp;\<br />
+			|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|<br />
+			&nbsp;‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
+		</p>
+		<br />
+
+		<p>It will be done soon</p>
+		<p>For now you can check my other links:</p>
+		<br />
+
+		@foreach (LinkModel item in Model.Links.Where(i => i.Name.Belongs("outlook", "linkedin", "vkontakte", "twitter", "github")))
+		{
+			<p>@item.Title: <a href="@item.Url">@((item.Url.ToString().StartsWith("mailto:") ? "" : "https:") + item.Url)</a></p>
+		}
+		<br />
+
+		<p>========== Build: 1 succeeded, 0 failed, 0 up-to-date, 0 skipped ==========</p>
+		<p>========== Deploy: 0 succeeded, 1 failed, 0 skipped ==========</p>
+	</main>
+
+	<footer>
+		<div class="status-bar-btn btn task" title="Background tasks"></div>
+		<span id="status">Ready</span>
+		<div class="git-btn btn push" title="4 unpushed commits">
+			<span>4</span>
+		</div>
+		<div class="git-btn btn commit" title="11 changes">
+			<span>11</span>
+		</div>
+		<div class="git-btn btn git" title="Path: //xfox111.net">
+			<span>xfox111</span>
+		</div>
+		<div class="git-btn btn branch" title="Name: master">
+			<span>master</span>
+		</div>
+		<div class="status-bar-btn btn notification" title="No Notifications"></div>
+	</footer>
+</body>
+</html>

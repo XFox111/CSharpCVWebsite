@@ -1,28 +1,40 @@
-﻿@model Resume
+﻿@model ResumeViewModel
 @{
-    Layout = null;
-    ViewData["Title"] = "Print";
+	Layout = null;
 }
 
-@Html.Raw(Model.Content)
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Michael (Mikhail) Gordeev - Resume</title>
+	<link rel="shortcut icon" href="~/favicon.ico" type="image/x-icon" />
 
-<link rel="stylesheet" type="text/css" href="~/css/Style.css" />
+	<link rel="stylesheet" type="text/css" href="~/css/Style.css" />
 
-<style>
-    html {
-        overflow: initial;
-    }
-    body {
-        display: initial;
-        margin: initial;
-        height: initial;
-    }
-</style>
+	<style>
+		html
+		{
+			overflow: initial;
+		}
 
-<script type="text/javascript">
-    window.print();
-    window.onfocus = function ()
-    {
-        window.location = "/Resume";
-    }
-</script>
+		body
+		{
+			display: initial;
+			margin: initial;
+			height: initial;
+		}
+	</style>
+
+	<script type="text/javascript">
+		window.onafterprint = function ()
+		{
+			window.location = "/Resume";
+		}
+		if (window.location.hash != "#preview")
+			window.print();
+	</script>
+</head>
+<body>
+	@Html.Raw(Model.Resume.Content)
+</body>
+</html>

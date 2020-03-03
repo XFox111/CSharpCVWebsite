@@ -1,4 +1,4 @@
-﻿@model MyWebsite.Models.Badge
+﻿@model MyWebsite.Models.BadgeModel
 
 @{
     ViewData["Title"] = "Delete badge";
@@ -11,14 +11,14 @@
 </header>
 
 <article>
-    <p class="form-group">
+    <p>
         <b>@Html.DisplayNameFor(model => model.Name):</b> @Model.Name<br />
         <b>@Html.DisplayNameFor(model => model.EnglishDescription):</b> @Model.EnglishDescription<br />
         <b>@Html.DisplayNameFor(model => model.RussianDescription):</b> @Model.RussianDescription<br />
         <b>@Html.DisplayNameFor(model => model.Image):</b> @(Model.Image).png<br />
 
         <b>Preview:</b>
-        <div class="badge" style="background-image: url(/images/Badges/@(Model.Image).png)" title="@(Model.Description)"></div>
+        <div class="badge" style="background-image: url('/images/Badges/@(Model.Image).png')" title="@(Model.Description)"></div>
     </p>
 
     <form asp-action="Delete">

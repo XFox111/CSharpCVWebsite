@@ -1,18 +1,17 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using MyWebsite.Models;
-using System.Linq;
+using MyWebsite.Models.Databases;
+using MyWebsite.ViewModels;
 
 namespace MyWebsite.Controllers
 {
-    public class GalleryController : Controller
-    {
-        public GalleryController(DatabaseContext context) =>
-            Startup.Database = context;
+	public class GalleryController : ExtendedController
+	{
+		public GalleryController(DatabaseContext context) : base(context) { }
 
-        public IActionResult Index() =>
-            View(Startup.Database.Gallery);
+		public IActionResult Index() =>
+			View(new ArtworkViewModel(Database));
 
-        public IActionResult Details(string id) =>
-            View(Startup.Database.Gallery.FirstOrDefault(i => i.FileName == id));
-    }
+		public IActionResult Details(string id) =>
+			View(new ArtworkViewModel(Database, id));
+	}
 }

@@ -6,15 +6,15 @@
 @font-face
 {
 	font-family: 'Consolas';
-	src: url("/fonts/consolas.eot");
-	src: url("/fonts/consolas.eot?#iefix") format("embedded-opentype"), url("/fonts/consolas.otf") format("opentype"), url("/fonts/consolas.svg") format("svg"), url("/fonts/consolas.ttf") format("truetype"), url("/fonts/consolas.woff") format("woff"), url("/fonts/consolas.woff2") format("woff2");
+	src: url("/fonts/Consolas/consolas.eot");
+	src: url("/fonts/Consolas/consolas.eot?#iefix") format("embedded-opentype"), url("/fonts/Consolas/consolas.otf") format("opentype"), url("/fonts/Consolas/consolas.svg") format("svg"), url("/fonts/Consolas/consolas.ttf") format("truetype"), url("/fonts/Consolas/consolas.woff") format("woff"), url("/fonts/Consolas/consolas.woff2") format("woff2");
 }
 
 @font-face
 {
 	font-family: 'Segoe MDL2 Assets';
-	src: url("/fonts/segoeMLD2assets.eot");
-	src: url("/fonts/segoeMLD2assets.eot?#iefix") format("embedded-opentype"), url("/fonts/segoeMLD2assets.otf") format("opentype"), url("/fonts/segoeMLD2assets.svg") format("svg"), url("/fonts/segoeMLD2assets.ttf") format("truetype"), url("/fonts/segoeMLD2assets.woff") format("woff"), url("/fonts/segoeMLD2assets.woff2") format("woff2");
+	src: url("/fonts/Segoe MDL2 Assets/segoeMLD2assets.eot");
+	src: url("/fonts/Segoe MDL2 Assets/segoeMLD2assets.eot?#iefix") format("embedded-opentype"), url("/fonts/Segoe MDL2 Assets/segoeMLD2assets.otf") format("opentype"), url("/fonts/Segoe MDL2 Assets/segoeMLD2assets.svg") format("svg"), url("/fonts/Segoe MDL2 Assets/segoeMLD2assets.ttf") format("truetype"), url("/fonts/Segoe MDL2 Assets/segoeMLD2assets.woff") format("woff"), url("/fonts/Segoe MDL2 Assets/segoeMLD2assets.woff2") format("woff2");
 }
 
 /* Header styles */
@@ -98,6 +98,7 @@ footer
 	align-items: center;
 	grid-template-columns: 1fr auto;
 	grid-column-gap: 10px;
+	user-select: none;
 }
 
 	footer a

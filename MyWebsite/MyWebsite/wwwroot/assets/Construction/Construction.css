@@ -1,0 +1,225 @@
+﻿/* Declaring fonts */
+@font-face
+{
+	font-family: 'Consolas';
+	src: url("/fonts/Consolas/consolas.eot");
+	src: url("/fonts/Consolas/consolas.eot?#iefix") format("embedded-opentype"), url("/fonts/Consolas/consolas.otf") format("opentype"), url("/fonts/Consolas/consolas.svg") format("svg"), url("/fonts/Consolas/consolas.ttf") format("truetype"), url("/fonts/Consolas/consolas.woff") format("woff"), url("/fonts/Consolas/consolas.woff2") format("woff2");
+}
+
+@font-face
+{
+	font-family: 'Segoe MDL2 Assets';
+	src: url("/fonts/Segoe MDL2 Assets/segoeMLD2assets.eot");
+	src: url("/fonts/Segoe MDL2 Assets/segoeMLD2assets.eot?#iefix") format("embedded-opentype"), url("/fonts/Segoe MDL2 Assets/segoeMLD2assets.otf") format("opentype"), url("/fonts/Segoe MDL2 Assets/segoeMLD2assets.svg") format("svg"), url("/fonts/Segoe MDL2 Assets/segoeMLD2assets.ttf") format("truetype"), url("/fonts/Segoe MDL2 Assets/segoeMLD2assets.woff") format("woff"), url("/fonts/Segoe MDL2 Assets/segoeMLD2assets.woff2") format("woff2");
+}
+
+/* Header */
+nav
+{
+	user-select: none;
+	position: fixed;
+	right: 0px;
+	left: 0px;
+}
+
+	nav > div:first-child
+	{
+		display: grid;
+		grid-template-columns: auto 1fr auto;
+		background-color: #007acc;
+		height: 22px;
+		background-image: url('Images/strip.png');
+	}
+
+		nav > div:first-child span
+		{
+			background-color: inherit;
+			padding: 2px 5px;
+		}
+
+		nav > div:first-child > div:last-child
+		{
+			background-color: inherit;
+			padding: 0px 2px;
+		}
+
+		nav > div:first-child > div div
+		{
+			display: inline-block;
+			margin: 2px 0px;
+			height: 17px;
+			width: 17px;
+			text-align: center;
+			line-height: 17px;
+			font-size: 11pt;
+		}
+
+	nav > div:last-child
+	{
+		display: grid;
+		grid-template-columns: auto auto 1fr;
+		background-color: #2d2d30;
+		height: 26px;
+	}
+
+		nav > div:last-child span
+		{
+			margin: 0px 6px;
+			line-height: 26px;
+			text-align: center;
+		}
+		nav > div:last-child select
+		{
+			background-color: #333337;
+			color: white;
+			border: 1px solid #434346;
+			border-radius: 0px;
+			width: 300px;
+			height: 21px;
+			margin: 2px 0px;
+		}
+		nav > div:last-child img
+		{
+			height: 100%;
+		}
+
+/* Body */
+html
+{
+	overflow: hidden;
+}
+
+body
+{
+	background-color: #252526;
+	color: white;
+	font-size: 9pt;
+	margin: 0px;
+	font-family: 'Segoe UI Symbol';
+	overflow: auto;
+	display: grid;
+	height: 100vh;
+}
+
+main
+{
+	font-family: Consolas;
+	margin: 50px 0px 50px 12px;
+}
+
+	main p
+	{
+		margin: 0px;
+		display: none;
+	}
+
+a
+{
+	color: #569cd6;
+}
+
+	a:visited
+	{
+		color: #569cd6;
+	}
+
+.err
+{
+	color: #e51400;
+}
+
+/* Footer */
+footer
+{
+	background-color: #007acc;
+	color: white;
+	height: 26px;
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	padding-right: 12px;
+	display: grid;
+	grid-template-columns: auto 1fr auto auto auto auto auto;
+	user-select: none;
+}
+
+.status-bar-btn
+{
+	width: 26px;
+	height: 26px;
+	display: inline-block;
+	text-align: center;
+	font-size: 12pt;
+}
+
+.git-btn
+{
+	padding: 0px 5px;
+	margin: 4px;
+	height: 17px;
+	min-width: 26px;
+}
+
+.btn
+{
+	cursor: pointer;
+}
+
+	.btn:hover
+	{
+		background-color: #ffffff33;
+	}
+
+#status
+{
+	margin: 0px 5px;
+	vertical-align: central;
+	line-height: 26px;
+}
+
+/* Button icons */
+.push:before
+{
+	content: '\e1fe';
+}
+
+.commit:before
+{
+	content: '\e104';
+}
+
+.branch:before
+{
+	content: '\E14B';
+}
+
+.git:before
+{
+	content: '\1F4D3';
+}
+
+.notification:before
+{
+	content: '\E1FA';
+}
+
+.task:before
+{
+	content: '\23E5';
+}
+
+.hide:before
+{
+	content: '\23F7';
+}
+
+.maximize:before
+{
+	content: '\1F5D7';
+}
+
+.close:before
+{
+	content: '\1F7A8';
+}

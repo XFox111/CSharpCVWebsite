@@ -1,35 +1,36 @@
-﻿@{
-    Link email = Startup.Database.Links.FirstOrDefault(i => i.Name == "outlook");
-    List<Link> links = Startup.Database.Links.Where(i => new string[] { "linkedin", "github", "twitter", "vkontakte" }.Contains(i.Name)).OrderBy(i => i.Order).ToList();
+﻿@model ViewModelBase
+@{
+	LinkModel email = Model.Links.FirstOrDefault(i => i.Name == "outlook" || i.Name == "email");
+	List<LinkModel> links = Model.Links.Where(i => new string[] { "linkedin", "github", "twitter", "vkontakte" }.Contains(i.Name)).OrderBy(i => i.Order).ToList();
 }
 
-<div id="contact-me">
-    <var>if</var> (<var class="class">You</var>.InsterestedInMe)<br />
-    <div>
-        <var class="method">ContactMe</var>();<br />
-    </div>
-    <br />
-    <a class="comment">// All links are clickable</a><br />
-    <var>public void</var> <var class="method">ConatactMe</var>()<br />
-    {<br />
-     <div>
-         @if (email != null)
-         {
-             <span><var>string</var> email = <a href="@email.Url">@email.Username</a>;<br /></span>
-         }
-         <var class="class">Link</var>[] socialNetworks = <var>new</var> <var class="class">Link</var>[]<br />
-         {<br />
-          <div>
-              @foreach (Link link in links)
-              {
-                  <span><img /><img /><var>new</var> <var class="class">Link</var>(<a>@(link.Title)</a>, <a target="_blank" href="@(link.Url)">https:@(link.Url)</a>),</span><br />
-              }
-          </div>
-         }<br />
-     </div>
-    }<br />
-    <br />
-    <a class="comment">// Copyright &copy;@(DateTime.Today.Year) Michael "XFox" Gordeev</a>
-</div>
+<footer>
+	<var>if</var> (<var class="class">You</var>.InsterestedInMe)<br />
+	<div>
+		<var class="method">ContactMe</var>();<br />
+	</div>
+	<br />
+	<a class="comment">// All links are clickable</a><br />
+	<var>public void</var> <var class="method">ConatactMe</var>()<br />
+	{<br />
+	<div>
+		@if (email != null)
+		{
+			<span><var>string</var> email = <a href="@email.Url">@email.Username</a>;<br /></span>
+		}
+		<var class="class">Link</var>[] socialNetworks = <var>new</var> <var class="class">Link</var>[]<br />
+		{<br />
+		<div>
+			@foreach (LinkModel link in links)
+			{
+				<span><img /><img /><var>new</var> <var class="class">Link</var>(<a>@(link.Title)</a>, <a target="_blank" href="@(link.Url)">https:@(link.Url)</a>),</span><br />
+			}
+		</div>
+		}<br />
+	</div>
+	}<br />
+	<br />
+	<a class="comment">// Copyright &copy;@(DateTime.Today.Year) Michael "XFox" Gordeev</a>
+</footer>
 
 <link rel="stylesheet" type="text/css" href="~/css/ContactsBlock.css" />
