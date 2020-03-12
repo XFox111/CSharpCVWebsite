@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MyWebsite.Controllers;
 using MyWebsite.Models.Databases;
+using System.Linq;
 
 namespace MyWebsite.Areas.API
 {
@@ -8,10 +9,12 @@ namespace MyWebsite.Areas.API
 	[Route("API/[controller]")]
 	public class GUTScheduleController : ExtendedController
 	{
-		public GUTScheduleController(DatabaseContext context) : base(context) { }
+		GUTScheduleDatabaseContext databaseContext;
+		public GUTScheduleController(DatabaseContext context, GUTScheduleDatabaseContext db) : base(context) =>
+			databaseContext = db;
 
 		[Route("SemesterOffsetDay")]
 		public string SemesterOffsetDay() =>
-			Database.CustomData.Find("gut.schedule.semester.offset")?.Value ?? "undefined";
+			databaseContext.OffsetDates?.FirstOrDefault()?.Value ?? "undefined";
 	}
 }

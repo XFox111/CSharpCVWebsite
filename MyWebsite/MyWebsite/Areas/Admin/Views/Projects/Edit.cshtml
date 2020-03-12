@@ -1,0 +1,111 @@
+﻿@model MyWebsite.Models.ProjectModel
+@{
+	ViewData["Title"] = "Edit";
+}
+
+<header>
+	&#xE760; <a asp-action="Index">Back to the list</a>
+	<h1>Edit project</h1>
+</header>
+
+<article>
+	<form asp-action="Edit" onsubmit="ConfigureBadges()">
+		<div asp-validation-summary="All" class="text-danger"></div>
+		<input asp-for="Order" type="number" hidden />
+		<div>
+			<label asp-for="Id"></label>
+			<input asp-for="Id" type="text" readonly />
+		</div>
+		<div>
+			<label asp-for="EnglishTitle"></label>
+			<input asp-for="EnglishTitle" type="text" required />
+			<span asp-validation-for="EnglishTitle" class="text-danger"></span>
+		</div>
+		<div>
+			<label asp-for="RussianTitle"></label>
+			<input asp-for="RussianTitle" type="text" />
+			<span asp-validation-for="RussianTitle" class="text-danger"></span>
+		</div>
+		<div>
+			<label asp-for="EnglishDescription"></label>
+			<textarea asp-for="EnglishDescription" required></textarea>
+			<span asp-validation-for="EnglishDescription" class="text-danger"></span>
+		</div>
+		<div>
+			<label asp-for="RussianDescription"></label>
+			<textarea asp-for="RussianDescription"></textarea>
+			<span asp-validation-for="RussianDescription" class="text-danger"></span>
+		</div>
+		<div>
+			<label asp-for="Link"></label>
+			<input asp-for="Link" type="text" />
+			<span asp-validation-for="Link" class="text-danger"></span>
+		</div>
+		<div>
+			<label asp-for="EnglishLinkCaption"></label>
+			<input asp-for="EnglishLinkCaption" type="text" />
+			<span asp-validation-for="EnglishLinkCaption" class="text-danger"></span>
+		</div>
+		<div>
+			<label asp-for="RussianLinkCaption"></label>
+			<input asp-for="RussianLinkCaption" type="text" />
+			<span asp-validation-for="RussianLinkCaption" class="text-danger"></span>
+		</div>
+		<div>
+			<label asp-for="Badges"></label>
+			<input asp-for="Badges" type="text" id="badges" hidden />
+			<span asp-validation-for="Badges" class="text-danger"></span>
+			<div class="badge-list">
+				@foreach (BadgeModel badge in ViewData["Badges"] as List<BadgeModel>)
+				{
+					<input type="checkbox" id="@badge.Name" checked="@(Model.Badges.Split(',').Contains(badge.Name))"/>
+					<div class="badge" style="background-image: url('/images/Badges/@(badge?.Image).png')" title="@(badge?.Description)"></div>
+					<span>@badge.Description</span><br />
+				}
+			</div>
+		</div>
+
+		<input type="submit" value="Save" />
+	</form>
+</article>
+
+@section Imports
+{
+	<script type="text/javascript">
+		function ConfigureBadges()
+		{
+			var checkboxes = document.querySelectorAll(".badge-list input");
+			var badges = [];
+			for (var k = 0; k < checkboxes.length; k++)
+				if (checkboxes[k].checked == true)
+					badges[badges.length] = checkboxes[k].id;
+
+			document.querySelector("#badges").value = badges.join(",");
+		}
+	</script>
+
+	<style type="text/css">
+		form
+		{
+			max-width: initial;
+		}
+
+		textarea
+		{
+			max-height: 250px;
+		}
+
+		.badge-list
+		{
+			margin: 10px 0px;
+		}
+
+			.badge-list div
+			{
+				height: 25px;
+				width: 25px;
+				display: inline-block;
+				background-size: contain;
+			}
+	</style>
+}

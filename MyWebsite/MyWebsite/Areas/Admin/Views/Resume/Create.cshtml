@@ -1,39 +1,48 @@
 ﻿@using System.Globalization
 @model MyWebsite.Models.ResumeModel
 @{
-    ViewData["Title"] = "Create resume";
+	ViewData["Title"] = "Create " + (ViewData["Caption"] ?? "resume");
 }
 
 <header>
-    <p>&#xE760; <a asp-action="Index">Back to the list</a></p>
-    <h1>Create resume</h1>
+	&#xE760; <a asp-action="Index">Back to the list</a>
+	<h1>Create @(ViewData["Caption"] ?? "resume")</h1>
 </header>
 
 <article>
-    <form asp-action="Create">
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        <div>
-            <label asp-for="Language"></label>
-            <input type="text" asp-for="Language"/>
-            <span asp-validation-for="Language" class="text-danger"></span>
-        </div>
-        <div>
-            <label asp-for="Content"></label>
-            <textarea asp-for="Content" spellcheck="false"></textarea>
-            <span asp-validation-for="Content" class="text-danger"></span>
-        </div>
-        <br />
-        <input type="submit" value="Save" class="btn"/>
-    </form>
+	<form method="post">
+		<div asp-validation-summary="All" class="text-danger"></div>
+		<div>
+			<label asp-for="Language"></label>
+			<select asp-for="Language" required>
+				@foreach (var culture in CultureInfo.GetCultures(CultureTypes.NeutralCultures))
+				{
+					<option value="@culture.Name">@culture.EnglishName</option>
+				}
+			</select>
+			<span asp-validation-for="Language" class="text-danger"></span>
+		</div>
+		<div>
+			<label asp-for="Content"></label>
+			<textarea asp-for="Content" spellcheck="false" required></textarea>
+			<span asp-validation-for="Content" class="text-danger"></span>
+		</div>
+		<br />
+		<input type="submit" value="Save" />
+	</form>
 </article>
 
-<link type="text/css" rel="stylesheet" href="~/css/Admin.css" />
-<style type="text/css">
-    form {
-        max-width: initial;
-    }
+@section Imports
+{
+	<style type="text/css">
+		form
+		{
+			max-width: initial;
+		}
 
-    textarea {
-        min-height: 500px;
-    }
-</style>
+		textarea
+		{
+			min-height: 500px;
+		}
+	</style>
+}

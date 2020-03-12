@@ -1,12 +1,10 @@
-﻿@using System.IO
-@using System.Globalization
-@model ScreenshotViewModel
+﻿@model ScreenshotViewModel
 @{
 	ViewData["Title"] = "Screenshot";
 	Layout = "_Layout.cshtml";
 }
 
-<article class="image-overview-block">
+<header>
 	<p class="controls">
 		&#xE15C; <a asp-action="Index" class="back">Back to description</a>
 		@if (Model.Previous != null)
@@ -20,41 +18,44 @@
 			<a asp-action="Screenshot" asp-route-id="@Model.Next" class="back">Next</a>
 		}
 	</p>
-
-	<p class="title">
+	<p>
 		<b>@Model.Current</b>
 	</p>
+</header>
 
-	<img src="@Model.Paths[Model.Position]" id="image" onclick="ToggleImageSize();"/>
+<article class="image-overview-block">
+	<img src="@Model.Paths[Model.Position]" id="image" onclick="ToggleImageSize();" />
 </article>
 
 @section Imports {
 	<link rel="stylesheet" type="text/css" href="~/css/Gallery.css" />
 	<style type="text/css">
-		#image {
-			max-height: initial;
+		#image
+		{
+			max-height: 75vh;
 		}
-		.controls {
-			display: inline-block;
-		}
-		.title {
-			float: right;
+
+		header
+		{
+			display: grid;
+			grid-template-columns: 1fr auto;
+			margin: 0px 20px;
 		}
 	</style>
 
 	<script type="text/javascript">
-        function ToggleImageSize()
-        {
-            var image = document.getElementById("image");
+		function ToggleImageSize()
+		{
+			var image = document.getElementById("image");
 
-            if (image.style.cursor == "zoom-out")
-                image.style = "";
-            else
-            {
-                image.style.maxHeight = "none";
-                image.style.maxWidth = "none";
-                image.style.cursor = "zoom-out";
-            }
-        }
+			if (image.style.cursor == "zoom-out")
+				image.style = "";
+			else
+			{
+				image.style.maxHeight = "initial";
+				image.style.maxWidth = "initial";
+				image.style.cursor = "zoom-out";
+			}
+		}
 	</script>
 }

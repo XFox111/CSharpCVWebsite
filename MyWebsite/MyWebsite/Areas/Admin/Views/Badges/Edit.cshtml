@@ -1,57 +1,47 @@
-﻿@using System.IO;
-@model MyWebsite.Models.BadgeModel
+﻿@model MyWebsite.Models.BadgeModel
 @{
-    ViewData["Title"] = "Edit badge";
-    List<SelectListItem> files = new List<SelectListItem>();
-    foreach (string path in Directory.GetFiles(Directory.GetCurrentDirectory() + "/wwwroot/images/Badges"))
-    {
-        string fileName = System.IO.Path.GetFileNameWithoutExtension(path);
-        files.Add(new SelectListItem(fileName, fileName));
-    }
+	ViewData["Title"] = "Edit badge";
 }
 
 <header>
-    <p>&#xE760; <a asp-action="Index">Back to the list</a></p>
-    <h1>Edit project badge</h1>
+	&#xE760; <a asp-action="Index">Back to the list</a>
+	<h1>Edit project badge</h1>
 </header>
 
 <article>
-    <form asp-action="Edit" oninput="UpdatePreview();">
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        <div>
-            <label asp-for="Name"></label>
-            <input asp-for="Name" type="text" class="readonly" readonly />
-            <span asp-validation-for="Name" class="text-danger"></span>
-        </div>
-        <div>
-            <label asp-for="EnglishDescription"></label>
-            <input asp-for="EnglishDescription" type="text" />
-            <span asp-validation-for="EnglishDescription" class="text-danger"></span>
-        </div>
-        <div>
-            <label asp-for="RussianDescription"></label>
-            <input asp-for="RussianDescription" type="text" />
-            <span asp-validation-for="RussianDescription" class="text-danger"></span>
-        </div>
-        <div>
-            <label asp-for="Image"></label>
-            <div class="image-selector">
-                <select asp-for="Image" asp-items="files" onchange="UpdatePreview();"></select>
-                <span>.png</span>
-            </div>
-            <span asp-validation-for="Image" class="text-danger"></span>
-        </div>
-        <partial name="Preview.cshtml" />
+	<form asp-action="Edit" oninput="UpdatePreview();">
+		<div asp-validation-summary="All" class="text-danger"></div>
+		<div>
+			<label asp-for="Name"></label>
+			<input asp-for="Name" type="text" readonly />
+			<span asp-validation-for="Name" class="text-danger"></span>
+		</div>
+		<div>
+			<label asp-for="EnglishDescription"></label>
+			<input asp-for="EnglishDescription" type="text" required />
+			<span asp-validation-for="EnglishDescription" class="text-danger"></span>
+		</div>
+		<div>
+			<label asp-for="RussianDescription"></label>
+			<input asp-for="RussianDescription" type="text" />
+			<span asp-validation-for="RussianDescription" class="text-danger"></span>
+		</div>
+		<div>
+			<label asp-for="Image"></label>
+			<div class="image-selector">
+				<select asp-for="Image" onchange="UpdatePreview();" required>
+					@foreach (string path in System.IO.Directory.GetFiles(System.IO.Directory.GetCurrentDirectory() + "/wwwroot/images/Badges"))
+					{
+						string file = System.IO.Path.GetFileNameWithoutExtension(path);
+						<option value="@file">@file</option>
+					}
+				</select>
+				<span>.png</span>
+			</div>
+			<span asp-validation-for="Image" class="text-danger"></span>
+		</div>
+		<partial name="Preview.cshtml" />
 
-        <input type="submit" value="Save" class="btn" />
-    </form>
-    <hr />
-    <h2>Upload badge image</h2>
-    <form method="post" enctype="multipart/form-data">
-        <input type="file" accept="image/png" name="file" />
-        <label for="file" style="@(ViewData.Keys.Contains("UploadException") ? "color: red" : "")">File must be a 64x64 PNG image</label>
-        <input type="submit" value="Upload image" class="btn"/>
-    </form>
+		<input type="submit" value="Update" />
+	</form>
 </article>
-
-<link type="text/css" rel="stylesheet" href="~/css/Admin.css" />

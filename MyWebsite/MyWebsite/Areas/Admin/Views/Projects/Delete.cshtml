@@ -1,31 +1,63 @@
 ﻿@model MyWebsite.Models.ProjectModel
 @{
-    ViewData["Title"] = "Delete project";
+	ViewData["Title"] = "Delete project";
 }
 
 <header>
-    <p>&#xE760; <a asp-action="Index">Back to the list</a></p>
-    <h1>Delete project entry</h1>
-    <h3>Are you sure you want to delete this?</h3>
+	&#xE760; <a asp-action="Index">Back to the list</a>
+	<h1>Delete project entry</h1>
+	<h3>Are you sure you want to delete this?</h3>
 </header>
 
 <article>
-    <p class="form-group">
-        <b>@Html.DisplayNameFor(model => model.Id):</b> @Model.Id<br />
-        <b>@Html.DisplayNameFor(model => model.EnglishTitle):</b> @Model.EnglishTitle<br />
-        <b>@Html.DisplayNameFor(model => model.RussianTitle):</b> @Model.RussianTitle<br />
-        <b>@Html.DisplayNameFor(model => model.EnglishDescription):</b> @Model.EnglishDescription<br />
-        <b>@Html.DisplayNameFor(model => model.RussianDescription):</b> @Model.RussianDescription<br />
-        <b>@Html.DisplayNameFor(model => model.Link):</b> @Model.Link<br />
-        <b>@Html.DisplayNameFor(model => model.EnglishLinkCaption):</b> @Model.EnglishLinkCaption<br />
-        <b>@Html.DisplayNameFor(model => model.RussianLinkCaption):</b> @Model.RussianLinkCaption<br />
-        <b>@Html.DisplayNameFor(model => model.Badges):</b> @Model.Badges<br />
-    </p>
+	<p>
+		<b>@Html.DisplayNameFor(model => model.Id):</b> @Model.Id<br />
+	</p>
+	<p>
+		<b>@Html.DisplayNameFor(model => model.EnglishTitle):</b> @Model.EnglishTitle<br />
+		<b>@Html.DisplayNameFor(model => model.RussianTitle):</b> @Model.RussianTitle<br />
+	</p>
+	<p>
+		<b>@Html.DisplayNameFor(model => model.EnglishLinkCaption):</b> @Model.EnglishLinkCaption<br />
+		<b>@Html.DisplayNameFor(model => model.RussianLinkCaption):</b> @Model.RussianLinkCaption<br />
+	</p>
+	<p>
+		<b>@Html.DisplayNameFor(model => model.Link):</b> <a target="_blank" href="@Model.Link">@Model.Link</a><br />
+	</p>
+	<p>
+		<b>@Html.DisplayNameFor(model => model.Badges):</b> @Model.Badges<br />
+		<div class="badge-placeholder">
+			@foreach (string b in Model.Badges.Split(','))
+			{
+				BadgeModel badge = (ViewData["Badges"] as List<BadgeModel>).FirstOrDefault(i => i.Name == b);
+				<div style="background-image: url('/images/Badges/@(badge?.Image).png')" title="@(badge?.Description)"></div>
+			}
+		</div>
+	</p>
 
-    <form asp-action="Delete">
-        <input hidden asp-for="Id" />
-        <input type="submit" value="Delete" class="btn-danger" />
-    </form>
+	<form asp-action="Delete">
+		<input hidden asp-for="Id" />
+		<input type="submit" value="Delete" required />
+	</form>
 </article>
 
-<link type="text/css" rel="stylesheet" href="~/css/Admin.css" />
+@section Imports
+{
+	<style type="text/css">
+		.badge-placeholder
+		{
+			display: grid;
+			grid-column-gap: 10px;
+			grid-auto-columns: max-content;
+			grid-auto-flow: column;
+		}
+
+			.badge-placeholder div
+			{
+				height: 25px;
+				width: 25px;
+				display: inline-block;
+				background-size: contain;
+			}
+	</style>
+}

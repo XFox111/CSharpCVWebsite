@@ -2,91 +2,89 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>@ViewData["Title"] - FoxTube - XFox111.NET</title>
-    <base href="~/assets/FoxTube/" />
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+	<title>@ViewData["Title"] - FoxTube - XFox111.NET</title>
+	<base href="~/assets/FoxTube/" />
+	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
 
-    <link rel="stylesheet" type="text/css" href="~/css/Socicon.css" />
-    <link rel="stylesheet" type="text/css" href="FoxTube.css" />
+	<link rel="stylesheet" href="https://s3.amazonaws.com/icomoon.io/114779/Socicon/style.css?u8vidh" />
+	<link rel="stylesheet" type="text/css" href="~/css/Fonts.css" />
+	<link rel="stylesheet" type="text/css" href="FoxTube.css" />
 
-    <script type="text/javascript">
-        function ToggleMenu()
-        {
-            var menu = document.getElementById("main-menu");
+	<script type="text/javascript">
+		function ToggleMenu()
+		{
+			var menu = document.querySelector("menu");
 
-            if (menu.style.display == "none")
-                menu.style.display = "initial";
-            else
-                menu.style.display = "none";
-        }
-    </script>
+			if (menu.style.display == "none")
+				menu.style.display = "initial";
+			else
+				menu.style.display = "none";
+		}
+	</script>
 
-    @RenderSection("Imports", false)
+	@RenderSection("Imports", false)
 
-    @if (IsSectionDefined("OpenGraph"))
-        RenderSection("OpenGraph");
-    else
-    {
-        <meta name="author" content="Michael 'XFox' Gordeev">
-        <meta name="description" content="YouTube client for Windows 10 family devices. It's fast and convenient. It also supports live streams and 8K videos!">
+	@if (IsSectionDefined("OpenGraph"))
+		RenderSection("OpenGraph");
+	else
+	{
+		<meta name="author" content="Michael 'XFox' Gordeev">
+		<meta name="description" content="YouTube client for Windows 10 family devices. It's fast and convenient. It also supports live streams and 8K videos!">
 
-        <meta property="og:image" content="FoxTubeLogo.png">
-        <meta property="og:video" content="//www.youtube.com/embed/Mio9FbxmbhM">
-        <meta property="og:video" content="https://www.youtube.com/embed/Mio9FbxmbhM">
-        <meta property="og:video" content="https://www.youtube.com/v/Mio9FbxmbhM">
-        <meta property="ya:ovs:allow_embed" content="true" />
-        <meta property="og:type" content="article">
-        <meta property="og:locale" content="en_US">
-        <meta property="og:description" content="YouTube client for Windows 10 family devices. It's fast and convenient. It also supports live streams and 8K videos!">
-        <meta property="og:title" content="Meet FoxTube! - New YouTube client for Windows 10">
-    }
+		<meta property="og:image" content="/assets/FoxTube/Logo.svg">
+		<meta property="og:site_name" content="FoxTube - New YouTube client for Windows 10" />
+		<meta property="og:video" content="//www.youtube.com/embed/Mio9FbxmbhM">
+		<meta property="og:video" content="https://www.youtube.com/embed/Mio9FbxmbhM">
+		<meta property="og:video" content="https://www.youtube.com/v/Mio9FbxmbhM">
+		<meta property="ya:ovs:allow_embed" content="true" />
+		<meta property="og:type" content="article">
+		<meta property="og:locale" content="en_US">
+		<meta property="og:description" content="YouTube client for Windows 10 family devices. It's fast and convenient. It also supports live streams and 8K videos!">
+		<meta property="og:title" content="Meet FoxTube! - New YouTube client for Windows 10">
+	}
 
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
 <body>
-    <nav>
-        <img class="logo" src="Logo.svg" />
-        <a asp-action="Index">
-            <b>FoxTube</b><br />
-            YouTube client for Windows 10
-        </a>
+	<nav>
+		<img class="logo" src="Logo.svg" />
+		<a asp-action="Index">
+			<b>FoxTube</b><br />
+			<span>YouTube client for Windows 10</span>
+		</a>
 
-        <menu type="toolbar" id="main-menu" style="display:none">
-            <li><a asp-area="" asp-controller="Home" asp-action="Index">Home();</a></li>
-            <li><a asp-area="" asp-controller="Resume" asp-action="Index">MyResume();</a></li>
-            <li><a asp-area="" asp-controller="Projects" asp-action="Index">Projects();</a></li>
-            <li><a asp-area="" asp-controller="Gallery" asp-action="Index">Arts();</a></li>
-            <li><a asp-area="" asp-controller="Contacts" asp-action="Index">Contacts();</a></li>
-        </menu>
+		<menu type="toolbar" style="display:none">
+			<partial name="~/Views/Shared/TopBarMenu.cshtml" />
+		</menu>
 
-        <p>
-            <a asp-controller="Home" asp-action="Index" asp-area="">XFox111.NET</a><br />
-            <a asp-controller="Home" asp-action="SwitchLanguage" lang="ru">РУС &#xE12B;</a>
-            <a id="menu-toggle" onclick="ToggleMenu();">&#xE700;</a>
-        </p>
-    </nav>
+		<p>
+			<a asp-controller="Home" asp-action="Index" asp-area="">XFox111.NET</a><br />
+			<a asp-controller="Home" asp-action="SwitchLanguage" lang="ru">РУС &#xE12B;</a>
+			<a id="menu-toggle" onclick="ToggleMenu();">&#xE700;</a>
+		</p>
+	</nav>
 
-    <main>
-        @RenderBody()
-    </main>
+	<main onclick="document.querySelector('menu').style.display = 'none'">
+		@RenderBody()
+	</main>
 
-    @{
-        if (IsSectionDefined("Footer"))
-            RenderSection("Footer");
-        else
-        {
-            <footer>
-                <span class="comment">// Copyright &copy;@(DateTime.Today.Year) Michael "XFox" Gordeev</span>
+	@{
+		if (IsSectionDefined("Footer"))
+			RenderSection("Footer");
+		else
+		{
+			<footer>
+				<span class="comment">// Copyright &copy;@(DateTime.Today.Year) Michael "XFox" Gordeev</span>
 
-                <div>
-                    @foreach (LinkModel link in Model.Links.Where(i => i.DisplayInFooter).OrderBy(i => i.Order))
-                    {
-                        <a class="socicon-@(link.Name)" href="@(link.Url)" target="_blank" title="@(link.Title)"></a>
-                    }
-                </div>
-            </footer>
-        }
-    }
+				<div>
+					@foreach (LinkModel link in Model.Links.Where(i => i.DisplayInFooter).OrderBy(i => i.Order))
+					{
+						<a class="socicon-@(link.Name)" href="@(link.Url)" target="_blank" title="@(link.Title)"></a>
+					}
+				</div>
+			</footer>
+		}
+	}
 </body>
 </html>

@@ -14,7 +14,7 @@
 <article>
 	@if (Model.Projects.Count() > 0)
 	{
-		@foreach (ProjectModel project in Model.Projects)
+		@foreach (ProjectModel project in Model.Projects.OrderBy(i => i.Order))
 		{
 			<div class="project-item">
 				<div>
@@ -40,6 +40,7 @@
 	}
 </article>
 
-@section Imports {
+@section Imports 
+{
 	<link rel="stylesheet" type="text/css" href="~/css/Projects.css" />
 }

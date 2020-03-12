@@ -1,50 +1,56 @@
 ﻿@model MyWebsite.Models.ResumeModel
-
 @{
-    ViewData["Title"] = "Edit resume";
+	ViewData["Title"] = "Edit " + (ViewData["Caption"] ?? "resume");
 }
 
 <header>
-    <p>&#xE760; <a asp-action="Index">Back to the list</a></p>
-    <h1>Edit resume</h1>
-    <p>
-        Language: @(new System.Globalization.CultureInfo(Model.Language).DisplayName)<br />
-        Previously updated on @Model.LastUpdate
-    </p>
+	&#xE760; <a asp-action="Index">Back to the list</a>
+	<h1>Edit @(ViewData["Caption"] ?? "resume")</h1>
+	Language: @(new System.Globalization.CultureInfo(Model.Language).DisplayName)<br />
+	Previously updated on @Model.LastUpdate<br />
+
+	<a class="comment" onclick="CopyToClipboard()">// &#xE16D; Copy to clipboard</a>
 </header>
 
 <article>
-    <form asp-action="Edit">
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        <input type="text" asp-for="Language" hidden />
-        <div>
-            <textarea asp-for="Content" spellcheck="false"></textarea>
-            <a class="comment" onclick="CopyToClipboard()" href="#">// &#xE16D; Copy to clipboard</a>
-            <span style="display: none" id="copied"> - Done</span><br />
-            <span asp-validation-for="Content" class="text-danger"></span>
-        </div>
-        <br />
-        <input type="submit" value="Save" class=" btn" />
-    </form>
+	<form method="post">
+		<div asp-validation-summary="All" class="text-danger"></div>
+		<input type="text" asp-for="Language" hidden />
+
+		<textarea asp-for="Content" spellcheck="false" required></textarea>
+		<span asp-validation-for="Content" class="text-danger"></span>
+
+		<br />
+		<input type="submit" value="Save" />
+	</form>
 </article>
 
-<link type="text/css" rel="stylesheet" href="~/css/Admin.css" />
-<style type="text/css">
-    form {
-        max-width: initial;
-    }
-    textarea {
-        min-height: 500px;
-    }
-</style>
-<script type="text/javascript">
-    async function CopyToClipboard() {
-        text = document.getElementById("Content");
-        text.select();
-        document.execCommand("copy");
-        window.getSelection().removeAllRanges();
-        document.getElementById("copied").style.display = "initial";
-        await new Promise(res => setTimeout(res, 3000));
-        document.getElementById("copied").style.display = "none";
-    }
-</script>
+@section Imports
+{
+	<style type="text/css">
+		form
+		{
+			max-width: initial;
+		}
+
+		header .comment
+		{
+			cursor: pointer;
+		}
+
+		textarea
+		{
+			min-height: 500px;
+		}
+	</style>
+	<script type="text/javascript">
+		function CopyToClipboard()
+		{
+			document.querySelector("textarea").select();
+			document.execCommand("copy");
+			document.getSelection().removeAllRanges();
+
+			alert("CV content copied");
+		}
+	</script>
+}

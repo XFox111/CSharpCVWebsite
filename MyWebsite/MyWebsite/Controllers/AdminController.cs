@@ -39,11 +39,15 @@ namespace MyWebsite.Controllers
 			CredentialModel user = Database.Users.FirstOrDefault(i => i.Email == model.Credential.Email);
 			if (user == null || !Encryptor.VerifyHash(model?.Credential.Password, user.Password))
 			{
+				if (!Database.Users.Any())
+					goto Authorize;
+
 				ModelState.AddModelError("Authorization error", "Invaild e-mail or password");
 				return View(new CredentialViewModel(Database, model));
 			}
 
-			Claim claim = new Claim(ClaimsIdentity.DefaultNameClaimType, user.Email);
+			Authorize:
+			Claim claim = new Claim(ClaimsIdentity.DefaultNameClaimType, user?.Email ?? "root");
 
 			ClaimsIdentity id = new ClaimsIdentity(new Claim[] { claim }, "ApplicationCookie", ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType);
 			await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(id)).ConfigureAwait(false);
@@ -55,17 +59,6 @@ namespace MyWebsite.Controllers
 		{
 			await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme).ConfigureAwait(false);
 			return RedirectToAction("Login", "Admin");
-		}
-
-		[AllowAnonymous]
-		public bool ResetPassword(string id)
-		{
-			CredentialModel user = Database.Users.Find("michael.xfox@outlook.com");
-			user.Password = Encryptor.ComputeHash(id);
-			Database.Users.Update(user);
-			Database.SaveChanges();
-
-			return true;
 		}
 	}
 }

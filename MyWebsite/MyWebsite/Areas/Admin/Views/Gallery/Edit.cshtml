@@ -1,48 +1,97 @@
 ﻿@model MyWebsite.Models.ImageModel
 @{
-    ViewData["Title"] = "Edit artwork";
+	ViewData["Title"] = "Edit artwork";
 }
 
 <header>
-    <p>
-        &#xE760; <a asp-action="Index">Back to the list</a> <br />
-        <h1>Edit artwork</h1>
-        <a class="comment" href="~/images/Gallery/@(Model.FileName)" target="_blank">// Open artwork</a>
-    </p>
+	&#xE760; <a asp-action="Index">Back to the list</a>
+	<h1>Edit artwork</h1>
+	<a class="comment" href="~/images/Gallery/@(Model.FileName)" target="_blank">// Open artwork file</a>
 </header>
 
 <article>
-    <form asp-action="Edit">
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        <input asp-for="FileName" hidden/>
-        <div>
-            <label asp-for="EnglishTitle"></label>
-            <input asp-for="EnglishTitle" type="text" />
-            <span asp-validation-for="EnglishTitle" class="text-danger"></span>
-        </div>
-        <div>
-            <label asp-for="RussianTitle"></label>
-            <input asp-for="RussianTitle" type="text" />
-            <span asp-validation-for="RussianTitle" class="text-danger"></span>
-        </div>
-        <div>
-            <label asp-for="EnglishDescription"></label>
-            <textarea asp-for="EnglishDescription"></textarea>
-            <span asp-validation-for="EnglishDescription" class="text-danger"></span>
-        </div>
-        <div>
-            <label asp-for="RussianDescription"></label>
-            <textarea asp-for="RussianDescription"></textarea>
-            <span asp-validation-for="RussianDescription" class="text-danger"></span>
-        </div>
-        <div>
-            <label asp-for="CreationDate"></label>
-            <input asp-for="CreationDate" type="date" />
-            <span asp-validation-for="CreationDate" class="text-danger"></span>
-        </div>
+	<img src="~/images/Gallery/@Model.FileName" onclick="ToggleImageSize();" />
 
-        <input type="submit" value="Save" class="btn" />
-    </form>
+	<form asp-action="Edit">
+		<div asp-validation-summary="All" class="text-danger"></div>
+		<input asp-for="FileName" hidden />
+		<div>
+			<label asp-for="EnglishTitle"></label>
+			<input asp-for="EnglishTitle" type="text" required/>
+			<span asp-validation-for="EnglishTitle" class="text-danger"></span>
+		</div>
+		<div>
+			<label asp-for="RussianTitle"></label>
+			<input asp-for="RussianTitle" type="text" />
+			<span asp-validation-for="RussianTitle" class="text-danger"></span>
+		</div>
+		<div>
+			<label asp-for="EnglishDescription"></label>
+			<textarea asp-for="EnglishDescription"></textarea>
+			<span asp-validation-for="EnglishDescription" class="text-danger"></span>
+		</div>
+		<div>
+			<label asp-for="RussianDescription"></label>
+			<textarea asp-for="RussianDescription"></textarea>
+			<span asp-validation-for="RussianDescription" class="text-danger"></span>
+		</div>
+		<div>
+			<label asp-for="CreationDate"></label>
+			<input asp-for="CreationDate" type="date" required/>
+			<span asp-validation-for="CreationDate" class="text-danger"></span>
+		</div>
+
+		<input type="submit" value="Save" />
+	</form>
 </article>
 
-<link type="text/css" rel="stylesheet" href="~/css/Admin.css" />
+@section Imports
+{
+	<script type="text/javascript">
+		function ToggleImageSize()
+		{
+			var image = document.querySelector("img");
+
+			if (image.style.cursor == "zoom-out")
+				image.style = "";
+			else
+			{
+				image.style.maxHeight = "none";
+				image.style.maxWidth = "none";
+				image.style.cursor = "zoom-out";
+			}
+		}
+	</script>
+
+	<style type="text/css">
+		article
+		{
+			display: grid;
+			grid-template-columns: 500px 1fr;
+			grid-column-gap: 20px;
+		}
+
+			article img
+			{
+				width: 100%;
+			}
+
+		@@media only screen and (max-width: 1000px)
+		{
+			article 
+			{
+				display: inherit;
+			}
+		}
+
+		form
+		{
+			max-width: initial;
+		}
+
+		textarea
+		{
+			max-height: 250px;
+		}
+	</style>
+}

@@ -1,75 +1,90 @@
 ﻿@model IEnumerable<MyWebsite.Models.LinkModel>
 @{
-    ViewData["Title"] = "Links list";
+	ViewData["Title"] = "Links list";
 }
 
 <header>
-    <p>&#xE760; <a asp-action="Index" asp-controller="Admin" asp-area="">Back to main menu</a></p>
-    <h1>Links list</h1>
-    <p>
-        <a asp-action="Create" class="comment">// + Create New</a>
-    </p>
+	&#xE760; <a asp-action="Index" asp-controller="Admin" asp-area="">Back to main menu</a>
+	<h1>Links list</h1>
+	<a asp-action="Create" class="comment">// + Create New</a>
 </header>
 
 <article>
-    <table>
-        <thead>
-            <tr>
-                <th>Reorder</th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Name)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.EnglishTitle)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.RussianTitle)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Username)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Url)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.CanContactMe)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.DisplayInFooter)
-                </th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model.OrderBy(i => i.Order))
-            {
-                <tr draggable="true" ondragover="onDragOver(event);">
-                    <td>&#xE700;</td>
-                    <td>@item.Name</td>
-                    <td>@item.EnglishTitle</td>
-                    <td>@item.RussianTitle</td>
-                    <td>@item.Username</td>
-                    <td>@item.Url</td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.CanContactMe)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.DisplayInFooter)
-                    </td>
-                    <td>
-                        <a asp-action="Edit" asp-route-id="@item.Name">Edit</a> | 
-                        <a asp-action="Delete" asp-route-id="@item.Name">Delete</a>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
+	<div asp-validation-summary="All" class="text-danger"></div>
+	<table>
+		<thead>
+			<tr>
+				<th>&#xE700;</th>
+				<th>
+					@Html.DisplayNameFor(model => model.Name)
+				</th>
+				<th class="hide-l2">
+					@Html.DisplayNameFor(model => model.Title)
+				</th>
+				<th class="hide-l1">
+					@Html.DisplayNameFor(model => model.Username)
+				</th>
+				<th class="hide-l2">
+					@Html.DisplayNameFor(model => model.Url)
+				</th>
+				<th class="hide-l1">
+					@Html.DisplayNameFor(model => model.CanContactMe)
+				</th>
+				<th class="hide-l1">
+					@Html.DisplayNameFor(model => model.DisplayInFooter)
+				</th>
+				<th>Actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var item in Model.OrderBy(i => i.Order))
+			{
+				<tr id="@item.Name">
+					<td class="reorderingBtns">
+						<a onclick="Up(this)">&#xE010;</a><br />
+						<span>&#xE915;</span><br />
+						<a onclick="Down(this)">&#xE011;</a>
+					</td>
+					<td>@item.Name</td>
+					<td class="hide-l2">
+						@item.EnglishTitle (en)<br />
+						@(item.RussianTitle ?? "<not_set>") (ru)
+					</td>
+					<td class="hide-l1">@item.Username</td>
+					<td class="hide-l2"><a target="_blank" href="@item.Url">@item.Url</a></td>
+					<td class="hide-l1">
+						@Html.DisplayFor(modelItem => item.CanContactMe)
+					</td>
+					<td class="hide-l1">
+						@Html.DisplayFor(modelItem => item.DisplayInFooter)
+					</td>
+					<td>
+						<a asp-action="Edit" asp-route-id="@item.Name">Edit</a> |
+						<a asp-action="Delete" asp-route-id="@item.Name">Delete</a>
+					</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+
+	<button onclick="ApplyReorder()" disabled>Apply reordering</button>
 </article>
 
-<link type="text/css" rel="stylesheet" href="~/css/Admin.css" />
-<script type="text/javascript">
-	function onDragOver(event)
-	{
-		this.style.marginTop = '20px';
-	}
-</script>
+@section Imports
+{
+	<style type="text/css">
+		.reorderingBtns
+		{
+			user-select: none;
+		}
+
+			.reorderingBtns a:hover
+			{
+				cursor: pointer;
+				color: gray;
+				text-decoration: underline;
+			}
+	</style>
+
+	<script type="text/javascript" src="~/js/ReorderScript.js"></script>
+}

@@ -1,47 +1,53 @@
 ﻿@model IEnumerable<MyWebsite.Models.ImageModel>
 @{
-    ViewData["Title"] = "Gallery";
+	ViewData["Title"] = "Gallery";
 }
 
 <header>
-    <p>&#xE760; <a asp-action="Index" asp-controller="Admin" asp-area="">Back to main menu</a></p>
-    <h1>Gallery</h1>
-    <p>
-        <a asp-action="Upload" class="comment">// + Upload new</a>
-    </p>
+	&#xE760; <a asp-action="Index" asp-controller="Admin" asp-area="">Back to main menu</a>
+	<h1>Gallery</h1>
+	<a asp-action="Upload" class="comment">// &#xE11C; Upload new</a>
 </header>
 
 <article>
-    <table>
-        @foreach (ImageModel item in Model)
-        {
-            <tr>
-                <td>
-                    <img title="@item.Title" src="~/images/Gallery/@item.FileName" />
-                </td>
-                <td>
-                    <p>
-                        <h3>@item.Title</h3>
-                        <span>File name: @item.FileName</span><br />
-                        <span>Creation date: @item.CreationDate.ToShortDateString()</span><br />
-                        <span>
-                            @Html.ActionLink("Edit", "Edit", new { id = item.FileName }) |
-                            @Html.ActionLink("Delete", "Delete", new { id = item.FileName })
-                        </span>
-                    </p>
-                </td>
-            </tr>
-        }
-    </table>
+	<table>
+		@foreach (ImageModel item in Model)
+		{
+			<tr>
+				<td>
+					<a asp-area="" asp-controller="Gallery" asp-action="Details" asp-route-id="@item.FileName" target="_blank">
+						<img title="@item.Title" src="~/images/Gallery/@item.FileName" />
+					</a>
+				</td>
+				<td>
+					<p>
+						<h3>@item.Title</h3>
+						<span>File name: @item.FileName</span><br />
+						<span>Creation date: @item.CreationDate.ToShortDateString()</span><br />
+						<span>
+							<a asp-action="Edit" asp-route-id="@item.FileName">Edit</a> |
+							<a asp-action="Delete" asp-route-id="@item.FileName">Delete</a> |
+							<a asp-area="" asp-controller="Gallery" asp-action="Details" asp-route-id="@item.FileName" target="_blank">View</a>
+						</span>
+					</p>
+				</td>
+			</tr>
+		}
+	</table>
 </article>
 
-<link type="text/css" rel="stylesheet" href="~/css/Admin.css" />
-<style type="text/css">
-    img {
-        height: 200px;
-        margin-right: 20px;
-    }
-    table {
-        width: initial;
-    }
-</style>
+@section Imports
+{
+	<style type="text/css">
+		img
+		{
+			height: 200px;
+			margin-right: 20px;
+		}
+
+		table
+		{
+			width: initial;
+		}
+	</style>
+}

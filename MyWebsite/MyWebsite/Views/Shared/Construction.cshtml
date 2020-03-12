@@ -12,6 +12,7 @@
 	<base href="~/assets/Construction/" />
 
 	<link rel="stylesheet" type="text/css" href="Construction.css">
+	<link rel="stylesheet" type="text/css" href="~/css/Fonts.css">
 	<script type="text/javascript" src="Construction.js"></script>
 
 	<meta name="author" content="Michael 'XFox' Gordeev">
@@ -89,7 +90,7 @@
 
 		@foreach (LinkModel item in Model.Links.Where(i => i.Name.Belongs("outlook", "linkedin", "vkontakte", "twitter", "github")))
 		{
-			<p>@item.Title: <a href="@item.Url">@((item.Url.ToString().StartsWith("mailto:") ? "" : "https:") + item.Url)</a></p>
+			<p>@item.Title: <a href="@item.Url" target="_blank">@((item.Url.ToString().StartsWith("mailto:") ? "" : "https:") + item.Url)</a></p>
 		}
 		<br />
 

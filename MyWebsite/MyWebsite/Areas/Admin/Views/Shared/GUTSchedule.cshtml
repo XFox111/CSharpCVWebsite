@@ -1,22 +1,49 @@
 ﻿@model CustomData
 @{
 	ViewData["Title"] = "GUTSchedule";
+	IEnumerable<ResumeModel> policies = ViewData["Policies"] as IEnumerable<ResumeModel>;
 }
 
 <header>
-    <p>&#xE760; <a asp-action="Index" asp-controller="Admin" asp-area="">Back to main menu</a></p>
+    &#xE760; <a asp-action="Index" asp-controller="Admin" asp-area="">Back to main menu</a>
 	<h1>GUTSchedule</h1>
 </header>
 
 <article>
+	<div asp-validation-summary="All" class="text-danger"></div>
+
+	<h2>Offset dates</h2>
 	<form asp-action="Index">
-		<div asp-validation-summary="ModelOnly" class="text-danger"></div>
-		<input asp-for="Key" hidden />
-		<label asp-for="Value">First work day in the semester: (Current: @Model.Value)</label>
+		<input asp-for="Key" value="offset" hidden />
+		<label asp-for="Value">First work day in the semester: (Current: @Model?.Value)</label>
 		<input type="number" asp-for="Value" />
 		<span asp-validation-for="Value" class="text-danger"></span>
-		<input type="submit" value="Update" class="btn"/>
+		<input type="submit" value="Update" />
 	</form>
-</article>
 
-<link href="~/css/Admin.css" type="text/css" rel="stylesheet" />
+	<h2>Privacy policies</h2>
+	<a class="comment" asp-action="PrivacyPolicy" target="_blank">// View privacy policy page</a><br />
+	<a class="comment" asp-action="CreatePolicy">// + Add new privacy policy</a>
+	<table>
+		<thead>
+			<tr>
+				<th>Langauge</th>
+				<th>Last update</th>
+				<th>Actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (ResumeModel item in policies)
+			{
+				<tr>
+					<td>@item.Language</td>
+					<td>@item.LastUpdate</td>
+					<td>
+						<a asp-action="EditPolicy" asp-route-id="@item.Language">Edit</a> |
+						<a asp-action="DeletePolicy" asp-route-id="@item.Language">Delete</a>
+					</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+</article>

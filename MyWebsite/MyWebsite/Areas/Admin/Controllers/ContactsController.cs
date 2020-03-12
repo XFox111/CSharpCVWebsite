@@ -3,61 +3,99 @@ using Microsoft.AspNetCore.Mvc;
 using MyWebsite.Controllers;
 using MyWebsite.Models;
 using MyWebsite.Models.Databases;
+using System;
+using System.Linq;
 
 namespace MyWebsite.Areas.Admin.Controllers
 {
-    [Area("Admin")]
-    [Authorize]
-    public class ContactsController : ExtendedController
-    {
-        public ContactsController(DatabaseContext context) : base(context) { }
+	[Area("Admin")]
+	[Authorize]
+	public class ContactsController : ExtendedController
+	{
+		public ContactsController(DatabaseContext context) : base(context) { }
 
-        public IActionResult Index() =>
-            View(Database.Links);
+		public IActionResult Index() =>
+			View(Database.Links);
 
-        [HttpGet]
-        public IActionResult Edit(string id) =>
-            View(Database.Links.Find(id));
+		[HttpPost]
+		public IActionResult Index(string[] reorderList)
+		{
+			if(reorderList?.Length != Database.Links.Count())
+			{
+				ModelState.AddModelError("Error", "Invalid or incomplete data recieved");
+				return View(Database.Links);
+			}
 
-        [HttpPost]
-        public IActionResult Edit(LinkModel model)
-        {
-            Database.Links.Update(model);
-            Database.SaveChanges();
+			for (int i = 0; i < reorderList.Length; i++)
+				Database.Links.Find(reorderList[i]).Order = i;
+			
+			Database.SaveChanges();
 
-            return RedirectToAction("Index");
-        }
+			return View(Database.Links);
+		}
 
-        [HttpGet]
-        public IActionResult Delete(string id) =>
-            View(Database.Links.Find(id));
+		[HttpGet]
+		public IActionResult Edit(string id) =>
+			View(Database.Links.Find(id));
 
-        [HttpPost]
-        public IActionResult Delete(LinkModel model)
-        {
-            Database.Links.Remove(model);
-            Database.SaveChanges();
+		[HttpPost]
+		public IActionResult Edit(LinkModel model)
+		{
+			if (model == null)
+				throw new ArgumentNullException(nameof(model));
 
-            return RedirectToAction("Index");
-        }
+			if (!ModelState.IsValid)
+			{
+				ModelState.AddModelError("Error", "Invalid data");
+				return View(model);
+			}
 
-        [HttpGet]
-        public IActionResult Create() =>
-            View();
+			Database.Links.Update(model);
+			Database.SaveChanges();
 
-        [HttpPost]
-        public IActionResult Create(LinkModel model)
-        {
-            if (!ModelState.IsValid)
-            {
-                ModelState.AddModelError("Error", "Invalid data");
-                return View(model);
-            }
+			return RedirectToAction("Index");
+		}
 
-            Database.Links.Add(model);
-            Database.SaveChanges();
+		[HttpGet]
+		public IActionResult Delete(string id) =>
+			View(Database.Links.Find(id));
 
-            return RedirectToAction("Index");
-        }
-    }
+		[HttpPost]
+		public IActionResult Delete(LinkModel model)
+		{
+			Database.Links.Remove(model);
+			Database.SaveChanges();
+
+			return RedirectToAction("Index");
+		}
+
+		[HttpGet]
+		public IActionResult Create() =>
+			View(model: null);
+
+		[HttpPost]
+		public IActionResult Create(LinkModel model)
+		{
+			if (model == null)
+				throw new ArgumentNullException(nameof(model));
+
+			if (!ModelState.IsValid)
+			{
+				ModelState.AddModelError("Error", "Invalid data");
+				return View(model);
+			}
+			model.Order = Database.Links.Count();
+
+			if (Database.Links.Any(i => i.Name == model.Name))
+			{
+				ModelState.AddModelError("Error", $"Link '{model.Name}' is already exists");
+				return View(model);
+			}
+
+			Database.Links.Add(model);
+			Database.SaveChanges();
+
+			return RedirectToAction("Index");
+		}
+	}
 }

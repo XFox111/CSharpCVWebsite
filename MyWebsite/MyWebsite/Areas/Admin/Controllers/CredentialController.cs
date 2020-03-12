@@ -2,51 +2,68 @@
 using Microsoft.AspNetCore.Mvc;
 using MyWebsite.Controllers;
 using MyWebsite.Helpers;
+using MyWebsite.Models;
 using MyWebsite.Models.Databases;
 using System.Linq;
 
 namespace MyWebsite.Areas.Admin.Controllers
 {
-    [Area("Admin")]
-    [Authorize]
-    public class CredentialController : ExtendedController
-    {
-        const string viewPath = "Areas/Admin/Views/Shared/Credential.cshtml";
+	[Area("Admin")]
+	[Authorize]
+	public class CredentialController : ExtendedController
+	{
+		const string viewPath = "Areas/Admin/Views/Shared/Credential.cshtml";
 
-        public CredentialController(DatabaseContext context) : base(context) { }
+		public CredentialController(DatabaseContext context) : base(context) { }
 
-        [HttpGet]
-        public IActionResult Index() =>
-            View(viewPath);
+		[HttpGet]
+		public IActionResult Index() =>
+			View(viewPath);
 
-        [HttpPost]
-        public IActionResult Index(Models.CredentialModel model)
-        {
-            MyWebsite.Models.CredentialModel credential = Database.Users.FirstOrDefault();
+		[HttpPost]
+		public IActionResult Index(string key, string value)
+		{
+			if(string.IsNullOrWhiteSpace(key))
+			{
+				ModelState.AddModelError("Validation error", "Unable to identify data to update");
+				return View(viewPath);
+			}
 
-            if (model == null || model.Current.Email != credential.Email || !Encryptor.VerifyHash(model.Current.Password, credential.Password))
-            {
-                ModelState.AddModelError("Authorization error", "Invaild e-mail or password");
-                return View(viewPath, model);
-            }
+			if(string.IsNullOrWhiteSpace(value))
+			{
+				ModelState.AddModelError("Validation error", "No data provided");
+				return View(viewPath);
+			}
 
-            if(string.IsNullOrWhiteSpace(model.Updated.Email) && string.IsNullOrWhiteSpace(model.Current.Password))
-            {
-                ModelState.AddModelError("Validation error", "No data to update");
-                return View(viewPath, model);
-            }
+			CredentialModel credential = Database.Users.FirstOrDefault();
+			Database.Users.RemoveRange(Database.Users);
 
-            Database.Users.Remove(credential);
-            Database.SaveChanges();
-            if(!string.IsNullOrWhiteSpace(model.Current.Email))
-                credential.Email = model.Updated.Email;
-            if(!string.IsNullOrWhiteSpace(model.Current.Password))
-                credential.Password = Encryptor.ComputeHash(model.Updated.Password);
-            Database.Users.Add(credential);
+			switch (key)
+			{
+				case "password":
+					Database.Users.Add(new CredentialModel
+					{
+						Email = credential.Email,
+						Password = Encryptor.ComputeHash(value)
+					});
+					break;
 
-            Database.SaveChanges();
+				case "email":
+					Database.Users.Add(new CredentialModel
+					{
+						Email = value,
+						Password = credential.Password
+					});
+					break;
 
-            return Redirect("~/Admin/Logout");
-        }
-    }
+				default:
+					ModelState.AddModelError("Processing error", "Provided data is missing or read-only");
+					return View(viewPath);
+			}
+
+			Database.SaveChanges();
+
+			return Redirect("~/Admin/Logout");
+		}
+	}
 }

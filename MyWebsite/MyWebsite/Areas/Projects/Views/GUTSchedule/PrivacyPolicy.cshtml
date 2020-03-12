@@ -1,0 +1,14 @@
+﻿@model ResumeViewModel
+@{
+	Layout = "/Views/Shared/_Layout.cshtml";
+	ViewData["Title"] = "GUT.Schedule privacy policy";
+}
+
+<header>
+    <h1>GUT.Schedule privacy policy</h1>
+    <p>Last update: @Model?.Resume?.LastUpdate</p>
+</header>
+
+<article>
+    @Html.Raw(Model?.Resume?.Content)
+</article>

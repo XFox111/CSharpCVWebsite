@@ -9,7 +9,7 @@ namespace MyWebsite.Models
 	public class ImageModel
 	{
 		[Key]
-		[Column(TypeName = "varchar(20)")]
+		[Column(TypeName = "varchar(255)")]
 		[DisplayName("File name")]
 		public string FileName { get; set; }
 
@@ -27,7 +27,6 @@ namespace MyWebsite.Models
 		[DisplayName("Description")]
 		public string Description => CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ru" && !string.IsNullOrWhiteSpace(RussianDescription) ? RussianDescription : EnglishDescription;
 
-		[Required]
 		[Column(TypeName = "text")]
 		[DisplayName("Description (en)")]
 		public string EnglishDescription { get; set; }

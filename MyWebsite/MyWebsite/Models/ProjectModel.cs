@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Globalization;
@@ -10,8 +11,14 @@ namespace MyWebsite.Models
 	{
 		[Key]
 		[Required]
-		[DisplayName("ID (Order)")]
-		public decimal Id { get; set; }
+		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+		[DisplayName("ID")]
+		public Guid Id { get; set; }
+
+		[Required]
+		[Column(TypeName = "int")]
+		[DisplayName("Order")]
+		public int Order { get; set; }
 
 		[DisplayName("Title")]
 		public string Title => CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ru" && !string.IsNullOrWhiteSpace(RussianTitle) ? RussianTitle : EnglishTitle;
@@ -42,7 +49,6 @@ namespace MyWebsite.Models
 		[DisplayName("Link text caption")]
 		public string LinkCaption => CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ru" && !string.IsNullOrWhiteSpace(RussianTitle) ? RussianLinkCaption : EnglishLinkCaption;
 
-		[Required]
 		[Column(TypeName = "varchar(50)")]
 		[DisplayName("Link text caption (en)")]
 		public string EnglishLinkCaption { get; set; }

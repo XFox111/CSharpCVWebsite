@@ -6,12 +6,13 @@
 	<link rel="shortcut icon" href="~/favicon.ico" type="image/x-icon" />
 
 	<link rel="stylesheet" type="text/css" href="~/css/Style.css" />
-	<link rel="stylesheet" type="text/css" href="~/css/Socicon.css" />
+	<link rel="stylesheet" type="text/css" href="~/css/Fonts.css" />
+	<link rel="stylesheet" href="https://s3.amazonaws.com/icomoon.io/114779/Socicon/style.css?u8vidh" />
 
 	<script type="text/javascript">
 		function ToggleMenu()
 		{
-			var menu = document.getElementById("main-menu");
+			var menu = document.querySelector("nav menu");
 
 			if (menu.style.display == "none")
 				menu.style.display = "initial";
@@ -47,12 +48,8 @@
 	<nav>
 		<a asp-controller="Home" asp-action="Index" asp-area="">XFox111.NET</a>
 
-		<menu type="toolbar" id="main-menu" style="display:none">
-			<li><a asp-area="" asp-controller="Home" asp-action="Index">AboutMe();</a></li>
-			<li><a asp-area="" asp-controller="Resume" asp-action="Index">Resume();</a></li>
-			<li><a asp-area="" asp-controller="Projects" asp-action="Index">Projects();</a></li>
-			<li><a asp-area="" asp-controller="Gallery" asp-action="Index">Arts();</a></li>
-			<li><a asp-area="" asp-controller="Contacts" asp-action="Index">Contacts();</a></li>
+		<menu type="toolbar" style="display:none">
+			<partial name="~/Views/Shared/TopBarMenu.cshtml" />
 		</menu>
 
 		<div>
@@ -61,7 +58,7 @@
 		</div>
 	</nav>
 
-	<main>
+	<main onclick="document.querySelector('nav menu').style.display = 'none'">
 		@RenderBody()
 	</main>
 

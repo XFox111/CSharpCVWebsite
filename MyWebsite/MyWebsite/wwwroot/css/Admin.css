@@ -1,7 +1,7 @@
-﻿input
+﻿input:not([type="checkbox"])
 {
 	padding: 10px;
-	border-radius: 10px;
+	border-radius: 5px;
 	border: 1px solid black;
 	width: 100%;
 	box-sizing: border-box;
@@ -12,32 +12,84 @@ select
 {
 	padding: 10px;
 	border: 1px solid black;
-	border-radius: 10px;
+	border-radius: 5px;
 	width: 100%;
 	-moz-appearance: none; /* Firefox */
 	-webkit-appearance: none; /* Safari and Chrome */
 }
 
+input:invalid
+{
+	border: 3px solid red;
+}
+
+input[type="submit"],
+input[type="button"],
 button
 {
-	margin: 10px;
-	border-radius: 10px;
+	border-radius: 5px;
 	border: 0px;
 	padding: 10px 20px;
 	background-color: #343434;
 	color: white;
+	cursor: pointer;
+}
+
+	input[type="submit"]:disabled,
+	input[type="button"]:disabled,
+	button:disabled
+	{
+		background-color: gray;
+		cursor: initial;
+	}
+
+	input[type="submit"]:hover:not(:disabled),
+	input[type="button"]:hover:not(:disabled),
+	button:hover:not(:disabled)
+	{
+		background-color: #505050;
+	}
+
+	input[type="submit"]:active,
+	input[type="button"]:active,
+	button:active
+	{
+		background-color: black;
+	}
+
+	input[type="submit"][required],
+	input[type="button"][required]
+	{
+		background-color: red;
+	}
+
+		input[type="submit"][required]:hover,
+		input[type="button"][required]:hover
+		{
+			background-color: rgb(200, 0, 0);
+		}
+
+		input[type="submit"][required]:active,
+		input[type="button"][required]:active
+		{
+			background-color: darkred;
+		}
+
+input[readonly]
+{
+	background-color: lightgray;
 }
 
 textarea
 {
 	resize: none;
 	width: 100%;
-	border-radius: 10px;
+	border-radius: 5px;
 	border: 1px solid black;
 	padding: 10px;
 	box-sizing: border-box;
-	height: 200px;
-	font-family: Consolas;
+	height: 68vh;
+	font-family: 'Consolas';
 }
 
 .select-container::after
@@ -60,17 +112,17 @@ textarea
 
 form
 {
-	max-width: 50%;
+	max-width: 500px;
+	width: 100%;
 }
 
-.admin-menu a
+.admin-menu > p a
 {
 	font-size: 16pt;
 }
 
-.logout, .logout:link, .logout:link:visited
+.comment.logout
 {
-	font-size: 16pt;
 	color: red !important;
 }
 
@@ -94,27 +146,10 @@ table
 	width: 100%;
 }
 
-.form-group input
-{
-	width: auto;
-}
-
 .text-danger
 {
 	text-decoration: solid;
 	color: red;
-}
-
-.btn
-{
-	background-color: #343434;
-	color: white;
-}
-
-.btn-danger
-{
-	background-color: red;
-	color: white;
 }
 
 .checkbox
@@ -122,20 +157,23 @@ table
 	width: auto;
 }
 
-.readonly
-{
-	background-color: lightgray;
-}
-
 .reorder-arrow:link
 {
 	text-decoration: none;
 }
 
-@media only screen and (max-width: 700px)
+@media only screen and (max-width: 1080px)
 {
-	form
+	.hide-l1
 	{
-		max-width: initial;
+		display: none;
+	}
+}
+
+@media only screen and (max-width: 850px)
+{
+	.hide-l2
+	{
+		display: none;
 	}
 }

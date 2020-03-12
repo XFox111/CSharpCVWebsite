@@ -5,14 +5,14 @@
 
 <header>
 	<h1>My resume</h1>
-	<p>Last update: @Model?.Resume.LastUpdate</p>
+	<p>Last update: @Model?.Resume?.LastUpdate</p>
 
 	<a class="comment" asp-action="Download">// Download CV (.pdf) &#xE118;</a><br />
 	<a class="comment" asp-action="Print">// Print CV &#xE749;</a>
 </header>
 
 <article>
-	@Html.Raw(Model?.Resume.Content)
+	@Html.Raw(Model?.Resume?.Content)
 </article>
 
 @section Footer

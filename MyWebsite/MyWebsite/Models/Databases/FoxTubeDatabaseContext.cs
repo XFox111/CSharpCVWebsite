@@ -8,6 +8,8 @@ namespace MyWebsite.Models.Databases
 		public DbSet<MetricsPackage> Metrics { get; set; }
 		public DbSet<Message> Messages { get; set; }
 		public DbSet<Changelog> Changelogs { get; set; }
+		
+		public DbSet<ResumeModel> PrivacyPolicies { get; set; }
 
 		public FoxTubeDatabaseContext(DbContextOptions<FoxTubeDatabaseContext> options) : base(options) =>
 			Database.EnsureCreated();

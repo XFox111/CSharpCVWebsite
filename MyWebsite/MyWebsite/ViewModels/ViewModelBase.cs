@@ -10,6 +10,6 @@ namespace MyWebsite.ViewModels
 		public IEnumerable<LinkModel> Links { get; }
 
 		public ViewModelBase(DatabaseContext context) =>
-			Links = context?.Links.ToList();
+			Links = context?.Links.OrderBy(i => i.Order);
 	}
 }

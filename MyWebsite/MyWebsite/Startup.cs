@@ -10,13 +10,10 @@ using MyWebsite.Models.Databases;
 
 namespace MyWebsite
 {
-	// TODO: Add reordering for contact links
-	// TODO: Complete project admin page
-	// TODO: Complete artworks admin page
 	// TODO: FoxTube API admin page
 	// TODO: Complete homepage
-	// TODO: Complete FoxTube page
 	// TODO: Add localization system
+	// TODO: Add blog
 	// TODO: Rid of JavaScript (use Blazor)
 	public class Startup
 	{
@@ -35,6 +32,9 @@ namespace MyWebsite
 
 			services.AddDbContext<FoxTubeDatabaseContext>(options =>
 				options.UseSqlServer(Configuration.GetConnectionString("FoxTubeDB")));
+
+			services.AddDbContext<GUTScheduleDatabaseContext>(options =>
+				options.UseSqlServer(Configuration.GetConnectionString("GUTScheduleDB")));
 
 			services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options =>
 				options.LoginPath = new PathString("/Admin/Login"));

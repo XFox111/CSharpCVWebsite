@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using MyWebsite.Areas.Admin.Models;
 using MyWebsite.Controllers;
 using MyWebsite.Models;
 using MyWebsite.Models.Databases;
@@ -9,90 +9,77 @@ using System.IO;
 
 namespace MyWebsite.Areas.Admin.Controllers
 {
-    [Area("Admin")]
-    [Authorize]
-    public class GalleryController : ExtendedController
-    {
-        public GalleryController(DatabaseContext context) : base(context) { }
+	[Area("Admin")]
+	[Authorize]
+	public class GalleryController : ExtendedController
+	{
+		public GalleryController(DatabaseContext context) : base(context) { }
 
-        public IActionResult Index() =>
-            View(Database.Gallery);
+		public IActionResult Index() =>
+			View(Database.Gallery);
 
-        [HttpGet]
-        public IActionResult Edit(Guid id)
-        {
-            if (Database.Gallery.Find(id) is ImageModel model)
-                return View(model);
-            else
-                return NotFound();
-        }
+		[HttpGet]
+		public IActionResult Edit(string id) =>
+			View(Database.Gallery.Find(id));
 
-        [HttpPost]
-        public IActionResult Edit(ImageModel model)
-        {
-            if (!ModelState.IsValid)
-            {
-                ModelState.AddModelError("Error", "Invalid data");
-                return View(model);
-            }
+		[HttpPost]
+		public IActionResult Edit(ImageModel model)
+		{
+			if (!ModelState.IsValid)
+			{
+				ModelState.AddModelError("Error", "Invalid data");
+				return View(model);
+			}
 
-            Database.Gallery.Update(model);
-            Database.SaveChanges();
+			Database.Gallery.Update(model);
+			Database.SaveChanges();
 
-            return RedirectToAction("Index");
-        }
+			return RedirectToAction("Index");
+		}
 
-        [HttpGet]
-        public IActionResult Delete(Guid id)
-        {
-            if (Database.Gallery.Find(id) is ImageModel model)
-                return View(model);
-            else
-                return NotFound();
-        }
+		[HttpGet]
+		public IActionResult Delete(string id) =>
+			View(Database.Gallery.Find(id));
 
-        [HttpPost]
-        public IActionResult Delete(ImageModel model)
-        {
-            Database.Gallery.Remove(model);
-            Database.SaveChanges();
+		[HttpPost]
+		public IActionResult Delete(ImageModel model)
+		{
+			Database.Gallery.Remove(model);
+			Database.SaveChanges();
 
-            System.IO.File.SetAttributes(Directory.GetCurrentDirectory() + "/wwwroot/images/Gallery/" + model?.FileName, FileAttributes.Normal);
-            System.IO.File.Delete(Directory.GetCurrentDirectory() + "/wwwroot/images/Gallery/" + model?.FileName);
+			System.IO.File.SetAttributes(Directory.GetCurrentDirectory() + "/wwwroot/images/Gallery/" + model?.FileName, FileAttributes.Normal);
+			System.IO.File.Delete(Directory.GetCurrentDirectory() + "/wwwroot/images/Gallery/" + model?.FileName);
 
-            return RedirectToAction("Index");
-        }
+			return RedirectToAction("Index");
+		}
 
-        [HttpGet]
-        public IActionResult Upload() =>
-            View();
+		[HttpGet]
+		public IActionResult Upload() =>
+			View(model: null);
 
-        [HttpPost]
-        public IActionResult Upload(ArtworkModel model)
-        {
-            if (!ModelState.IsValid)
-            {
-                ModelState.AddModelError("Error", "Invalid data");
-                return View(model);
-            }
+		[HttpPost]
+		public IActionResult Upload(ImageModel model, IFormFile file)
+		{
+			if (model == null)
+				throw new ArgumentNullException(nameof(model));
+			if (file == null)
+				throw new ArgumentNullException(nameof(file));
 
-            using (var stream = System.IO.File.Create(Directory.GetCurrentDirectory() + "/wwwroot/images/Gallery/" + model?.File.FileName))
-                model.File.CopyTo(stream);
+			model.FileName = file.FileName;
 
-            ImageModel image = new ImageModel
-            {
-                EnglishTitle = model.EnglishTitle,
-                RussianTitle = model.RussianTitle,
-                EnglishDescription = model.EnglishDescription,
-                RussianDescription = model.RussianDescription,
-                CreationDate = model.CreationDate,
-                FileName = model.File.FileName
-            };
+			if (!ModelState.IsValid)
+			{
+				ModelState.AddModelError("Error", "Invalid data");
+				return View(model);
+			}
 
-            Database.Gallery.Add(image);
-            Database.SaveChanges();
+			using (var stream = System.IO.File.Create(Directory.GetCurrentDirectory() + "/wwwroot/images/Gallery/" + file.FileName))
+				file.CopyTo(stream);
 
-            return RedirectToAction("Index");
-        }
-    }
+			Database.Gallery.Add(model);
+			Database.SaveChanges();
+
+			return RedirectToAction("Index");
+		}
+	}
 }

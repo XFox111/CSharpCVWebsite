@@ -7,87 +7,116 @@ using MyWebsite.Models.Databases;
 using System;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 
 namespace MyWebsite.Areas.Admin.Controllers
 {
-    [Area("Admin")]
-    [Authorize]
-    public class BadgesController : ExtendedController
-    {
-        public BadgesController(DatabaseContext context) : base(context) { }
+	[Area("Admin")]
+	[Authorize]
+	public class BadgesController : ExtendedController
+	{
+		public BadgesController(DatabaseContext context) : base(context) { }
 
-        public IActionResult Index() =>
-            View(Database.Badges);
+		[HttpGet]
+		public IActionResult Index() =>
+			View(Database.Badges);
 
-        [HttpGet]
-        public IActionResult Edit(string id) =>
-            View(Database.Badges.Find(id));
+		[HttpPost]
+		public IActionResult Index(IFormFile badgeImage)
+		{
+			if (badgeImage == null)
+				throw new ArgumentNullException(nameof(badgeImage));
 
-        [HttpPost]
-        public IActionResult Edit(BadgeModel model, IFormFile file = null)
-        {
-            if (model == null)
-                throw new ArgumentNullException(nameof(model));
+			System.Drawing.Image image = System.Drawing.Image.FromStream(badgeImage.OpenReadStream());
+			if (System.IO.File.Exists(Directory.GetCurrentDirectory() + "/wwwroot/images/Badges/" + badgeImage.FileName))
+				ModelState.AddModelError("Error", $"Badge image with such name ({badgeImage.FileName}) is already esists");
+			else if (image.Width != 64 || image.Height != 64 || !badgeImage.FileName.EndsWith(".PNG", true, CultureInfo.InvariantCulture))
+				ModelState.AddModelError("Error", "The file must be EXACTLY 64x64 pixels PNG image");
+			else
+				using (var stream = System.IO.File.Create(Directory.GetCurrentDirectory() + "/wwwroot/images/Badges/" + badgeImage.FileName))
+					badgeImage.CopyTo(stream);
 
-            if (file != null)
-                UploadFile(file, model);
+			return View(Database.Badges);
+		}
 
-            Database.Badges.Update(model);
-            Database.SaveChanges();
+		[HttpGet]
+		public IActionResult Edit(string id) =>
+			View(Database.Badges.Find(id));
 
-            return RedirectToAction("Index");
-        }
+		[HttpPost]
+		public IActionResult Edit(BadgeModel model)
+		{
+			if (model == null)
+				throw new ArgumentNullException(nameof(model));
 
-        [HttpGet]
-        public IActionResult Delete(string id) =>
-            View(Database.Badges.Find(id));
+			if (!ModelState.IsValid)
+			{
+				ModelState.AddModelError("Error", "Invalid data");
+				return View(model);
+			}
 
-        [HttpPost]
-        public IActionResult Delete(BadgeModel model)
-        {
-            Database.Badges.Remove(model);
-            Database.SaveChanges();
+			Database.Badges.Update(model);
+			Database.SaveChanges();
 
-            return RedirectToAction("Index");
-        }
+			return RedirectToAction("Index");
+		}
 
-        [HttpGet]
-        public IActionResult Create() =>
-            View();
+		[HttpGet]
+		public IActionResult Delete(string id) =>
+			View(Database.Badges.Find(id));
 
-        [HttpPost]
-        public IActionResult Create(BadgeModel model, IFormFile file = null)
-        {
-            if (model == null)
-                throw new ArgumentNullException(nameof(model));
+		[HttpPost]
+		public IActionResult Delete(BadgeModel model)
+		{
+			if (Database.Projects.ToList().Any(i => i.Badges.Contains(model.Name, StringComparison.InvariantCulture)))
+			{
+				ModelState.Clear();
+				ModelState.AddModelError("Error", "Remove badge references from projects descriptions in order to delete the badge");
+				return View(Database.Badges.Find(model?.Name));
+			}
 
-            if (file != null)
-                return UploadFile(file, model);
+			Database.Badges.Remove(model);
+			Database.SaveChanges();
 
-            if (!ModelState.IsValid)
-            {
-                ModelState.AddModelError("Error", "Invalid data");
-                return View(model);
-            }
+			return RedirectToAction("Index");
+		}
 
-            Database.Badges.Add(model);
-            Database.SaveChanges();
+		[HttpGet]
+		public IActionResult Create() =>
+			View(model: null);
 
-            return RedirectToAction("Index");
-        }
+		[HttpPost]
+		public IActionResult Create(BadgeModel model)
+		{
+			if (model == null)
+				throw new ArgumentNullException(nameof(model));
 
-        private IActionResult UploadFile(IFormFile file, BadgeModel model)
-        {
-            System.Drawing.Image image = System.Drawing.Image.FromStream(file.OpenReadStream());
-            if (image.Width != 64 || image.Height != 64 || !file.FileName.EndsWith(".PNG", true, CultureInfo.InvariantCulture))
-            {
-                ViewData["UploadException"] = "error";
-                return View(model);
-            }
-            using (var stream = System.IO.File.Create(Directory.GetCurrentDirectory() + "/wwwroot/images/Badges/" + file.FileName))
-                file.CopyTo(stream);
+			if (!ModelState.IsValid)
+			{
+				ModelState.AddModelError("Error", "Invalid data");
+				return View(model);
+			}
 
-            return Redirect(Request.Path.Value);
-        }
-    }
+			if (Database.Badges.Any(i => i.Name == model.Name))
+			{
+				ModelState.AddModelError("Error", $"Badge '{model.Name}' is already exists");
+				return View(model);
+			}
+
+			Database.Badges.Add(model);
+			Database.SaveChanges();
+
+			return RedirectToAction("Index");
+		}
+
+		[HttpGet]
+		public IActionResult DeleteBadgeImage(string id)
+		{
+			string path = Directory.GetCurrentDirectory() + "/wwwroot/images/Badges/" + id;
+			if (System.IO.File.Exists(path))
+				System.IO.File.Delete(path);
+
+			return RedirectToAction("Index");
+		}
+	}
 }

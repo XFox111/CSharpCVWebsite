@@ -1,49 +1,61 @@
-﻿@model ArtworkModel
+﻿@model ImageModel
 @{
-    ViewData["Title"] = "Upload artwork";
+	ViewData["Title"] = "Upload artwork";
 }
 
 <header>
-    <p>&#xE760; <a asp-action="Index">Back to the list</a></p>
-    <h1>Upload an artwork</h1>
+	&#xE760; <a asp-action="Index">Back to the list</a>
+	<h1>Upload an artwork</h1>
 </header>
 
 <article>
-    <form asp-action="Upload">
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        <div>
-            <label asp-for="EnglishTitle"></label>
-            <input asp-for="EnglishTitle" type="text" />
-            <span asp-validation-for="EnglishTitle" class="text-danger"></span>
-        </div>
-        <div>
-            <label asp-for="RussianTitle"></label>
-            <input asp-for="RussianTitle" type="text" />
-            <span asp-validation-for="RussianTitle" class="text-danger"></span>
-        </div>
-        <div>
-            <label asp-for="EnglishDescription"></label>
-            <textarea asp-for="EnglishDescription"></textarea>
-            <span asp-validation-for="EnglishDescription" class="text-danger"></span>
-        </div>
-        <div>
-            <label asp-for="RussianDescription"></label>
-            <textarea asp-for="RussianDescription"></textarea>
-            <span asp-validation-for="RussianDescription" class="text-danger"></span>
-        </div>
-        <div>
-            <label asp-for="CreationDate"></label>
-            <input asp-for="CreationDate" type="date" />
-            <span asp-validation-for="CreationDate" class="text-danger"></span>
-        </div>
-        <div>
-            <label asp-for="File"></label>
-            <input type="file" accept="image" asp-for="File" />
-            <span asp-validation-for="File" class="text-danger"></span>
-        </div>
+	<form asp-action="Upload" enctype="multipart/form-data">
+		<div>
+			<label for="file">Artwork file</label>
+			<input type="file" accept="image" name="File" required />
+		</div>
+		<div asp-validation-summary="All" class="text-danger"></div>
+		<div>
+			<label asp-for="EnglishTitle"></label>
+			<input asp-for="EnglishTitle" type="text" required />
+			<span asp-validation-for="EnglishTitle" class="text-danger"></span>
+		</div>
+		<div>
+			<label asp-for="RussianTitle"></label>
+			<input asp-for="RussianTitle" type="text" />
+			<span asp-validation-for="RussianTitle" class="text-danger"></span>
+		</div>
+		<div>
+			<label asp-for="EnglishDescription"></label>
+			<textarea asp-for="EnglishDescription"></textarea>
+			<span asp-validation-for="EnglishDescription" class="text-danger"></span>
+		</div>
+		<div>
+			<label asp-for="RussianDescription"></label>
+			<textarea asp-for="RussianDescription"></textarea>
+			<span asp-validation-for="RussianDescription" class="text-danger"></span>
+		</div>
+		<div>
+			<label asp-for="CreationDate"></label>
+			<input asp-for="CreationDate" type="date" required />
+			<span asp-validation-for="CreationDate" class="text-danger"></span>
+		</div>
 
-        <input type="submit" value="Upload" class="btn" />
-    </form>
+		<input type="submit" value="Upload" />
+	</form>
 </article>
 
-<link type="text/css" rel="stylesheet" href="~/css/Admin.css" />
+@section Imports
+{
+	<style type="text/css">
+		form
+		{
+			max-width: initial;
+		}
+
+		textarea
+		{
+			max-height: 250px;
+		}
+	</style>
+}

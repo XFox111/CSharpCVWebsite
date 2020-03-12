@@ -8,6 +8,9 @@ namespace MyWebsite.ViewModels
 	{
 		public ResumeModel Resume { get; }
 		public ResumeViewModel(DatabaseContext context, CultureInfo language) : base(context) =>
-			Resume = context.Resume.Find(language?.Name) ?? context.Resume.Find("en-US");
+			Resume = context.Resume.Find(language?.TwoLetterISOLanguageName) ?? context.Resume.Find("en");
+
+		public ResumeViewModel(ResumeModel model, DatabaseContext context) : base(context) =>
+			Resume = model;
 	}
 }

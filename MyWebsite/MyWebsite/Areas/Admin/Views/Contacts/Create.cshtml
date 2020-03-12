@@ -1,55 +1,52 @@
 ﻿@model MyWebsite.Models.LinkModel
-
 @{
-    ViewData["Title"] = "Create link";
+	ViewData["Title"] = "Create link";
 }
 
 <header>
-    <p>&#xE760; <a asp-action="Index">Back to the list</a></p>
-    <h1>Create link</h1>
+	&#xE760; <a asp-action="Index">Back to the list</a>
+	<h1>Create link</h1>
 </header>
 
 <article>
-    <form asp-action="Create">
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        <div>
-            <label asp-for="Name"></label>
-            <input asp-for="Name" type="text" />
-            <span asp-validation-for="Name" class="text-danger"></span>
-        </div>
-        <div>
-            <label asp-for="Order"></label>
-            <input asp-for="Order" type="number" />
-            <span asp-validation-for="Order" class="text-danger"></span>
-        </div>
-        <div>
-            <label asp-for="EnglishTitle"></label>
-            <input asp-for="EnglishTitle" type="text" />
-            <span asp-validation-for="EnglishTitle" class="text-danger"></span>
-        </div>
-        <div>
-            <label asp-for="RussianTitle"></label>
-            <input asp-for="RussianTitle" type="text" />
-            <span asp-validation-for="RussianTitle" class="text-danger"></span>
-        </div>
-        <div>
-            <label asp-for="Username"></label>
-            <input asp-for="Username" type="text" />
-            <span asp-validation-for="Username" class="text-danger"></span>
-        </div>
-        <div>
-            <label asp-for="Url"></label>
-            <input asp-for="Url" type="text" />
-            <span asp-validation-for="Url" class="text-danger"></span>
-        </div>
+	<form asp-action="Create">
+		<div asp-validation-summary="All" class="text-danger"></div>
+		<input asp-for="Order" type="number" hidden value="-1" />
+		<div>
+			<label asp-for="Name"></label>
+			<a target="_blank" class="comment" href="//socicon.com/icons">// Socicon naming cheatsheet</a>
+			<input asp-for="Name" type="text" required />
+			<span asp-validation-for="Name" class="text-danger"></span>
+		</div>
+		<div>
+			<label asp-for="EnglishTitle"></label>
+			<input asp-for="EnglishTitle" type="text" required />
+			<span asp-validation-for="EnglishTitle" class="text-danger"></span>
+		</div>
+		<div>
+			<label asp-for="RussianTitle"></label>
+			<input asp-for="RussianTitle" type="text" />
+			<span asp-validation-for="RussianTitle" class="text-danger"></span>
+		</div>
+		<div>
+			<label asp-for="Username"></label>
+			<input asp-for="Username" type="text" required />
+			<span asp-validation-for="Username" class="text-danger"></span>
+		</div>
+		<div>
+			<label asp-for="Url"></label>
+			<input asp-for="Url" type="text" required />
+			<span asp-validation-for="Url" class="text-danger"></span>
+		</div>
+		<div>
+			<input type="checkbox" class="checkbox" asp-for="CanContactMe" />
+			<label asp-for="CanContactMe"></label> <br />
+		</div>
+		<div>
+			<input type="checkbox" class="checkbox" asp-for="DisplayInFooter" />
+			<label asp-for="DisplayInFooter"></label>
+		</div>
 
-        <label asp-for="CanContactMe"></label>
-        <input type="checkbox" class="checkbox" asp-for="CanContactMe" /> <br />
-        <label asp-for="DisplayInFooter"></label>
-        <input type="checkbox" class="checkbox" asp-for="DisplayInFooter" />
-
-        <input type="submit" value="Create" class="btn" />
-    </form>
+		<input type="submit" value="Create" />
+	</form>
 </article>
-
-<link type="text/css" rel="stylesheet" href="~/css/Admin.css" />

@@ -1,62 +1,159 @@
 ﻿@model IEnumerable<MyWebsite.Models.BadgeModel>
 @{
-    ViewData["Title"] = "Badges list";
+	ViewData["Title"] = "Badges list";
 }
 
 <header>
-    <p>&#xE760; <a asp-action="Index" asp-controller="Admin" asp-area="">Back to main menu</a></p>
-    <h1>Project badges list</h1>
-    <p>
-        <a asp-action="Create" class="comment">// + Create New</a>
-    </p>
+	&#xE760; <a asp-action="Index" asp-controller="Admin" asp-area="">Back to main menu</a>
+	<h1>Project badges list</h1>
+	<a asp-action="Create" class="comment">// + Create New</a>
 </header>
 
 <article>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Preview</th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Name)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.EnglishDescription)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.RussianDescription)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Image)
-                </th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>
-                        <div class="badge" style="background-image: url(/images/Badges/@(item.Image).png)" title="@(item.Description)"></div>
-                    </td>
-                    <td>@item.Name</td>
-                    <td>@item.EnglishDescription</td>
-                    <td>@item.RussianDescription</td>
-                    <td>@item.Image</td>
-                    <td>
-                        <a asp-action="Edit" asp-route-id="@item.Name">Edit</a> |
-                        <a asp-action="Delete" asp-route-id="@item.Name">Delete</a>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
+	<table>
+		<thead>
+			<tr>
+				<th>Preview</th>
+				<th class="hide-l2">
+					@Html.DisplayNameFor(model => model.Name)
+				</th>
+				<th>
+					@Html.DisplayNameFor(model => model.EnglishDescription)
+				</th>
+				<th class="hide-l2">
+					@Html.DisplayNameFor(model => model.RussianDescription)
+				</th>
+				<th class="hide-l1">
+					@Html.DisplayNameFor(model => model.Image)
+				</th>
+				<th>Actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var item in Model)
+			{
+				<tr>
+					<td>
+						<div class="badge" style="background-image: url(/images/Badges/@(item.Image).png)" title="@(item.Description)"></div>
+					</td>
+					<td class="hide-l2">@item.Name</td>
+					<td>@item.EnglishDescription</td>
+					<td class="hide-l2">@item.RussianDescription</td>
+					<td class="hide-l1">@item.Image</td>
+					<td>
+						<a asp-action="Edit" asp-route-id="@item.Name">Edit</a> |
+						<a asp-action="Delete" asp-route-id="@item.Name">Delete</a>
+					</td>
+				</tr>
+			}
+		</tbody>
+	</table>
 </article>
 
-<link type="text/css" rel="stylesheet" href="~/css/Admin.css" />
-<style type="text/css">
-    .badge {
-        height: 25px;
-        width: 25px;
-        background-size: contain;
-    }
-</style>
+<header>
+	<hr />
+	<h1>Badge image files</h1>
+</header>
+
+<article>
+	<h2>Upload new badge image</h2>
+	<form method="post" enctype="multipart/form-data">
+		<div asp-validation-summary="All" class="text-danger"></div>
+		<label for="badgeImage">Badge image file</label>
+		<input name="badgeImage" type="file" required />
+		<span>
+			<b>Note:</b> Image should be exactly 64x64 pixels PNG file
+		</span>
+		<br />
+		<button>Upload</button>
+	</form>
+
+	<h2>Available badge images</h2>
+	<table class="files-table">
+		<thead>
+			<tr>
+				<th>Preview</th>
+				<th>File name</th>
+				<th>Actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (string path in System.IO.Directory.GetFiles(System.IO.Directory.GetCurrentDirectory() + "/wwwroot/images/Badges"))
+			{
+				string file = System.IO.Path.GetFileName(path);
+				<tr>
+					<td>
+						<div class="badge" style="background-image: url(/images/Badges/@(file))" title="@(file)"></div>
+					</td>
+					<td>@file</td>
+					<td>
+						@if (Model.Any(i => i.Image + ".png" == file))
+						{
+							<span class="hide-l2" title="Delete or edit correlated badges linked with the image in order to delete it">No available actions</span>
+						}
+						else
+						{
+							<a asp-action="DeleteBadgeImage" asp-route-id="@file" onclick="return ConfirmDetetion('@file')">Delete</a>
+						}
+					</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+</article>
+
+
+
+@section Imports
+{
+	<style type="text/css">
+		.badge
+		{
+			height: 25px;
+			width: 25px;
+			background-size: contain;
+		}
+
+		.files-table
+		{
+			max-width: 500px;
+		}
+
+		td span
+		{
+			color: gray;
+			cursor: help;
+		}
+		td span:after
+		{
+			content: " (?)";
+		}
+	</style>
+	<script type="text/javascript">
+		function ConfirmDetetion(filename)
+		{
+			return confirm("Are you really want to delete \"" + filename + "\"? This action cannot be undone");
+		}
+
+		function Upload()
+		{
+			var form = document.createElement("form");
+			form.method = "post";
+			form.hidden = true;
+
+			document.body.appendChild(form);
+
+			var input = document.createElement("input");
+			input.type = "file";
+			input.name = "badgeImage";
+			input.click();
+
+			input.onchange = function ()
+			{
+				form.appendChild(input);
+
+				form.submit();
+			}
+		}
+	</script>
+}

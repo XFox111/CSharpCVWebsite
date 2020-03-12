@@ -1,37 +1,41 @@
 ﻿@model MyWebsite.Models.BadgeModel
 
 @{
-    ViewData["Title"] = "Delete badge";
+	ViewData["Title"] = "Delete badge";
 }
 
 <header>
-    <p>&#xE760; <a asp-action="Index">Back to the list</a></p>
-    <h1>Delete project badge</h1>
-    <h3>Are you sure you want to delete this?</h3>
+	&#xE760; <a asp-action="Index">Back to the list</a>
+	<h1>Delete project badge</h1>
+	<h3>Are you sure you want to delete this?</h3>
 </header>
 
 <article>
-    <p>
-        <b>@Html.DisplayNameFor(model => model.Name):</b> @Model.Name<br />
-        <b>@Html.DisplayNameFor(model => model.EnglishDescription):</b> @Model.EnglishDescription<br />
-        <b>@Html.DisplayNameFor(model => model.RussianDescription):</b> @Model.RussianDescription<br />
-        <b>@Html.DisplayNameFor(model => model.Image):</b> @(Model.Image).png<br />
+	<div asp-validation-summary="All" class="text-danger"></div>
+	<p>
+		<b>@Html.DisplayNameFor(model => model.Name):</b> @Model.Name<br />
+		<b>@Html.DisplayNameFor(model => model.EnglishDescription):</b> @Model.EnglishDescription<br />
+		<b>@Html.DisplayNameFor(model => model.RussianDescription):</b> @Model.RussianDescription<br />
+		<b>@Html.DisplayNameFor(model => model.Image):</b> @(Model.Image).png<br />
 
-        <b>Preview:</b>
-        <div class="badge" style="background-image: url('/images/Badges/@(Model.Image).png')" title="@(Model.Description)"></div>
-    </p>
+		<b>Preview:</b>
+		<div class="badge" style="background-image: url('/images/Badges/@(Model.Image).png')" title="@(Model.Description)"></div>
+	</p>
 
-    <form asp-action="Delete">
-        <input hidden asp-for="Name" />
-        <input type="submit" value="Delete" class="btn-danger" />
-    </form>
+	<form asp-action="Delete">
+		<input hidden asp-for="Name" />
+		<input type="submit" value="Delete" required />
+	</form>
 </article>
 
-<link type="text/css" rel="stylesheet" href="~/css/Admin.css" />
-<style type="text/css">
-    .badge {
-        height: 50px;
-        width: 50px;
-        background-size: contain;
-    }
-</style>
+@section Imports
+{
+	<style type="text/css">
+		.badge
+		{
+			height: 50px;
+			width: 50px;
+			background-size: contain;
+		}
+	</style>
+}

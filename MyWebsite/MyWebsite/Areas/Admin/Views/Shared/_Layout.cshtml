@@ -1,0 +1,74 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<title>@ViewData["Title"] - Admin pangel - XFox111.NET</title>
+	<link rel="shortcut icon" href="~/favicon.ico" type="image/x-icon" />
+
+	<link rel="stylesheet" type="text/css" href="~/css/Style.css" />
+	<link rel="stylesheet" type="text/css" href="~/css/Fonts.css" />
+	<link rel="stylesheet" href="https://s3.amazonaws.com/icomoon.io/114779/Socicon/style.css?u8vidh" />
+	<link href="~/css/Admin.css" type="text/css" rel="stylesheet" />
+
+	<script type="text/javascript">
+		function ToggleMenu()
+		{
+			var menu = document.getElementById("main-menu");
+
+			if (menu.style.display == "none")
+				menu.style.display = "initial";
+			else
+				menu.style.display = "none";
+		}
+	</script>
+
+	@RenderSection("Imports", false)
+
+	@{
+		if (IsSectionDefined("OpenGraph"))
+			RenderSection("OpenGraph");
+		else
+		{
+			<meta name="author" content="Michael 'XFox' Gordeev" />
+			<meta name="description" content="Hi, my name is Michael. I'm C# Developer and this is my personal website. Here you can find info about me, my projects and more. Check it out!" />
+
+			<meta property="og:type" content="website" />
+			<meta property="og:site_name" content="XFox111.NET" />
+			<meta property="og:url" content="//XFox111.NET/" />
+			<meta property="og:locale" content="en_US" />
+			<meta property="og:image" content="/images/me.png" />
+			<meta property="og:description" content="Hi, my name is Michael. I'm C# Developer and this is my personal website. Here you can find info about me, my projects and more. Check it out!" />
+			<meta property="og:title" content="Michael 'XFox' Gordeev - Personal website" />
+		}
+	}
+
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+<body>
+	<nav>
+		<a asp-controller="Home" asp-action="Index" asp-area="">XFox111.NET</a>
+
+		<menu type="toolbar" id="main-menu" style="display:none">
+			<li><a asp-area="" asp-controller="Home" asp-action="Index">AboutMe();</a></li>
+			<li><a href="//xfox111.blogspot.com/" target="_blank">MyBlog();</a></li>
+			<li><a asp-area="" asp-controller="Resume" asp-action="Index">Resume();</a></li>
+			<li><a asp-area="" asp-controller="Projects" asp-action="Index">Projects();</a></li>
+			<li><a asp-area="" asp-controller="Gallery" asp-action="Index">Arts();</a></li>
+			<li><a asp-area="" asp-controller="Contacts" asp-action="Index">Contacts();</a></li>
+		</menu>
+
+		<div>
+			<a asp-controller="Home" asp-action="SwitchLanguage" lang="ru">РУС &#xE12B;</a>
+			<a id="menu-toggle" onclick="ToggleMenu();">&#xE700;</a>
+		</div>
+	</nav>
+
+	<main onclick="document.querySelector('#main-menu').style.display = 'none'">
+		@RenderBody()
+	</main>
+
+	<footer>
+		<span class="comment">// Copyright &copy;@(DateTime.Today.Year) Michael "XFox" Gordeev</span>
+	</footer>
+</body>
+</html>

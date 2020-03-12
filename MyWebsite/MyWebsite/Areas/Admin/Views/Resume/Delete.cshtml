@@ -1,24 +1,22 @@
 ﻿@model MyWebsite.Models.ResumeModel
 @{
-    ViewData["Title"] = "Delete resume";
+	ViewData["Title"] = "Delete " + (ViewData["Caption"] ?? "resume");
 }
 
 <header>
-    <p>&#xE760; <a asp-action="Index">Back to the list</a></p>
-    <h1>Delete resume</h1>
-    <h3>Are you sure you want to delete this?</h3>
+	&#xE760; <a asp-action="Index">Back to the list</a>
+	<h1>Delete @(ViewData["Caption"] ?? "resume")</h1>
+	<h3>Are you sure you want to delete this?</h3>
 </header>
 
 <article>
-    <p class="form-group">
-        <b>@Html.DisplayNameFor(model => model.Language):</b> @(new System.Globalization.CultureInfo(Model.Language).DisplayName)<br />
-        <b>@Html.DisplayNameFor(model => model.LastUpdate):</b> @Model.LastUpdate<br />
-    </p>
+	<p>
+		<b>@Html.DisplayNameFor(model => model.Language):</b> @(new System.Globalization.CultureInfo(Model.Language).DisplayName)<br />
+		<b>@Html.DisplayNameFor(model => model.LastUpdate):</b> @Model.LastUpdate<br />
+	</p>
 
-    <form asp-action="Delete">
-        <input hidden asp-for="Language" />
-        <input type="submit" value="Delete" class="btn-danger" />
-    </form>
+	<form method="post">
+		<input hidden asp-for="Language" />
+		<input type="submit" value="Delete" required />
+	</form>
 </article>
-
-<link type="text/css" rel="stylesheet" href="~/css/Admin.css" />

@@ -1,0 +1,23 @@
+﻿@font-face
+{
+	font-family: 'Consolas';
+	src: local("Consolas"), url("/fonts/Consolas/consolas.eot"), url("/fonts/Consolas/consolas.eot?#iefix") format("embedded-opentype"), url("/fonts/Consolas/consolas.otf") format("opentype"), url("/fonts/Consolas/consolas.svg") format("svg"), url("/fonts/Consolas/consolas.ttf") format("truetype"), url("/fonts/Consolas/consolas.woff") format("woff"), url("/fonts/Consolas/consolas.woff2") format("woff2");
+}
+
+@font-face
+{
+	font-family: 'SegoeMDL2Assets';
+	src: local("Segoe MDL2 Assets"), url("/fonts/Segoe MDL2 Assets/segoeMLD2assets.eot"), url("/fonts/Segoe MDL2 Assets/segoeMLD2assets.eot?#iefix") format("embedded-opentype"), url("/fonts/Segoe MDL2 Assets/segoeMLD2assets.otf") format("opentype"), url("/fonts/Segoe MDL2 Assets/segoeMLD2assets.svg") format("svg"), url("/fonts/Segoe MDL2 Assets/segoeMLD2assets.ttf") format("truetype"), url("/fonts/Segoe MDL2 Assets/segoeMLD2assets.woff") format("woff"), url("/fonts/Segoe MDL2 Assets/segoeMLD2assets.woff2") format("woff2");
+}
+
+@font-face
+{
+	font-family: 'Calibri';
+	src: local("Calibri"), url("/fonts/Calibri/calibri.eot"), url("/fonts/Calibri/calibri.eot?#iefix") format("embedded-opentype"), url("/fonts/Calibri/calibri.otf") format("opentype"), url("/fonts/Calibri/calibri.svg") format("svg"), url("/fonts/Calibri/calibri.ttf") format("truetype"), url("/fonts/Calibri/calibri.woff") format("woff"), url("/fonts/Calibri/calibri.woff2") format("woff2");
+}
+
+@font-face
+{
+	font-family: 'SegoeUISymbol';
+	src: local("Segoe UI Symbol"), url("/fonts/Segoe UI Symbol/segoeUISymbol.eot"), url("/fonts/Segoe UI Symbol/segoeUISymbol.eot?#iefix") format("embedded-opentype"), url("/fonts/Segoe UI Symbol/segoeUISymbol.otf") format("opentype"), url("/fonts/Segoe UI Symbol/segoeUISymbol.svg") format("svg"), url("/fonts/Segoe UI Symbol/segoeUISymbol.ttf") format("truetype"), url("/fonts/Segoe UI Symbol/segoeUISymbol.woff") format("woff"), url("/fonts/Segoe UI Symbol/segoeUISymbol.woff2") format("woff2");
+}

@@ -4,24 +4,22 @@
 }
 
 <header>
-	<p>
-		@if (Model.Previous != null)
-		{
-			@:&#xE760;
-			<a asp-action="Details" asp-route-id="@Model.Previous">Previous</a>
-			@:|
-		}
-		&#xE8B9; <a asp-action="Index" asp-controller="Gallery">All artworks</a>
-		@if (Model.Next != null)
-		{
-			@:| &#xE761;
-			<a asp-action="Details" asp-route-id="@Model.Next">Next</a>
-		}
-	</p>
+	@if (Model.Previous != null)
+	{
+		@:&#xE760;
+		<a asp-action="Details" asp-route-id="@Model.Previous">Previous</a>
+		@:|
+	}
+	&#xE8B9; <a asp-action="Index" asp-controller="Gallery">All artworks</a>
+	@if (Model.Next != null)
+	{
+		@:| &#xE761;
+		<a asp-action="Details" asp-route-id="@Model.Next">Next</a>
+	}
 </header>
 
 <article class="image-overview-block">
-	<img src="~/images/Gallery/@Model.Current?.FileName" onclick="ToggleImageSize();" id="image" />
+	<img src="~/images/Gallery/@Model.Current?.FileName" onclick="ToggleImageSize();" />
 
 	<div>
 		<h1>@Model.Current?.Title</h1>
@@ -32,13 +30,14 @@
 	</div>
 </article>
 
-@section Imports {
+@section Imports 
+{
 	<link rel="stylesheet" type="text/css" href="~/css/Gallery.css" />
 
 	<script type="text/javascript">
 		function ToggleImageSize()
 		{
-			var image = document.getElementById("image");
+			var image = document.querySelector("img");
 
 			if (image.style.cursor == "zoom-out")
 				image.style = "";

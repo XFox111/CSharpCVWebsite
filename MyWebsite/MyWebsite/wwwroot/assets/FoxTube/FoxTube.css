@@ -1,19 +1,4 @@
-﻿/* Declaring fonts */
-@font-face
-{
-	font-family: 'Consolas';
-	src: url("/fonts/Consolas/consolas.eot");
-	src: url("/fonts/Consolas/consolas.eot?#iefix") format("embedded-opentype"), url("/fonts/Consolas/consolas.otf") format("opentype"), url("/fonts/Consolas/consolas.svg") format("svg"), url("/fonts/Consolas/consolas.ttf") format("truetype"), url("/fonts/Consolas/consolas.woff") format("woff"), url("/fonts/Consolas/consolas.woff2") format("woff2");
-}
-
-@font-face
-{
-	font-family: 'Segoe MDL2 Assets';
-	src: url("/fonts/Segoe MDL2 Assets/segoeMLD2assets.eot");
-	src: url("/fonts/Segoe MDL2 Assets/segoeMLD2assets.eot?#iefix") format("embedded-opentype"), url("/fonts/Segoe MDL2 Assets/segoeMLD2assets.otf") format("opentype"), url("/fonts/Segoe MDL2 Assets/segoeMLD2assets.svg") format("svg"), url("/fonts/Segoe MDL2 Assets/segoeMLD2assets.ttf") format("truetype"), url("/fonts/Segoe MDL2 Assets/segoeMLD2assets.woff") format("woff"), url("/fonts/Segoe MDL2 Assets/segoeMLD2assets.woff2") format("woff2");
-}
-
-/* Header styles */
+﻿/* Header styles */
 nav
 {
 	display: grid;
@@ -70,40 +55,6 @@ menu
 		display: block;
 	}
 
-/* Adaptive code */
-@media only screen and (min-width: 1150px)
-{
-	menu
-	{
-		display: initial !important;
-		grid-row: 1;
-		grid-column: 3;
-		margin: 0px;
-		align-self: end;
-		margin-bottom: 3px;
-	}
-
-		menu li
-		{
-			display: inline-block;
-			margin-right: 10px;
-			margin-top: 0px;
-		}
-
-	#menu-toggle
-	{
-		display: none;
-	}
-}
-
-@media only screen and (max-width: 700px) {
-	body
-	{
-		margin-top: 112px !important;
-		height: calc(100vh - 112px) !important;
-	}
-}
-
 /* Body styles */
 html
 {
@@ -112,7 +63,7 @@ html
 
 body
 {
-	font-family: 'Consolas', 'Segoe MDL2 Assets';
+	font-family: 'Consolas', 'SegoeMDL2Assets';
 	overflow: auto;
 	margin: 0px;
 	margin-top: 84px;
@@ -123,7 +74,7 @@ body
 
 main
 {
-	font-family: 'Calibri', 'Segoe MDL2 Assets';
+	font-family: 'Calibri', 'SegoeMDL2Assets';
 }
 
 .back
@@ -152,6 +103,18 @@ article
 	color: #57a64a !important;
 }
 
+.video
+{
+	max-width: 560px;
+	height: 315px;
+	width: 100%;
+}
+
+*[hidden]
+{
+	display: none;
+}
+
 /* Footer styles */
 footer
 {
@@ -172,3 +135,56 @@ footer
 		{
 			color: orangered;
 		}
+
+/* Adaptive code */
+@media only screen and (min-width: 1150px)
+{
+	menu
+	{
+		display: initial !important;
+		grid-row: 1;
+		grid-column: 3;
+		margin: 0px;
+		align-self: end;
+		margin-bottom: 3px;
+	}
+
+		menu li
+		{
+			display: inline-block;
+			margin-right: 10px;
+			margin-top: 0px;
+		}
+
+	#menu-toggle
+	{
+		display: none;
+	}
+}
+
+@media only screen and (max-width: 700px) and (min-width: 480px)
+{
+	body
+	{
+		margin-top: 112px !important;
+		height: calc(100vh - 112px) !important;
+	}
+}
+
+@media only screen and (max-width: 480px)
+{
+	nav > a > span
+	{
+		display: none;
+	}
+
+	.video
+	{
+		height: 240px !important;
+	}
+}
+
+nav > p > a:nth-last-child(2)
+{
+	visibility: hidden;
+}

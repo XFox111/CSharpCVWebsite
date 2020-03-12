@@ -1,19 +1,4 @@
-﻿/* Declaring fonts */
-@font-face
-{
-	font-family: 'Consolas';
-	src: url("/fonts/Consolas/consolas.eot");
-	src: url("/fonts/Consolas/consolas.eot?#iefix") format("embedded-opentype"), url("/fonts/Consolas/consolas.otf") format("opentype"), url("/fonts/Consolas/consolas.svg") format("svg"), url("/fonts/Consolas/consolas.ttf") format("truetype"), url("/fonts/Consolas/consolas.woff") format("woff"), url("/fonts/Consolas/consolas.woff2") format("woff2");
-}
-
-@font-face
-{
-	font-family: 'Segoe MDL2 Assets';
-	src: url("/fonts/Segoe MDL2 Assets/segoeMLD2assets.eot");
-	src: url("/fonts/Segoe MDL2 Assets/segoeMLD2assets.eot?#iefix") format("embedded-opentype"), url("/fonts/Segoe MDL2 Assets/segoeMLD2assets.otf") format("opentype"), url("/fonts/Segoe MDL2 Assets/segoeMLD2assets.svg") format("svg"), url("/fonts/Segoe MDL2 Assets/segoeMLD2assets.ttf") format("truetype"), url("/fonts/Segoe MDL2 Assets/segoeMLD2assets.woff") format("woff"), url("/fonts/Segoe MDL2 Assets/segoeMLD2assets.woff2") format("woff2");
-}
-
-/* Header */
+﻿/* Header */
 nav
 {
 	user-select: none;
@@ -68,6 +53,7 @@ nav
 			line-height: 26px;
 			text-align: center;
 		}
+
 		nav > div:last-child select
 		{
 			background-color: #333337;
@@ -78,9 +64,10 @@ nav
 			height: 21px;
 			margin: 2px 0px;
 		}
+
 		nav > div:last-child img
 		{
-			height: 100%;
+			height: 26px;
 		}
 
 /* Body */
@@ -95,7 +82,7 @@ body
 	color: white;
 	font-size: 9pt;
 	margin: 0px;
-	font-family: 'Segoe UI Symbol';
+	font-family: 'SegoeUISymbol';
 	overflow: auto;
 	display: grid;
 	height: 100vh;
@@ -103,7 +90,7 @@ body
 
 main
 {
-	font-family: Consolas;
+	font-family: 'Consolas';
 	margin: 50px 0px 50px 12px;
 }
 
@@ -111,6 +98,7 @@ main
 	{
 		margin: 0px;
 		display: none;
+		white-space: nowrap;
 	}
 
 a
@@ -222,4 +210,39 @@ footer
 .close:before
 {
 	content: '\1F7A8';
+}
+
+@media only screen and (max-width: 560px)
+{
+	nav > div:last-child
+	{
+		height: initial;
+		grid-template-columns: initial;
+	}
+
+		nav > div:last-child select
+		{
+			width: initial;
+			margin: 0px 5px;
+		}
+
+	nav > div > span
+	{
+		text-align: start !important;
+	}
+
+	main
+	{
+		margin-top: 110px;
+	}
+
+	.git-btn
+	{
+		min-width: 17px;
+	}
+
+		.git-btn > span
+		{
+			display: none;
+		}
 }
