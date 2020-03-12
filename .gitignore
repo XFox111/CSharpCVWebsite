@@ -2,16 +2,12 @@
 # This .gitignore file was automatically created by Microsoft(R) Visual Studio.
 ################################################################################
 
-/.vs
-/MyWebsite/.vs/MyWebsite
-/MyWebsite/MyWebsite/bin/Debug/netcoreapp2.1
-/MyWebsite/MyWebsite/obj
-/MyWebsite/MyWebsite/bin/Release/netcoreapp2.1
-/MyWebsite/bin
-/MyWebsite/obj
-/MyWebsite/MyWebsite/bin/Debug/netcoreapp3.1
-/MyWebsite.old/.vs/MyWebsite
-/MyWebsite.old/MyWebsite/bin/Debug/netcoreapp2.1
-/MyWebsite.old/MyWebsite/obj/Debug/netcoreapp2.1
-/MyWebsite.old/MyWebsite/obj
-/MyWebsite.old/obj/Debug/netcoreapp2.1
+*.user
+
+[Bb]in/
+[Oo]bj/
+.vs/
+
+/MyWebsite/.config
+/MyWebsite/MyWebsite/Properties/PublishProfiles
+/MyWebsite/MyWebsite/.config
