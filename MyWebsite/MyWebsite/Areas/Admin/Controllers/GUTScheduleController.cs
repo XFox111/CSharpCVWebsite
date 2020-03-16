@@ -129,5 +129,10 @@ namespace MyWebsite.Areas.Admin.Controllers
 		[Route("/Projects/GUTSchedule/PrivacyPolicy")]
 		public IActionResult PrivacyPolicy() =>
 			View("Areas/Projects/Views/GUTSchedule/PrivacyPolicy.cshtml", new ResumeViewModel(db.PrivacyPolicies.Find(CultureInfo.CurrentCulture.TwoLetterISOLanguageName) ?? db.PrivacyPolicies.Find("en") ?? db.PrivacyPolicies.Find("ru"), Database));
+
+		[AllowAnonymous]
+		[Route("/Projects/GUTSchedule")]
+		public IActionResult GetGUTSchedule() =>
+			View();
 	}
 }

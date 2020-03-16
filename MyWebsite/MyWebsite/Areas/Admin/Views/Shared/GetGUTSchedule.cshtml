@@ -1,0 +1,35 @@
+﻿@{
+	ViewData["Title"] = "Скачайте ГУТ.Расписание сейчас!";
+	Layout = "/Views/Shared/_Layout.cshtml";
+}
+
+<header>
+	<h1>Скачайте ГУТ.Расписание сейчас!</h1>
+</header>
+
+<article>
+	<img src="~/images/GUTSchedulePoster.png" style="max-width:800px; width: 100%" />
+	<h2>Для Windows 10</h2>
+	<div id="mspb-cgyfrexl3uyg" class="9NXKDK52W3RX"></div>
+
+	<h2>Для Android</h2>
+	<small>Доступно для версий Android 4.1 и выше</small><br />
+	<a href="https://play.google.com/store/apps/details?id=com.xfox111.gut.schedule" target="_blank">
+		<img alt='Доступно в Google Play' style="max-width:475px; width:100%" src='https://play.google.com/intl/en_us/badges/static/images/badges/ru_badge_web_generic.png' />
+	</a>
+	<p>
+		<small>Microsoft Store и логотип Майкрософт являются товарными знаками корпорации Майкрософт.</small><br />
+		<small>Google Play и логотип Google Play являются товарными знаками корпорации Google LLC.</small>
+	</p>
+</article>
+
+@section Imports
+{
+	<script src="https://storebadge.azureedge.net/src/badge-1.8.4.js"></script>
+	<script>
+		mspb('9NXKDK52W3RX', function (badge)
+		{
+			document.getElementById('mspb-cgyfrexl3uyg').innerHTML = badge;
+		});
+	</script>
+}
