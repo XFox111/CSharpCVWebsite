@@ -25,7 +25,7 @@
 					<a href="@(project.Link)" target="_blank">@project.LinkCaption</a>
 				</div>
 				<div class="badge-placeholder">
-					@foreach (string b in project.Badges.Split(','))
+					@foreach (string b in (project.Badges ?? "").Split(','))
 					{
 						BadgeModel badge = Model.Badges.FirstOrDefault(i => i.Name == b);
 						<div style="background-image: url('../images/Badges/@(badge?.Image).png')" title="@(badge?.Description)"></div>

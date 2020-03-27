@@ -58,7 +58,7 @@
 			<div class="badge-list">
 				@foreach (BadgeModel badge in ViewData["Badges"] as List<BadgeModel>)
 				{
-					<input type="checkbox" id="@badge.Name" checked="@(Model.Badges.Split(',').Contains(badge.Name))"/>
+					<input type="checkbox" id="@badge.Name" checked="@(Model.Badges?.Split(',').Contains(badge.Name) ?? false)"/>
 					<div class="badge" style="background-image: url('/images/Badges/@(badge?.Image).png')" title="@(badge?.Description)"></div>
 					<span>@badge.Description</span><br />
 				}

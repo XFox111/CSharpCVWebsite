@@ -55,7 +55,7 @@
 					<td class="hide-l2"><a target="_blank" href="@item.Link">@item.Link</a></td>
 					<td class="hide-l2">
 						<div class="badge-placeholder">
-							@foreach (string b in item.Badges.Split(','))
+							@foreach (string b in (item.Badges ?? "").Split(','))
 							{
 								BadgeModel badge = Model.badges.FirstOrDefault(i => i.Name == b);
 								<div style="background-image: url('../images/Badges/@(badge?.Image).png')" title="@(badge?.Description)"></div>

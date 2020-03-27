@@ -27,7 +27,7 @@
 	<p>
 		<b>@Html.DisplayNameFor(model => model.Badges):</b> @Model.Badges<br />
 		<div class="badge-placeholder">
-			@foreach (string b in Model.Badges.Split(','))
+			@foreach (string b in (Model.Badges ?? "").Split(','))
 			{
 				BadgeModel badge = (ViewData["Badges"] as List<BadgeModel>).FirstOrDefault(i => i.Name == b);
 				<div style="background-image: url('/images/Badges/@(badge?.Image).png')" title="@(badge?.Description)"></div>
