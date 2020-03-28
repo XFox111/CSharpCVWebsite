@@ -5,7 +5,9 @@ using MyWebsite.Controllers;
 using MyWebsite.Models;
 using MyWebsite.Models.Databases;
 using System;
-using System.Globalization;
+using System.Drawing;
+using System.Drawing.Drawing2D;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 
@@ -27,14 +29,24 @@ namespace MyWebsite.Areas.Admin.Controllers
 			if (badgeImage == null)
 				throw new ArgumentNullException(nameof(badgeImage));
 
-			System.Drawing.Image image = System.Drawing.Image.FromStream(badgeImage.OpenReadStream());
+			Image image = Image.FromStream(badgeImage.OpenReadStream());
+
 			if (System.IO.File.Exists(Directory.GetCurrentDirectory() + "/wwwroot/images/Badges/" + badgeImage.FileName))
 				ModelState.AddModelError("Error", $"Badge image with such name ({badgeImage.FileName}) is already esists");
-			else if (image.Width != 64 || image.Height != 64 || !badgeImage.FileName.EndsWith(".PNG", true, CultureInfo.InvariantCulture))
-				ModelState.AddModelError("Error", "The file must be EXACTLY 64x64 pixels PNG image");
+			else if (image.Width < 64 || image.Width != image.Height || !badgeImage.FileName.EndsWith(".png", StringComparison.OrdinalIgnoreCase))
+				ModelState.AddModelError("Error", "The file must be PNG image with 1:1 aspect ratio and at least 64x64 pixels");
 			else
-				using (var stream = System.IO.File.Create(Directory.GetCurrentDirectory() + "/wwwroot/images/Badges/" + badgeImage.FileName))
-					badgeImage.CopyTo(stream);
+			{
+				using Bitmap resized = new Bitmap(64, 64);
+				using Graphics graphics = Graphics.FromImage(resized);
+
+				graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
+				graphics.CompositingMode = CompositingMode.SourceCopy;
+				graphics.DrawImage(image, 0, 0, 64, 64);
+
+				using FileStream stream = System.IO.File.Create(Directory.GetCurrentDirectory() + "/wwwroot/images/Badges/" + badgeImage.FileName);
+				resized.Save(stream, ImageFormat.Png);
+			}
 
 			return View(Database.Badges);
 		}
