@@ -6,7 +6,8 @@
 <header>
 	&#xE760; <a asp-action="Index" asp-controller="Admin" asp-area="">Back to main menu</a>
 	<h1>Gallery</h1>
-	<a asp-action="Upload" class="comment">// &#xE11C; Upload new</a>
+	<a asp-action="Upload" class="comment">// &#xE11C; Upload new</a><br />
+	<a asp-action="UpdateCache" class="comment">// Cache gallery</a>
 </header>
 
 <article>
@@ -16,7 +17,7 @@
 			<tr>
 				<td>
 					<a asp-area="" asp-controller="Gallery" asp-action="Details" asp-route-id="@item.FileName" target="_blank">
-						<img title="@item.Title" src="~/images/Gallery/@item.FileName" />
+						<img title="@item.Title" src="~/images/Gallery/@(item.FileName.EndsWith(".svg", StringComparison.OrdinalIgnoreCase) ? item.FileName : $"Cache/{item.FileName}.jpg")" onerror="this.src = '/images/Gallery/@item.FileName'" />
 					</a>
 				</td>
 				<td>

@@ -11,7 +11,7 @@
 	@if (Model.Images.Count > 0)
 		foreach (ImageModel image in Model.Images)
 		{
-			<a asp-action="Details" asp-route-id="@image.FileName"><img title="@image.Title" src="~/images/Gallery/@image.FileName" /></a>
+			<a asp-action="Details" asp-route-id="@image.FileName"><img title="@image.Title" src="~/images/Gallery/@(image.FileName.EndsWith(".svg", StringComparison.OrdinalIgnoreCase) ? image.FileName : $"Cache/{image.FileName}.jpg")" onerror="this.src = '/images/Gallery/@image.FileName'" /></a>
 		}
 	else
 	{
