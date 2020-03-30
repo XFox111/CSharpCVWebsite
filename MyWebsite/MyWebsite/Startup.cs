@@ -54,6 +54,7 @@ namespace MyWebsite
 				app.UseHsts();
 			}
 			app.UseHttpsRedirection();
+			app.UseStatusCodePagesWithReExecute("/Error");
 			app.UseStaticFiles();
 
 			app.UseRouting();

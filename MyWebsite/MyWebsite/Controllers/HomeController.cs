@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using MyWebsite.Models.Databases;
 using MyWebsite.ViewModels;
 
@@ -28,6 +27,10 @@ namespace MyWebsite.Controllers
 		[Route("Error")]
 		[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
 		public IActionResult Error() =>
-			View(new ErrorViewModel(Database) { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+			View();
+
+		[Route("GetError")]
+		public IActionResult GetError(int errorCode = 404) =>
+			StatusCode(errorCode);
 	}
 }

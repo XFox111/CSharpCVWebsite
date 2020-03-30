@@ -1,19 +1,15 @@
-﻿@model ErrorViewModel
+﻿@using Microsoft.AspNetCore.WebUtilities
 @{
 	ViewData["Title"] = "Error";
 }
 
-<!-- TODO: Make Error page-->
 <header>
-	<h1>Error</h1>
-	<h2>An error occurred while processing your request.</h2>
+	<h1>Error @Context.Response.StatusCode</h1>
+	<h2>@ReasonPhrases.GetReasonPhrase(Context.Response.StatusCode)</h2>
 </header>
 
 <article>
-	@if (Model.ShowRequestId)
-	{
-		<p>
-			<strong>Request ID:</strong> <code>@Model.RequestId</code>
-		</p>
-	}
+	<p>
+		
+	</p>
 </article>
