@@ -10,6 +10,7 @@ using MyWebsite.Models;
 using MyWebsite.Models.Databases;
 using MyWebsite.ViewModels;
 
+#pragma warning disable CA1054 // Uri parameters should not be strings
 namespace MyWebsite.Controllers
 {
 	[Authorize]
@@ -22,15 +23,15 @@ namespace MyWebsite.Controllers
 
 		[AllowAnonymous]
 		[HttpGet]
-		public IActionResult Login() =>
-			View(new CredentialViewModel(Database));
+		public IActionResult Login(string ReturnUrl) =>
+			View(new CredentialViewModel(Database, ReturnUrl));
 
 		[AllowAnonymous]
 		[HttpPost]
 		[ValidateAntiForgeryToken]
 		public async Task<IActionResult> Login(CredentialViewModel model)
 		{
-			if (!ModelState.IsValid)
+			if (!ModelState.IsValid || model == null)
 			{
 				ModelState.AddModelError("Authorization error", "Invalid data");
 				return View(new CredentialViewModel(Database, model));
@@ -52,7 +53,7 @@ namespace MyWebsite.Controllers
 			ClaimsIdentity id = new ClaimsIdentity(new Claim[] { claim }, "ApplicationCookie", ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType);
 			await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(id)).ConfigureAwait(false);
 
-			return RedirectToAction("Index", "Admin");
+			return Redirect(model.ReturnUrl ?? "/Admin");
 		}
 
 		public async Task<IActionResult> Logout()

@@ -10,6 +10,7 @@
 <article>
 	<form asp-action="Login" asp-antiforgery="true">
 		<div asp-validation-summary="All" class="validation-error"></div>
+		<input hidden asp-for="ReturnUrl" />
 		<div>
 			<label asp-for="Credential.Email">E-mail</label>
 			<input type="email" asp-for="Credential.Email" />
@@ -20,7 +21,8 @@
 			<input type="password" asp-for="Credential.Password" />
 			<span asp-validation-for="Credential.Password"></span>
 		</div>
-		<input class="btn" style="margin-top:10px" type="submit" value="Login" />
+
+		<input type="submit" value="Login" />
 	</form>
 </article>
 
