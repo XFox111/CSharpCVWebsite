@@ -13,6 +13,8 @@ namespace MyWebsite.Controllers
 		public IActionResult Index()
 		{
 			ResumeViewModel model = new ResumeViewModel(Database, CultureInfo.CurrentUICulture);
+			if (model.Resume == null)
+				return NotFound();
 			model.Resume.Content = model.Resume.Content
 				.Replace("%WEBSITE%", $"{Request.Scheme}://{Request.Host}/", true, CultureInfo.InvariantCulture)
 				.Replace("%PHONE_NUMBER%", "+7 (996) 929-19-69", true, CultureInfo.InvariantCulture)
