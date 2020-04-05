@@ -13,12 +13,12 @@
 		<input hidden asp-for="ReturnUrl" />
 		<div>
 			<label asp-for="Credential.Email">E-mail</label>
-			<input type="email" asp-for="Credential.Email" />
+			<input required type="email" asp-for="Credential.Email" />
 			<span asp-validation-for="Credential.Email"></span>
 		</div>
 		<div>
 			<label asp-for="Credential.Password">Password</label>
-			<input type="password" asp-for="Credential.Password" />
+			<input required type="password" asp-for="Credential.Password" />
 			<span asp-validation-for="Credential.Password"></span>
 		</div>
 
