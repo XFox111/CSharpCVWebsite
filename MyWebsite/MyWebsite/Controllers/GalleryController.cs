@@ -12,6 +12,8 @@ namespace MyWebsite.Controllers
 			View(new ArtworkViewModel(Database));
 
 		public IActionResult Details(string id) =>
+			string.IsNullOrWhiteSpace(id) ? 
+			(IActionResult)RedirectToAction("Index") :
 			View(new ArtworkViewModel(Database, id));
 	}
 }
