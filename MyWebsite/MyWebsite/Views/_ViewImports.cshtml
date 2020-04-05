@@ -1,4 +1,8 @@
 ﻿@using MyWebsite
 @using MyWebsite.Models
 @using MyWebsite.ViewModels
+@using Microsoft.AspNetCore.Mvc.Localization
+
+@inject IViewLocalizer Localizer
+@inject IHtmlLocalizer<SharedResources> SharedLocalizer
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers

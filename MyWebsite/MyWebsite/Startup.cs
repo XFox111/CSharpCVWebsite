@@ -7,6 +7,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http;
 using MyWebsite.Models.Databases;
+using Microsoft.AspNetCore.Mvc.Razor;
+using System.Globalization;
+using Microsoft.AspNetCore.Localization;
 
 namespace MyWebsite
 {
@@ -39,7 +42,14 @@ namespace MyWebsite
 			services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options =>
 				options.LoginPath = new PathString("/Admin/Login"));
 
-			services.AddControllersWithViews();
+			services.AddLocalization(options => options.ResourcesPath = "Resources");
+
+			services.AddControllersWithViews()
+					.AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)
+					.AddDataAnnotationsLocalization(options => {
+						options.DataAnnotationLocalizerProvider = (type, factory) =>
+							factory.Create(typeof(SharedResources));
+					});
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -55,6 +65,19 @@ namespace MyWebsite
 			}
 			app.UseHttpsRedirection();
 			app.UseStatusCodePagesWithReExecute("/Error");
+
+			CultureInfo[] supportedCultures = new[]
+			{
+				new CultureInfo("en"),
+				new CultureInfo("ru"),
+			};
+			app.UseRequestLocalization(new RequestLocalizationOptions
+			{
+				DefaultRequestCulture = new RequestCulture("en"),
+				SupportedCultures = supportedCultures,
+				SupportedUICultures = supportedCultures
+			});
+
 			app.UseStaticFiles();
 
 			app.UseRouting();

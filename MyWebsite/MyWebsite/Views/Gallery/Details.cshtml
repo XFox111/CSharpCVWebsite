@@ -7,14 +7,14 @@
 	@if (Model.Previous != null)
 	{
 		@:&#xE760;
-		<a asp-action="Details" asp-route-id="@Model.Previous">Previous</a>
+		<a asp-action="Details" asp-route-id="@Model.Previous">@Localizer["Previous"]</a>
 		@:|
 	}
-	&#xE8B9; <a asp-action="Index" asp-controller="Gallery">All artworks</a>
+	&#xE8B9; <a asp-action="Index" asp-controller="Gallery">@Localizer["All artworks"]</a>
 	@if (Model.Next != null)
 	{
 		@:| &#xE761;
-		<a asp-action="Details" asp-route-id="@Model.Next">Next</a>
+		<a asp-action="Details" asp-route-id="@Model.Next">@Localizer["Next"]</a>
 	}
 </header>
 
@@ -23,7 +23,7 @@
 
 	<div>
 		<h1>@Model.Current?.Title</h1>
-		<span>Creation date: @Model.Current?.CreationDate.ToShortDateString()</span>
+		<span>@Localizer["Creation date"]: @Model.Current?.CreationDate.ToShortDateString()</span>
 		<p>
 			@Html.Raw(Model.Current?.Description)
 		</p>

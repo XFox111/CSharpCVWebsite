@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
-    <AssemblyName>XFox111dotNET</AssemblyName>
+    <AssemblyName>MyWebsite</AssemblyName>
     <Authors>Michael "XFox" Gordeev</Authors>
     <Company>FoxDev Studio</Company>
     <Product>XFox111.NET</Product>
@@ -24,6 +24,7 @@
     <PackageReference Include="Select.HtmlToPdf.NetCore" Version="19.2.0" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Resources\Areas\" />
     <Folder Include="wwwroot\images\Gallery\Cache\" />
   </ItemGroup>
 </Project>

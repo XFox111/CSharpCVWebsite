@@ -1,12 +1,12 @@
 ﻿@model ProjectsViewModel
 @{
-	ViewData["Title"] = "My projects";
+	ViewData["Title"] = SharedLocalizer["My projects"];
 }
 
 <header>
 	<div>
-		<h1>My projects</h1>
-		<h3>Here is presented the most of projects I worked on</h3>
+		<h1>@SharedLocalizer["My projects"]</h1>
+		<h3>@SharedLocalizer["Here is presented the most of projects I worked on"]</h3>
 	</div>
 	<iframe src="//githubbadge.appspot.com/xfox111" class="github-stats" frameborder="0"></iframe>
 </header>
@@ -36,7 +36,7 @@
 	}
 	else
 	{
-		<p style="margin: 0px 40px" class="comment">// No content available</p>
+		<p style="margin: 0px 40px" class="comment">// @SharedLocalizer["No content available"]</p>
 	}
 </article>
 

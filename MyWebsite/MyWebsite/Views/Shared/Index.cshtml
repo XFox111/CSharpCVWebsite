@@ -1,25 +1,25 @@
 ﻿@{
-	ViewData["Title"] = "Home Page";
+	ViewData["Title"] = Localizer["Home Page"];
 }
 
 <header>
-	<h1>Hello, World!</h1>
+	<h1>@Localizer["Hello, World!"]</h1>
 </header>
 
 <article>
 	<p>
-		Hi guys! This is my website. And this is its home page. Usually, homepages should look as much glorious and cool as they can. But for some inspirational reasons I've done everything except homepage.
+		@Localizer["Hi guys! This is my website. And this is its home page. Usually, homepages should look as much glorious and cool as they can. But for some inspirational reasons I've done everything except homepage."]
 	</p>
-	<p>
+	<p hidden>
 		Well, maybe not everything... But the most of it. If I could I would leave it offline for a few more <s>years</s> <s>month</s> time. But I need it online now, so here we go. <br />
 		Lets consider it as 0.1.2020.03.08.666 prerelease beta technical preview demo pre-RTM version.
 	</p>
 	<p>
-		So  you can lurk around and check other pages. I'm pretty sure they should be fine.
+		@Localizer["But you still can lurk around and check other pages. I'm pretty sure they should be fine."]
 	</p>
 	<dl>
-		<dt>Cheers,</dt>
-		<dd>Michael "XFox" Gordeev</dd>
+		<dt>@Localizer["Cheers"],</dt>
+		<dd>@SharedLocalizer["Michael \"XFox\" Gordeev"]</dd>
 	</dl>
 	<p hidden>
 		But anyway I should tell some more about it, shouldn't I?
