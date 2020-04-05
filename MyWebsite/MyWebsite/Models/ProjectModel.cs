@@ -47,7 +47,7 @@ namespace MyWebsite.Models
 		public string Link { get; set; }
 
 		[DisplayName("Link text caption")]
-		public string LinkCaption => CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ru" && !string.IsNullOrWhiteSpace(RussianTitle) ? RussianLinkCaption : EnglishLinkCaption;
+		public string LinkCaption => CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ru" && !string.IsNullOrWhiteSpace(RussianLinkCaption) ? RussianLinkCaption : EnglishLinkCaption;
 
 		[Column(TypeName = "varchar(50)")]
 		[DisplayName("Link text caption (en)")]
