@@ -52,7 +52,7 @@ namespace MyWebsite.Areas.Admin.Controllers
 					Database.Users.Add(new CredentialModel
 					{
 						Email = value,
-						Password = credential.Password
+						Password = credential?.Password ?? Encryptor.ComputeHash("qwerty")
 					});
 					break;
 
