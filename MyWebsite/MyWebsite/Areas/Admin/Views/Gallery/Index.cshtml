@@ -1,4 +1,4 @@
-﻿@model IEnumerable<MyWebsite.Models.ImageModel>
+﻿@model ArtworkViewModel
 @{
 	ViewData["Title"] = "Gallery";
 }
@@ -12,7 +12,7 @@
 
 <article>
 	<table>
-		@foreach (ImageModel item in Model)
+		@foreach (ImageModel item in Model.Images)
 		{
 			<tr>
 				<td>

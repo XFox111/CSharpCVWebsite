@@ -8,6 +8,7 @@ using System;
 using System.IO;
 using System.Drawing;
 using System.Threading;
+using MyWebsite.ViewModels;
 
 namespace MyWebsite.Areas.Admin.Controllers
 {
@@ -18,7 +19,7 @@ namespace MyWebsite.Areas.Admin.Controllers
 		public GalleryController(DatabaseContext context) : base(context) { }
 
 		public IActionResult Index() =>
-			View(Database.Gallery);
+			View(new ArtworkViewModel(Database));
 
 		[HttpGet]
 		public IActionResult Edit(string id) =>
