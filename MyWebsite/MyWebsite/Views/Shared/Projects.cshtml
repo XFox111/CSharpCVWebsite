@@ -20,7 +20,7 @@
 				<div>
 					<h1>@project.Title</h1>
 					<p>
-						@Html.Raw(project.Description)
+						@Html.Raw(project.Description?.Replace("\n", "<br />"))
 					</p>
 					<a href="@(project.Link)" target="_blank">@project.LinkCaption</a>
 				</div>

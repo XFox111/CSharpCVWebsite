@@ -25,7 +25,7 @@
 		<h1>@Model.Current?.Title</h1>
 		<span>@Localizer["Creation date"]: @Model.Current?.CreationDate.ToShortDateString()</span>
 		<p>
-			@Html.Raw(Model.Current?.Description)
+			@Html.Raw(Model.Current?.Description?.Replace("\n", "<br />"))
 		</p>
 	</div>
 </article>
