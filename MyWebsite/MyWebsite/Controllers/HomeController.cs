@@ -48,7 +48,18 @@ namespace MyWebsite.Controllers
 				)),
 			new CookieOptions { Expires = DateTimeOffset.UtcNow.AddYears(1) });
 
-			return Redirect(Request.Headers["Referer"]);
+			return Redirect(Extensions.CheckNullOrWhitespace(Request.Headers["Referer"], "/"));
+		}
+
+		[Route("ComicSans")]
+		public IActionResult ComicSans()
+		{
+			if (Request.Cookies.ContainsKey("useComicSans"))
+				Response.Cookies.Delete("useComicSans");
+			else
+				Response.Cookies.Append("useComicSans", "true");
+
+			return Redirect(Extensions.CheckNullOrWhitespace(Request.Headers["Referer"], "/"));
 		}
 	}
 }

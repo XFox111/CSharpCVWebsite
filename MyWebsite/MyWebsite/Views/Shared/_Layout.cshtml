@@ -9,6 +9,16 @@
 	<link rel="stylesheet" type="text/css" href="~/css/Fonts.css" />
 	<link rel="stylesheet" type="text/css" href="~/css/Socicon.css" />
 
+	@if (Context.Request.Cookies.ContainsKey("useComicSans"))
+	{
+		<style type="text/css">
+			body
+			{
+				font-family: 'Comic Sans MS', 'Consolas', 'SegoeMDL2Assets';
+			}
+		</style>
+	}
+
 	<script type="text/javascript">
 		function ToggleMenu()
 		{
