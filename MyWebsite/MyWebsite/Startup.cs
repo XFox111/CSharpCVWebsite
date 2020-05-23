@@ -15,14 +15,15 @@ namespace MyWebsite
 {
 	// TODO: FoxTube API admin page
 	// TODO: Complete homepage
-	// TODO: Add localization system
-	// TODO: Add blog
 	// TODO: Rid of JavaScript (use Blazor)
 	public class Startup
 	{
+		public static string BlogspotAPI { get; private set; }
+
 		public Startup(IConfiguration configuration)
 		{
 			Configuration = configuration;
+			BlogspotAPI = configuration.GetConnectionString("BlogspotAPI");
 		}
 
 		public IConfiguration Configuration { get; }
@@ -68,12 +69,12 @@ namespace MyWebsite
 
 			CultureInfo[] supportedCultures = new[]
 			{
-				new CultureInfo("en"),
+				new CultureInfo("en-US"),
 				new CultureInfo("ru"),
 			};
 			app.UseRequestLocalization(new RequestLocalizationOptions
 			{
-				DefaultRequestCulture = new RequestCulture("en"),
+				DefaultRequestCulture = new RequestCulture("en-US"),
 				SupportedCultures = supportedCultures,
 				SupportedUICultures = supportedCultures
 			});

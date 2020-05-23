@@ -117,85 +117,19 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AboutMe" xml:space="preserve">
-    <value>ОбоМне</value>
+  <data name="Next" xml:space="preserve">
+    <value>Вперед</value>
   </data>
-  <data name="All links are clickable" xml:space="preserve">
-    <value>Все ссылки кликабельны</value>
+  <data name="Prev" xml:space="preserve">
+    <value>Назад</value>
   </data>
-  <data name="Arts" xml:space="preserve">
-    <value>Галерея</value>
+  <data name="Search" xml:space="preserve">
+    <value>Поиск</value>
   </data>
-  <data name="Back to main menu" xml:space="preserve">
-    <value>Назад в главное меню</value>
+  <data name="Search results for" xml:space="preserve">
+    <value>Результаты поиска по тегу</value>
   </data>
-  <data name="Blog" xml:space="preserve">
-    <value>Блог</value>
-  </data>
-  <data name="Contact information" xml:space="preserve">
-    <value>Контактная информация</value>
-  </data>
-  <data name="ContactMe" xml:space="preserve">
-    <value>СвязатьсяСоМной</value>
-  </data>
-  <data name="Contacts" xml:space="preserve">
-    <value>Контакты</value>
-  </data>
-  <data name="Copyright" xml:space="preserve">
-    <value />
-  </data>
-  <data name="en" xml:space="preserve">
-    <value>ru</value>
-  </data>
-  <data name="Follow me on" xml:space="preserve">
-    <value>Подписывайтесь на</value>
-  </data>
-  <data name="Here is presented the most of projects I worked on" xml:space="preserve">
-    <value>Здесь собрано большинство проектов над которыми я когда-либо работал</value>
-  </data>
-  <data name="Hi, my name is Michael. I'm C# Developer and this is my personal website. Here you can find info about me, my projects and more. Check it out!" xml:space="preserve">
-    <value>Привет! Меня зовут Михаил и я C# разработчик. Это мой личный веб-сайт. Здесь вы можете найти информацию обо мне и моих проектах</value>
-  </data>
-  <data name="InterestedInMe" xml:space="preserve">
-    <value>Заинтересовались</value>
-  </data>
-  <data name="Michael &quot;XFox&quot; Gordeev" xml:space="preserve">
-    <value>Михаил "XFox" Гордеев</value>
-  </data>
-  <data name="Michael (Mikhail) Gordeev - Resume" xml:space="preserve">
-    <value>Михаил Гордеев - Резюме</value>
-  </data>
-  <data name="My artworks" xml:space="preserve">
-    <value>Мои рисунки</value>
-  </data>
-  <data name="My projects" xml:space="preserve">
-    <value>Мои проекты</value>
-  </data>
-  <data name="MyResume" xml:space="preserve">
-    <value>Резюме</value>
-  </data>
-  <data name="No content available" xml:space="preserve">
-    <value>Нет доступного контента</value>
-  </data>
-  <data name="Personal website" xml:space="preserve">
-    <value>Личный веб-сайт</value>
-  </data>
-  <data name="Projects" xml:space="preserve">
-    <value>Проекты</value>
-  </data>
-  <data name="ru" xml:space="preserve">
-    <value>en</value>
-  </data>
-  <data name="socialNetworks" xml:space="preserve">
-    <value>соцСети</value>
-  </data>
-  <data name="Tags" xml:space="preserve">
-    <value>Теги</value>
-  </data>
-  <data name="You" xml:space="preserve">
-    <value>Вы</value>
-  </data>
-  <data name="РУС" xml:space="preserve">
-    <value>ENG</value>
+  <data name="Visit on" xml:space="preserve">
+    <value>Открыть на</value>
   </data>
 </root>

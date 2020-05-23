@@ -1,0 +1,88 @@
+﻿@model BlogListViewModel
+@{
+	ViewData["Title"] = "Fox, Coffee and Science - " + SharedLocalizer["Blog"];
+}
+
+<header>
+	@if (string.IsNullOrWhiteSpace(Model.SearchTerm))
+	{
+		<h1>Fox, Coffee and Science - @SharedLocalizer["Blog"]</h1>
+	}
+	else
+	{
+		<h1>@SharedLocalizer["Search results for"] @Model.SearchTerm</h1>
+	}
+	@Localizer["Visit on"] <a target="_blank" href="@Model.Links.FirstOrDefault(i => i.Name == "blogger")?.Url">Blogspot</a>
+</header>
+
+<form method="get" action="https://xfox111.blogspot.com/search" target="_blank">
+	<input type="text" name="q" spellcheck="false" placeholder="@Localizer["Search"]" />
+	<input type="submit" value="&#xE094;" />
+</form>
+
+<article>
+	<div>
+		@if (Model.Posts.Items == null || Model.Posts.Items.Count < 1)
+		{
+			<p class="comment">// @SharedLocalizer["No content available"]</p>
+		}
+		else
+			foreach (Google.Apis.Blogger.v3.Data.Post post in Model.Posts.Items)
+			{
+				<div class="item">
+					@if (post.Images != null && post.Images.Count > 0)
+					{
+						<img src="@post.Images.FirstOrDefault()?.Url" title="@post.Title" onerror="this.parentElement.removeChild(this)" />
+					}
+					<div>
+						<p>
+							@DateTime.Parse(post.Published).ToShortDateString() | <a href="@post.Author.Url" target="_blank">@post.Author.DisplayName</a><br />
+							@if (post.Labels != null && post.Labels.Count > 0)
+							{
+								<span class="comment">// @(Html.Raw(string.Join(", ", (post.Labels ?? new string[0]).Select(i => $"<a class=\"comment\" href=\"Blog/Tags/{i}\">{i}</a>"))))</span>
+							}
+						</p>
+						<h2><a asp-action="Post" asp-route-id="@post.Id">@post.Title</a></h2>
+					</div>
+				</div>
+			}
+	</div>
+
+	@if ((string.IsNullOrWhiteSpace(Model.SearchTerm) || Model.SearchTerm.StartsWith("#")) && (Model.PageNumber > 0 || !string.IsNullOrWhiteSpace(Model.Posts.NextPageToken)))
+	{
+		<div class="page-navigation">
+			@if (Model.PageNumber > 0)
+			{
+				<a asp-action="Index" asp-route-pageNumber="@(Model.PageNumber - 1)">&#xE00E; @Localizer["Prev"]</a>
+			}
+			<span>@(Model.PageNumber + 1)</span>
+			@if (!string.IsNullOrWhiteSpace(Model.Posts.NextPageToken))
+			{
+				<a asp-action="Index" asp-route-pageNumber="@(Model.PageNumber + 1)">@Localizer["Next"] &#xE00F;</a>
+			}
+		</div>
+	}
+</article>
+
+<aside>
+	<a class="twitter-timeline" data-lang="@SharedLocalizer["en"]" data-width="300" data-height="600" data-theme="light" href="https://twitter.com/xfox111?ref_src=twsrc%5Etfw">Tweets by xfox111</a>
+
+	<h3>@SharedLocalizer["Follow me on"]</h3>
+
+	<div class="follow-list">
+		@foreach (LinkModel link in Model.Links.Where(i => new[] { "twitter", "blogger", "github" }.Contains(i.Name)).OrderBy(i => i.Order))
+		{
+			<a class="socicon-@(link.Name)" href="@(link.Url)" target="_blank" title="@(link.Title)"></a>
+		}
+		<a class="socicon-rss" href="//xfox111.blogspot.com/feeds/posts/default?alt=rss" target="_blank" title="RSS Feed"></a>
+		<a href="//buymeacoff.ee/xfox111" target="_blank" title="Buy me a coffee">
+			<img width="24" height="25" src="https://cdn.buymeacoffee.com/buttons/bmc-new-btn-logo.svg">
+		</a>
+	</div>
+</aside>
+
+@section Imports
+{
+	<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+	<link rel="stylesheet" type="text/css" href="~/css/Blog.css" />
+}

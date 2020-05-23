@@ -1,0 +1,279 @@
+﻿main
+{
+	display: grid;
+	grid-template-columns: 1fr 300px;
+	grid-column-gap: 50px;
+	max-width: 1100px;
+	margin: 0px auto;
+	padding: 0px 30px;
+}
+
+article, header
+{
+	margin: 0px;
+}
+
+body
+{
+	background-color: whitesmoke;
+}
+
+.item
+{
+	background: white;
+	margin-bottom: 20px;
+	border-radius: 5px;
+}
+
+header
+{
+	align-self: center;
+	height: 100px;
+}
+
+header a:link
+{
+	text-decoration: underline;
+}
+
+	header > h1
+	{
+		margin-bottom: 0px;
+	}
+
+.item > img
+{
+	width: 100%;
+	border-radius: 5px 5px 0px 0px;
+}
+
+.post-body img
+{
+	width: 100%;
+}
+
+.item > div
+{
+	padding: 10px 25px;
+}
+
+	.item > div > p
+	{
+		color: gray;
+	}
+
+	.item > div > h2 > a
+	{
+		color: black;
+		text-decoration: none;
+	}
+
+	.item > div > h2::after
+	{
+		content: " \E00F";
+		font-size: initial;
+		margin: 10px 0px;
+	}
+
+main > form
+{
+	align-self: center;
+	background-color: white;
+	position: relative;
+	border-radius: 5px;
+}
+
+	main > form > input[type=text]
+	{
+		border: none;
+		box-sizing: border-box;
+		border-radius: 5px;
+		padding: 0px 10px;
+		height: 32px;
+		width: 100%;
+	}
+
+	main > form > input[type=submit]
+	{
+		font-family: "SegoeMDL2Assets";
+		height: 32px;
+		width: 32px;
+		background-color: transparent;
+		border: none;
+		border-radius: 5px;
+		position: absolute;
+		right: 0px;
+	}
+
+.page-navigation
+{
+	background-color: white;
+	border-radius: 5px;
+	display: table;
+	user-select: none;
+	margin: auto;
+}
+
+	.page-navigation > a
+	{
+		background: #343434;
+		color: white !important;
+		text-decoration: none;
+		border-radius: 5px;
+		padding: 7px 15px 7px 15px;
+		line-height: 33px;
+	}
+
+	.page-navigation > span
+	{
+		margin: 0px 20px;
+		line-height: 33px;
+	}
+
+.follow-list a
+{
+	color: black;
+	text-decoration: none;
+	font-size: x-large;
+}
+
+	.follow-list a:hover
+	{
+		opacity: .5;
+	}
+
+.follow-list
+{
+	display: inline-grid;
+	grid-auto-flow: column;
+	grid-column-gap: 20px;
+}
+
+.post-body
+{
+	background: white;
+	margin-bottom: 20px;
+	border-radius: 5px;
+	padding: 1px 0px;
+}
+
+	.post-body .post-header, .post-body > p
+	{
+		margin-right: 25px;
+		margin-left: 25px;
+		margin-bottom: 25px;
+	}
+
+.share-btns
+{
+	display: inline-grid;
+	grid-auto-flow: column;
+	grid-column-gap: 5px;
+}
+
+.share-btn
+{
+	width: 32px;
+	height: 32px;
+	color: white;
+	transition-duration: .3s;
+}
+
+	.share-btn:hover
+	{
+		background-color: white !important;
+	}
+
+	.share-btn svg
+	{
+		width: 16px;
+		height: 16px;
+		padding: 8px;
+	}
+
+	.share-btn path
+	{
+		fill: white
+	}
+
+	.share-btn.facebook
+	{
+		background-color: #3e68c0;
+	}
+
+		.share-btn.facebook:hover path
+		{
+			fill: #3e68c0 !important;
+		}
+
+	.share-btn.twitter
+	{
+		background-color: #23abff;
+	}
+
+		.share-btn.twitter:hover path
+		{
+			fill: #23abff !important;
+		}
+
+	.share-btn.linkedin
+	{
+		background-color: #15ace5;
+	}
+
+		.share-btn.linkedin:hover path
+		{
+			fill: #15ace5 !important;
+		}
+
+	.share-btn.vk
+	{
+		background-color: #3673be;
+	}
+
+		.share-btn.vk:hover path
+		{
+			fill: #3673be !important;
+		}
+
+.post-comments
+{
+	background-color: white;
+	border-radius: 5px;
+	padding: 5px 25px;
+}
+
+.post-comment > div
+{
+	display: grid;
+	grid-template-columns: auto 1fr;
+	grid-column-gap: 20px;
+}
+
+	.post-comment > div > div > span
+	{
+		line-height: 35px;
+	}
+
+	.post-comment > div > div > div
+	{
+		margin-top: 30px;
+	}
+
+	.post-comment > div > img
+	{
+		border-radius: 999px;
+	}
+
+@media only screen and (max-width: 800px)
+{
+	main > aside, main > form
+	{
+		display: none;
+	}
+
+	main
+	{
+		display: block;
+	}
+}
