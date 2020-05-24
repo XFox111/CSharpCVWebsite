@@ -3,6 +3,7 @@
 	display: grid;
 	grid-template-columns: 1fr 300px;
 	grid-column-gap: 50px;
+	grid-row-gap: 25px;
 	max-width: 1100px;
 	margin: 0px auto;
 	padding: 0px 30px;
@@ -28,7 +29,6 @@ body
 header
 {
 	align-self: center;
-	height: 100px;
 }
 
 header a:link
@@ -265,6 +265,14 @@ main > form
 		border-radius: 999px;
 	}
 
+@media only screen and (max-width: 1000px)
+{
+	main
+	{
+		grid-column-gap: 25px;
+	}
+}
+
 @media only screen and (max-width: 800px)
 {
 	main > aside, main > form
@@ -275,5 +283,17 @@ main > form
 	main
 	{
 		display: block;
+	}
+	header
+	{
+		margin-bottom: 25px;
+	}
+}
+
+@media only screen and (max-width: 500px)
+{
+	main
+	{
+		padding: 10px !important;
 	}
 }

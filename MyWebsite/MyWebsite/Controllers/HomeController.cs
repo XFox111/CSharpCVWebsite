@@ -44,7 +44,7 @@ namespace MyWebsite.Controllers
 			CookieRequestCultureProvider.DefaultCookieName,
 			CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(
 				CultureInfo.CurrentCulture.TwoLetterISOLanguageName.ToUpperInvariant() == "RU" ?
-				"en" : "ru"
+				"en-US" : "ru"
 				)),
 			new CookieOptions { Expires = DateTimeOffset.UtcNow.AddYears(1) });
 
