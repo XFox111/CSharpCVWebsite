@@ -164,6 +164,20 @@ main > form
 		margin-bottom: 25px;
 	}
 
+	.post-body > hr,
+	.post-body > h1,
+	.post-body > h2,
+	.post-body > h3,
+	.post-body > h6,
+	.post-body > h5,
+	.post-body > h6,
+	.post-body > ol,
+	.post-body > ul
+	{
+		margin-right: 25px;
+		margin-left: 25px;
+	}
+
 .share-btns
 {
 	display: inline-grid;
