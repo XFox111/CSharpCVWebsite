@@ -51,7 +51,7 @@
 						@(item.RussianTitle ?? "<not_set>") (ru)
 					</td>
 					<td class="hide-l1">@item.Username</td>
-					<td class="hide-l2"><a target="_blank" href="@item.Url">@item.Url</a></td>
+					<td class="hide-l2"><a target="_blank" rel="noopener noreferrer" href="@item.Url">@item.Url</a></td>
 					<td class="hide-l1">
 						@Html.DisplayFor(modelItem => item.CanContactMe)
 					</td>

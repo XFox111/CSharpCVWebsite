@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Hi, my name is Michael. And this is my blog. Here I write about software and hardware development, interesting things from CS and more" xml:space="preserve">
+    <value>Привет! Меня зовут Михаил и это мой блог. Здесь я пишу о разработе программного и аппаратного обеспечения, а текже об интересных вещах из мира компьютерных наук</value>
+  </data>
   <data name="Next" xml:space="preserve">
     <value>Вперед</value>
   </data>

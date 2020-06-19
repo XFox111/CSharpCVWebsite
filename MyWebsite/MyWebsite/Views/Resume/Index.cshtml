@@ -3,12 +3,28 @@
 	ViewData["Title"] = Localizer["My resume"];
 }
 
+@section OpenGraph
+{
+	<meta name="author" content="@SharedLocalizer["Michael &apos;XFox&apos; Gordeev"]" />
+	<meta name="description" content="@SharedLocalizer["Hi, my name is Michael. I'm C# Developer and this is my personal website. Here you can find info about me, my projects and more. Check it out!"]" />
+
+	<meta property="og:type" content="article" />
+	<meta property="og:site_name" content="@SharedLocalizer["Michael &apos;XFox&apos; Gordeev"]" />
+	<meta property="og:url" content="https://XFox111.NET/Resume" />
+	<meta property="og:locale" content="@SharedLocalizer["en"]" />
+	<meta property="og:image" content="https://xfox111.net/images/me.jpg" />
+	<meta property="og:description" content="@SharedLocalizer["Hi, my name is Michael. I'm C# Developer and this is my personal website. Here you can find info about me, my projects and more. Check it out!"]" />
+	<meta property="og:title" content="@Localizer["My resume"]" />
+
+	<meta property="article:modified_time" content="@Model.Resume.LastUpdate.ToString("o")" />
+}
+
 <header>
 	<h1>@Localizer["My resume"]</h1>
 	<p>@Localizer["Last update"]: @Model.Resume.LastUpdate</p>
 
-	<a class="comment" asp-action="Download">// @Localizer["Download CV"] (.pdf) &#xE118;</a><br />
-	<a class="comment" asp-action="Print">// @Localizer["Print CV"] &#xE749;</a>
+	<a class="comment" asp-action="Download">// @Localizer["Download resume"] (.pdf) &#xE118;</a><br />
+	<a class="comment" asp-action="Print">// @Localizer["Print resume"] &#xE749;</a>
 </header>
 
 <article>

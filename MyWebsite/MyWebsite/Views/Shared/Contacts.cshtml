@@ -11,13 +11,13 @@
 	<p>
 		@foreach (LinkModel link in Model.Links.Where(i => i.CanContactMe))
 		{
-			<a class="socicon-@(link.Name)"></a> @(link.Title) <a href="@(link.Url)" target="_blank">@(link.Username)</a><br />
+			<a class="socicon-@(link.Name)"></a> @(link.Title) <a href="@(link.Url)" target="_blank" rel="noopener noreferrer">@(link.Username)</a><br />
 		}
 	</p>
 	<p>
 		@foreach (LinkModel link in Model.Links.Where(i => !i.CanContactMe))
 		{
-			<a class="socicon-@(link.Name)"></a> @(link.Title) <a href="@(link.Url)" target="_blank">@(link.Username)</a><br />
+			<a class="socicon-@(link.Name)"></a> @(link.Title) <a href="@(link.Url)" target="_blank" rel="noopener noreferrer">@(link.Username)</a><br />
 		}
 	</p>
 </article>

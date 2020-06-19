@@ -81,7 +81,7 @@
 				<div>
 					@foreach (LinkModel link in Model.Links.Where(i => i.DisplayInFooter).OrderBy(i => i.Order))
 					{
-						<a class="socicon-@(link.Name)" href="@(link.Url)" target="_blank" title="@(link.Title)"></a>
+						<a class="socicon-@(link.Name)" href="@(link.Url)" target="_blank" rel="noopener noreferrer" title="@(link.Title)"></a>
 					}
 				</div>
 			</footer>

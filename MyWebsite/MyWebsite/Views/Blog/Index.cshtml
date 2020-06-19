@@ -3,6 +3,20 @@
 	ViewData["Title"] = "Fox, Coffee and Science - " + SharedLocalizer["Blog"];
 }
 
+@section OpenGraph
+{
+	<meta name="author" content="@SharedLocalizer["Michael &apos;XFox&apos; Gordeev"]" />
+	<meta name="description" content="@SharedLocalizer["Hi, my name is Michael. And this is my blog. Here I write about software and hardware development, interesting things from CS and more"]" />
+
+	<meta property="og:type" content="website" />
+	<meta property="og:site_name" content="XFox111.NET" />
+	<meta property="og:url" content="https://XFox111.NET/Blog" />
+	<meta property="og:locale" content="@SharedLocalizer["en"]" />
+	@*<meta property="og:image" content="https://xfox111.net/images/me.jpg" />*@
+	<meta property="og:description" content="@Localizer["Hi, my name is Michael. And this is my blog. Here I write about software and hardware development, interesting things from CS and more"]" />
+	<meta property="og:title" content="Fox, Coffee and Science" />
+}
+
 <header>
 	@if (string.IsNullOrWhiteSpace(Model.SearchTerm))
 	{
@@ -12,10 +26,10 @@
 	{
 		<h1>@SharedLocalizer["Search results for"] @Model.SearchTerm</h1>
 	}
-	@Localizer["Visit on"] <a target="_blank" href="@Model.Links.FirstOrDefault(i => i.Name == "blogger")?.Url">Blogspot</a>
+	@Localizer["Visit on"] <a target="_blank" rel="noopener noreferrer" href="@Model.Links.FirstOrDefault(i => i.Name == "blogger")?.Url">Blogspot</a>
 </header>
 
-<form method="get" action="https://xfox111.blogspot.com/search" target="_blank">
+<form method="get" action="https://xfox111.blogspot.com/search" target="_blank" rel="noopener noreferrer">
 	<input type="text" name="q" spellcheck="false" placeholder="@Localizer["Search"]" />
 	<input type="submit" value="&#xE094;" />
 </form>
@@ -36,7 +50,7 @@
 					}
 					<div>
 						<p>
-							@DateTime.Parse(post.Published).ToShortDateString() | <a href="@post.Author.Url" target="_blank">@post.Author.DisplayName</a><br />
+							@DateTime.Parse(post.Published).ToShortDateString() | <a href="@post.Author.Url" target="_blank" rel="noopener noreferrer">@post.Author.DisplayName</a><br />
 							@if (post.Labels != null && post.Labels.Count > 0)
 							{
 								<span class="comment">// @(Html.Raw(string.Join(", ", (post.Labels ?? new string[0]).Select(i => $"<a class=\"comment\" href=\"Blog/Tags/{i}\">{i}</a>"))))</span>
@@ -72,10 +86,10 @@
 	<div class="follow-list">
 		@foreach (LinkModel link in Model.Links.Where(i => new[] { "twitter", "blogger", "github" }.Contains(i.Name)).OrderBy(i => i.Order))
 		{
-			<a class="socicon-@(link.Name)" href="@(link.Url)" target="_blank" title="@(link.Title)"></a>
+			<a class="socicon-@(link.Name)" href="@(link.Url)" target="_blank" rel="noopener noreferrer" title="@(link.Title)"></a>
 		}
-		<a class="socicon-rss" href="//xfox111.blogspot.com/feeds/posts/default?alt=rss" target="_blank" title="RSS Feed"></a>
-		<a href="//buymeacoff.ee/xfox111" target="_blank" title="Buy me a coffee">
+		<a class="socicon-rss" href="//xfox111.blogspot.com/feeds/posts/default?alt=rss" target="_blank" rel="noopener noreferrer" title="RSS Feed"></a>
+		<a href="//buymeacoff.ee/xfox111" target="_blank" rel="noopener noreferrer" title="Buy me a coffee">
 			<img width="24" height="25" src="https://cdn.buymeacoffee.com/buttons/bmc-new-btn-logo.svg">
 		</a>
 	</div>

@@ -159,8 +159,8 @@
   <data name="InterestedInMe" xml:space="preserve">
     <value>Заинтересовались</value>
   </data>
-  <data name="Michael &quot;XFox&quot; Gordeev" xml:space="preserve">
-    <value>Михаил "XFox" Гордеев</value>
+  <data name="Michael &amp;apos;XFox&amp;apos; Gordeev" xml:space="preserve">
+    <value>Михаил &amp;apos;XFox&amp;apos; Гордеев</value>
   </data>
   <data name="Michael (Mikhail) Gordeev - Resume" xml:space="preserve">
     <value>Михаил Гордеев - Резюме</value>

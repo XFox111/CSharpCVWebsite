@@ -16,7 +16,7 @@
 		{
 			<tr>
 				<td>
-					<a asp-area="" asp-controller="Gallery" asp-action="Details" asp-route-id="@item.FileName" target="_blank">
+					<a asp-area="" asp-controller="Gallery" asp-action="Details" asp-route-id="@item.FileName" target="_blank" rel="noopener noreferrer">
 						<img title="@item.Title" src="~/images/Gallery/@(item.FileName.EndsWith(".svg", StringComparison.OrdinalIgnoreCase) ? item.FileName : $"Cache/{item.FileName}.jpg")" onerror="this.src = '/images/Gallery/@item.FileName'" />
 					</a>
 				</td>
@@ -28,7 +28,7 @@
 						<span>
 							<a asp-action="Edit" asp-route-id="@item.FileName">Edit</a> |
 							<a asp-action="Delete" asp-route-id="@item.FileName">Delete</a> |
-							<a asp-area="" asp-controller="Gallery" asp-action="Details" asp-route-id="@item.FileName" target="_blank">View</a>
+							<a asp-area="" asp-controller="Gallery" asp-action="Details" asp-route-id="@item.FileName" target="_blank" rel="noopener noreferrer">View</a>
 						</span>
 					</p>
 				</td>

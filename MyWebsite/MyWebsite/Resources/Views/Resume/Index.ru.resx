@@ -117,7 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Download CV" xml:space="preserve">
+  <data name="Download resume" xml:space="preserve">
     <value>Скачать резюме</value>
   </data>
   <data name="Last update" xml:space="preserve">
@@ -126,7 +126,7 @@
   <data name="My resume" xml:space="preserve">
     <value>Мое резюме</value>
   </data>
-  <data name="Print CV" xml:space="preserve">
+  <data name="Print resume" xml:space="preserve">
     <value>Распечатать резюме</value>
   </data>
 </root>

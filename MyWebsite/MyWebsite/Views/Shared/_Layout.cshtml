@@ -1,6 +1,6 @@
 ﻿@model ViewModelBase
 <!DOCTYPE html>
-<html>
+<html prefix="og: http://ogp.me/ns#">
 <head>
 	<title>@ViewData["Title"] - XFox111.NET</title>
 	<link rel="shortcut icon" href="~/favicon.ico" type="image/x-icon" />
@@ -38,16 +38,16 @@
 			RenderSection("OpenGraph");
 		else
 		{
-			<meta name="author" content="@SharedLocalizer["Michael \"XFox\" Gordeev"]" />
+			<meta name="author" content="@SharedLocalizer["Michael &apos;XFox&apos; Gordeev"]" />
 			<meta name="description" content="@SharedLocalizer["Hi, my name is Michael. I'm C# Developer and this is my personal website. Here you can find info about me, my projects and more. Check it out!"]" />
 
 			<meta property="og:type" content="website" />
 			<meta property="og:site_name" content="XFox111.NET" />
-			<meta property="og:url" content="//XFox111.NET/" />
+			<meta property="og:url" content="@Context.Request.Scheme://@Context.Request.Host@(Context.Request.Path)@Context.Request.QueryString" />
 			<meta property="og:locale" content="@SharedLocalizer["en"]" />
-			<meta property="og:image" content="/images/me.png" />
+			<meta property="og:image" content="https://xfox111.net/images/me.jpg" />
 			<meta property="og:description" content="@SharedLocalizer["Hi, my name is Michael. I'm C# Developer and this is my personal website. Here you can find info about me, my projects and more. Check it out!"]" />
-			<meta property="og:title" content="@SharedLocalizer["Michael \"XFox\" Gordeev"] - @SharedLocalizer["Personal website"]" />
+			<meta property="og:title" content="@SharedLocalizer["Michael &apos;XFox&apos; Gordeev"] - @SharedLocalizer["Personal website"]" />
 		}
 	}
 
@@ -83,7 +83,7 @@
 				<div>
 					@foreach (LinkModel link in Model.Links.Where(i => i.DisplayInFooter).OrderBy(i => i.Order))
 					{
-						<a class="socicon-@(link.Name)" href="@(link.Url)" target="_blank" title="@(link.Title)"></a>
+						<a class="socicon-@(link.Name)" href="@(link.Url)" target="_blank" rel="noopener noreferrer" title="@(link.Title)"></a>
 					}
 				</div>
 			</footer>

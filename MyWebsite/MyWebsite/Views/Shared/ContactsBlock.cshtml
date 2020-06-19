@@ -23,7 +23,7 @@
 		<div>
 			@foreach (LinkModel link in links)
 			{
-				<span><img /><img /><var>new</var> <var class="class">Link</var>(<a>@(link.Title)</a>, <a target="_blank" href="@(link.Url)">https:@(link.Url)</a>),</span><br />
+				<span><img /><img /><var>new</var> <var class="class">Link</var>(<a>@(link.Title)</a>, <a target="_blank" rel="noopener noreferrer" href="@(link.Url)">https:@(link.Url)</a>),</span><br />
 			}
 		</div>
 		}<br />
