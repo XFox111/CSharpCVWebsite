@@ -2,6 +2,7 @@
 {
 	display: grid;
 	grid-template-columns: 1fr 300px;
+	grid-template-rows: auto 1fr;
 	grid-column-gap: 50px;
 	grid-row-gap: 25px;
 	max-width: 1100px;
@@ -28,7 +29,7 @@ body
 
 header
 {
-	align-self: center;
+	margin: 25px 0px;
 }
 
 header a:link
