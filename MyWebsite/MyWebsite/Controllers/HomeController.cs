@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
+using MyWebsite.Models;
 using MyWebsite.Models.Databases;
 using MyWebsite.ViewModels;
 using System;
@@ -12,9 +13,14 @@ namespace MyWebsite.Controllers
 	{
 		public HomeController(DatabaseContext context) : base(context) { }
 
-		[Route("")]
-		public IActionResult Index() =>
-			View();
+		[Route("/{id?}")]
+		public IActionResult Index(string id = "")
+		{
+			if (!string.IsNullOrWhiteSpace(id) && Database.ShortLinks.Find(id) is ShortLinkModel link)
+				return Redirect(link.Uri.OriginalString);
+			else
+				return View();
+		}
 
 		[Route("Contacts")]
 		public IActionResult Contacts() =>

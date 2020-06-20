@@ -1,4 +1,9 @@
-﻿input:not([type="checkbox"])
+﻿html
+{
+	user-select: unset;
+}
+
+input:not([type="checkbox"])
 {
 	padding: 10px;
 	border-radius: 5px;

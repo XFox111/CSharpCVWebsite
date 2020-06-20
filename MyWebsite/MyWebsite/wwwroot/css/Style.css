@@ -18,7 +18,6 @@ nav
 	padding: 10px;
 	min-height: 33px;
 	font-size: 26px;
-	user-select: none;
 }
 
 	nav a
@@ -35,7 +34,6 @@ nav
 	nav div
 	{
 		grid-column: 3;
-		user-select: none;
 		cursor: pointer;
 	}
 
@@ -60,7 +58,6 @@ footer
 	align-items: center;
 	grid-template-columns: 1fr auto;
 	grid-column-gap: 10px;
-	user-select: none;
 }
 
 	footer a
@@ -78,6 +75,7 @@ footer
 html
 {
 	overflow: hidden;
+	user-select: none;
 }
 
 body
@@ -90,6 +88,11 @@ body
 	display: grid;
 	grid-template-rows: 1fr auto;
 	height: calc(100vh - 53px);
+}
+
+*[allow-select]
+{
+	user-select: text;
 }
 
 header a

@@ -10,6 +10,7 @@ namespace MyWebsite.Models.Databases
 		public DbSet<CredentialModel> Users { get; set; }
 		public DbSet<BadgeModel> Badges { get; set; }
 		public DbSet<ResumeModel> Resume { get; set; }
+		public DbSet<ShortLinkModel> ShortLinks { get; set; }
 		public DbSet<CustomData> CustomData { get; set; }
 
 		public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options) =>

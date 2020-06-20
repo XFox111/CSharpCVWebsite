@@ -1,0 +1,46 @@
+﻿@model List<ShortLinkModel>
+@{
+	ViewData["Title"] = "Link shortener";
+}
+
+<header>
+	&#xE760; <a asp-action="Index" asp-controller="Admin" asp-area="">Back to main menu</a>
+	<h1>Link shortener</h1>
+</header>
+
+<article>
+	<div asp-validation-summary="All" class="text-danger"></div>
+
+	<h2>Create new link</h2>
+	<form method="post" asp-action="Create" enctype="multipart/form-data">
+		<label for="original-link">Original link</label>
+		<input id="original-link" name="url" type="url" />
+
+		<label for="link-id">Short link identifier (optional)</label>
+		<input id="link-id" name="id" type="text" />
+
+		<input type="submit" value="Create" />
+	</form>
+
+	<h2>Shortened links</h2>
+	<table>
+		<thead>
+			<tr>
+				<th>Original link</th>
+				<th>Short link</th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (ShortLinkModel link in Model)
+			{
+				<tr>
+					<td>@link.Uri.OriginalString</td>
+					<td>//xfox111.net/@link.LinkId</td>
+					<td>
+						<a asp-action="Delete" asp-route-id="@link.LinkId">Delete</a>
+					</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+</article>
