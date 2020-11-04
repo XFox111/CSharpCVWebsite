@@ -59,5 +59,9 @@ namespace MyWebsite.Models
 		[Column(TypeName = "varchar(100)")]
 		[DisplayName("Badges")]
 		public string Badges { get; set; }
+
+		[Column(TypeName = "varchar(255)")]
+		[DisplayName("Logo")]
+		public string Logo { get; set; }
 	}
 }

@@ -83,7 +83,7 @@ body
 	overflow: auto;
 	margin: 0px;
 	margin-top: 53px;
-	font-family: 'Consolas', 'SegoeMDL2Assets';
+	font-family: "Consolas", "Segoe MDL2 Assets";
 	/* This stuff is necessary for sticky footer */
 	display: grid;
 	grid-template-rows: 1fr auto;

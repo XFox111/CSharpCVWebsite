@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System;
 using MyWebsite.Controllers;
 using MyWebsite.Models.Databases;
 using System.Linq;
@@ -14,7 +15,16 @@ namespace MyWebsite.Areas.API
 			databaseContext = db;
 
 		[Route("SemesterOffsetDay")]
-		public string SemesterOffsetDay() =>
-			databaseContext.OffsetDates?.FirstOrDefault()?.Value ?? "undefined";
+		public string SemesterOffsetDay()
+		{
+			try
+			{
+				return DateTime.Parse(databaseContext.OffsetDates?.FirstOrDefault()?.Value).Ticks.ToString();
+			}
+			catch
+			{
+				return "undefined";
+			}
+		}
 	}
 }

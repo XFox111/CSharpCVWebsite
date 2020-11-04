@@ -1,6 +1,8 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MyWebsite.Controllers;
 using MyWebsite.Models;
@@ -19,7 +21,7 @@ namespace MyWebsite.Areas.Admin.Controllers
 		public IActionResult Index() =>
 			View(ViewPath, Database.ShortLinks.ToList());
 
-		[HttpPost]
+		[HttpGet]
 		public IActionResult Create(string url, string id = "")
 		{
 			if (!string.IsNullOrWhiteSpace(id) && Database.ShortLinks.Find(id) != null)
@@ -64,9 +66,43 @@ namespace MyWebsite.Areas.Admin.Controllers
 			{
 				key = new string(Enumerable.Repeat(chars, length)
 				  .Select(s => s[random.Next(s.Length)]).ToArray());
-			} while (Database.ShortLinks.Any(i => i.LinkId == key));
+			} while (Database.ShortLinks.AsEnumerable().Any(i => i.LinkId == key));
 
 			return key;
+		}
+
+		[HttpPost]
+		public IActionResult Upload()
+		{
+			if (Request?.Form?.Files == null || Request.Form.Files.Count < 1)
+				throw new ArgumentNullException("Files");
+
+			foreach (IFormFile file in Request.Form.Files)
+			{
+				if (!string.IsNullOrWhiteSpace(Request.Form["directory"]))
+					Directory.CreateDirectory("wwwroot/assets/SharedFiles" + Request.Form["directory"]);
+				string path = string.Join('/', new[] { Request.Form["directory"].ToString(), file.FileName });
+				using FileStream stream = System.IO.File.Create("wwwroot/assets/SharedFiles" + path);
+
+				if (stream != null)
+					file.CopyTo(stream);
+			}
+			return RedirectToAction("Index");
+		}
+
+		[HttpGet]
+		public IActionResult DeleteFile(string file)
+		{
+			if (System.IO.File.Exists("wwwroot" + file))
+				System.IO.File.Delete("wwwroot" + file);
+
+			if (Database.ShortLinks.AsEnumerable().FirstOrDefault(i => i.Uri.LocalPath == file.Replace("\\", "/")) is ShortLinkModel link)
+			{
+				Database.ShortLinks.Remove(link);
+				Database.SaveChanges();
+			}
+
+			return RedirectToAction("Index");
 		}
 	}
 }

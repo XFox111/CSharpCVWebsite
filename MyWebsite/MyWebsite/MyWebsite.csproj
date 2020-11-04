@@ -11,21 +11,23 @@
     <Copyright>©2020 Michael "XFox" Gordeev</Copyright>
     <PackageProjectUrl>https://xfox111.net/</PackageProjectUrl>
     <RepositoryUrl>https://github.com/xfox111/cvwebsite</RepositoryUrl>
+    <UserSecretsId>7e5f90e2-b583-4979-820a-e8204e9aab6a</UserSecretsId>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Google.Apis.Blogger.v3" Version="1.45.0.1966" />
-    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="3.0.0">
+    <PackageReference Include="Google.Apis.Blogger.v3" Version="1.49.0.2071" />
+    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="3.3.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.4" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.4" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="3.1.4" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.3" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.7" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.7" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="3.1.7" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.4" />
     <PackageReference Include="Select.HtmlToPdf.NetCore" Version="20.1.0" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\Areas\" />
+    <Folder Include="wwwroot\assets\SharedFiles\" />
     <Folder Include="wwwroot\images\Gallery\Cache\" />
   </ItemGroup>
 </Project>

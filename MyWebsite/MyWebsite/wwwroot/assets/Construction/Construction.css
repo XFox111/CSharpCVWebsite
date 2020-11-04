@@ -82,7 +82,7 @@ body
 	color: white;
 	font-size: 9pt;
 	margin: 0px;
-	font-family: 'SegoeUISymbol';
+	font-family: "Segoe UI";
 	overflow: auto;
 	display: grid;
 	height: 100vh;
@@ -90,7 +90,7 @@ body
 
 main
 {
-	font-family: 'Consolas';
+	font-family: "Consolas";
 	margin: 50px 0px 50px 12px;
 }
 

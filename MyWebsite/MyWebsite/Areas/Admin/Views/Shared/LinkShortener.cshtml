@@ -1,6 +1,10 @@
 ﻿@model List<ShortLinkModel>
 @{
 	ViewData["Title"] = "Link shortener";
+
+	var blogLinks = Model.Where(i => i.Uri.AbsoluteUri.Contains("xfox111.net/Blog/Post"));
+	var fileLinks = Model.Where(i => i.Uri.AbsoluteUri.Contains("xfox111.net/assets/SharedFiles") && System.IO.File.Exists("wwwroot" + i.Uri.LocalPath));
+	var otherLinks = Model.Where(i => !blogLinks.Contains(i) && !fileLinks.Contains(i));
 }
 
 <header>
@@ -12,9 +16,9 @@
 	<div asp-validation-summary="All" class="text-danger"></div>
 
 	<h2>Create new link</h2>
-	<form method="post" asp-action="Create" enctype="multipart/form-data">
+	<form method="get" asp-action="Create" enctype="multipart/form-data">
 		<label for="original-link">Original link</label>
-		<input id="original-link" name="url" type="url" />
+		<input id="original-link" name="url" type="url" required/>
 
 		<label for="link-id">Short link identifier (optional)</label>
 		<input id="link-id" name="id" type="text" />
@@ -31,13 +35,82 @@
 			</tr>
 		</thead>
 		<tbody>
-			@foreach (ShortLinkModel link in Model)
+			@foreach (ShortLinkModel link in otherLinks)
 			{
 				<tr>
-					<td>@link.Uri.OriginalString</td>
-					<td>//xfox111.net/@link.LinkId</td>
+					<td>
+						<a target="_blank" rel="noreferrer noopener" href="@link.Uri.OriginalString">@link.Uri.OriginalString</a>
+					</td>
+					<td>https://xfox111.net/@link.LinkId</td>
 					<td>
 						<a asp-action="Delete" asp-route-id="@link.LinkId">Delete</a>
+					</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+
+	<h2>Blog links</h2>
+	<table>
+		<thead>
+			<tr>
+				<th>Original link</th>
+				<th>Short link</th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (ShortLinkModel link in blogLinks)
+			{
+				<tr>
+					<td>
+						<a target="_blank" rel="noreferrer noopener" href="@link.Uri.OriginalString">@link.Uri.OriginalString</a>
+					</td>
+					<td>https://xfox111.net/@link.LinkId</td>
+					<td>
+						<a asp-action="Delete" asp-route-id="@link.LinkId">Delete</a>
+					</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+
+	<h2>Shared files</h2>
+	<form method="post" asp-action="Upload" enctype="multipart/form-data">
+		<label for="file-field">Files</label>
+		<input type="file" name="file" id="file-field" required multiple/>
+
+		<label for="directory">Folder routing</label>
+		<input type="text" value="" name="directory" id="directory"/>
+
+		<input type="submit" value="Upload" />
+	</form>
+	<table>
+		<thead>
+			<tr>
+				<th>File name</th>
+				<th>Short link</th>
+				<th>Action</th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (string file in System.IO.Directory.GetFiles("wwwroot/assets/SharedFiles", "*", System.IO.SearchOption.AllDirectories))
+			{
+				<tr>
+					<td>
+						<a target="_blank" rel="noreferrer noopener" href="@(file.Replace("wwwroot", ""))">@(file.Replace("wwwroot", ""))</a>
+					</td>
+					<td>
+						@if (fileLinks.FirstOrDefault(i => i.Uri.OriginalString.EndsWith(file.Replace("wwwroot", "").Replace("\\", "/"), StringComparison.InvariantCultureIgnoreCase)) is ShortLinkModel link)
+						{
+							<span>https://xfox111.net/@link.LinkId</span>
+						}
+						else
+						{
+							<a href="Shortener/Create?url=https://xfox111.net@(file.Replace("wwwroot", ""))">Shorten link</a>
+						}
+					</td>
+					<td>
+						<a asp-action="DeleteFile" asp-route-file="@(file.Replace("wwwroot", ""))">Delete file</a>
 					</td>
 				</tr>
 			}

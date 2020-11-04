@@ -16,7 +16,7 @@
 	<form asp-action="Index">
 		<input asp-for="Key" value="offset" hidden />
 		<label asp-for="Value">First work day in the semester: (Current: @Model?.Value)</label>
-		<input type="number" asp-for="Value" />
+		<input type="date" asp-for="Value" />
 		<span asp-validation-for="Value" class="text-danger"></span>
 		<input type="submit" value="Update" />
 	</form>

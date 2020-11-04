@@ -18,6 +18,9 @@
 				<th class="hide-l1">
 					@Html.DisplayNameFor(model => model.projects.First().Id)
 				</th>
+				<th class="hide-l1">
+					@Html.DisplayNameFor(model => model.projects.First().Logo)
+				</th>
 				<th>
 					@Html.DisplayNameFor(model => model.projects.First().Title)
 				</th>
@@ -44,6 +47,12 @@
 						<a onclick="Down(this)">&#xE011;</a>
 					</td>
 					<td class="hide-l1">@item.Id</td>
+					<td class="hide-l1">
+						@if (Uri.IsWellFormedUriString(item.Logo, UriKind.RelativeOrAbsolute))
+						{
+							<img src="@item.Logo"/>
+						}
+					</td>
 					<td>
 						@item.EnglishTitle (en)<br />
 						@(item.RussianTitle ?? "<not_set>") (ru)
@@ -104,6 +113,12 @@
 				color: gray;
 				text-decoration: underline;
 			}
+
+		img
+		{
+			width: 25px;
+			height: 25px;
+		}
 	</style>
 
 	<script type="text/javascript" src="~/js/ReorderScript.js"></script>

@@ -1,12 +1,16 @@
 ﻿@model BlogPostViewModel
+@using System.Text.RegularExpressions
 @{
 	ViewData["Title"] = Model.Post.Title + " - Fox, Coffee and Science - " + SharedLocalizer["Blog"];
+	string description = new System.Text.RegularExpressions.Regex(@"(?<=\<p\>\s{1,})(.|\s)*?\s*(?=\<\/p\>)").Match(Model.Post.Content).Value
+		.Replace("\n", "");
+	description = Regex.Replace(description, "<.*?>", string.Empty);
 }
 
 @section OpenGraph
 {
 	<meta name="author" content="@Model.Post.Author.DisplayName" />
-	<meta name="description" content="@(new System.Text.RegularExpressions.Regex(@"(?<=\<p\>)(\s*.*\s*)(?=\<\/p\>)").Match(Model.Post.Content).Value.Replace("\n", ""))" />
+	<meta name="description" content="@description" />
 
 	<meta property="og:type" content="article" />
 	<meta property="og:site_name" content="Fox, Coffee and Science Blog" />
@@ -15,7 +19,7 @@
 	<meta property="og:title" content="@Model.Post.Title" />
 
 	<meta property="og:image" content="@(Model.Post.Images.FirstOrDefault()?.Url)" />
-	<meta property="og:description" content="@(new System.Text.RegularExpressions.Regex(@"(?<=\<p\>)(\s*.*\s*)(?=\<\/p\>)").Match(Model.Post.Content).Value.Replace("\n", ""))" />
+	<meta property="og:description" content="@description" />
 
 	<meta property="article:published_time" content="@Model.Post.Published" />
 	<meta property="article:modified_time" content="@Model.Post.Updated" />
@@ -25,88 +29,71 @@
 	}
 }
 
-<article>
-	<div class="post-body" allow-select>
-		<div class="post-header">
-			<h2>@Model.Post.Title</h2>
-			<p>
-				@DateTime.Parse(Model.Post.Published).ToShortDateString() | <a href="@Model.Post.Author.Url" target="_blank" rel="noopener noreferrer">@Model.Post.Author.DisplayName</a><br />
-			</p>
-			<div class="share-btns">
-				<a class="share-btn facebook" target="_blank" rel="noopener noreferrer" href="//www.facebook.com/sharer/sharer.php?u=@Context.Request.Scheme://@Context.Request.Host@Context.Request.Path" title="Facebook">
-					<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="24px" height="24px" viewBox="0 0 24 24" enable-background="new 0 0 24 24" xml:space="preserve" class="eapps-social-share-buttons-item-icon">
-					<path d="M5.677,12.998V8.123h3.575V6.224C9.252,2.949,11.712,0,14.736,0h3.94v4.874h-3.94 c-0.432,0-0.934,0.524-0.934,1.308v1.942h4.874v4.874h-4.874V24H9.252V12.998H5.677z"></path>
-					</svg>
-				</a>
-				<a class="share-btn twitter" target="_blank" rel="noopener noreferrer" href="//twitter.com/intent/tweet?url=@Context.Request.Scheme://@Context.Request.Host@Context.Request.Path&text=@Model.Post.Title" title="Twitter">
-					<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="24px" height="24px" viewBox="0 0 24 24" enable-background="new 0 0 24 24" xml:space="preserve" class="eapps-social-share-buttons-item-icon">
-					<path fill="%233E68C0" d="M21.535,7.063c0.311,6.923-4.852,14.642-13.99,14.642 c-2.78,0-5.368-0.815-7.545-2.213c2.611,0.308,5.217-0.415,7.287-2.038c-2.154-0.039-3.972-1.462-4.599-3.418 c0.771,0.148,1.53,0.105,2.223-0.084c-2.367-0.475-4.002-2.608-3.948-4.888c0.664,0.369,1.423,0.59,2.229,0.615 C1.001,8.215,0.38,5.32,1.67,3.108c2.428,2.978,6.055,4.938,10.145,5.143c-0.717-3.079,1.618-6.044,4.796-6.044 c1.415,0,2.694,0.598,3.592,1.554c1.121-0.221,2.174-0.631,3.126-1.195c-0.368,1.149-1.149,2.114-2.164,2.724 c0.995-0.119,1.944-0.384,2.826-0.776C23.331,5.503,22.497,6.37,21.535,7.063z"></path>
-					</svg>
-				</a>
-				<a class="share-btn linkedin" target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/sharing/share-offsite/?url=@Context.Request.Scheme://@Context.Request.Host@Context.Request.Path" title="LinkedIn">
-					<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="24px" height="24px" viewBox="0 0 24 24" enable-background="new 0 0 24 24" xml:space="preserve" class="eapps-social-share-buttons-item-icon">
-					<path fill="%233E68C0" d="M6.52,22h-4.13V8.667h4.13V22z M4.436,6.92 c-1.349,0-2.442-1.101-2.442-2.46C1.994,3.102,3.087,2,4.436,2s2.442,1.102,2.442,2.46C6.877,5.819,5.784,6.92,4.436,6.92z M21.994,22h-4.109c0,0,0-5.079,0-6.999c0-1.919-0.73-2.991-2.249-2.991c-1.652,0-2.515,1.116-2.515,2.991c0,2.054,0,6.999,0,6.999 h-3.96V8.667h3.96v1.796c0,0,1.191-2.202,4.02-2.202c2.828,0,4.853,1.727,4.853,5.298C21.994,17.129,21.994,22,21.994,22z"></path>
-					</svg>
-				</a>
-				<a class="share-btn vk" target="_blank" rel="noopener noreferrer" href="//vk.com/share.php?url=@Context.Request.Scheme://@Context.Request.Host@Context.Request.Path&title=@Model.Post.Title" title="VK">
-					<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="24px" height="24px" viewBox="0 0 24 24" enable-background="new 0 0 24 24" xml:space="preserve" class="eapps-social-share-buttons-item-icon">
-					<path fill="%233E68C0" d="M23.876,17.52c-0.029-0.063-0.056-0.115-0.081-0.156c-0.416-0.75-1.212-1.67-2.387-2.762l-0.025-0.025 l-0.012-0.012l-0.013-0.013h-0.013c-0.533-0.508-0.871-0.85-1.012-1.025c-0.259-0.333-0.317-0.671-0.175-1.012 c0.1-0.258,0.475-0.804,1.125-1.637c0.342-0.442,0.612-0.795,0.812-1.062c1.441-1.916,2.066-3.141,1.874-3.674l-0.074-0.125 c-0.05-0.075-0.096-0.116-0.304-0.178c-0.208-0.062-0.466-0.057-1.107-0.057l-3.03,0.021c-0.155,0-0.486-0.017-0.594,0.008 s-0.163,0.038-0.163,0.038L18.633,5.88l-0.05,0.038c-0.042,0.025-0.087,0.069-0.138,0.131c-0.05,0.062-0.091,0.135-0.125,0.219 c-0.392,1.008-0.837,1.945-1.337,2.811c-0.308,0.517-0.591,0.964-0.85,1.343c-0.258,0.379-0.475,0.658-0.65,0.837 c-0.175,0.179-0.333,0.323-0.475,0.431s-0.25,0.154-0.325,0.138c-0.075-0.017-0.146-0.033-0.213-0.05 c-0.117-0.075-0.21-0.177-0.281-0.306s-0.119-0.292-0.144-0.487c-0.025-0.196-0.04-0.364-0.044-0.506 c-0.004-0.141-0.002-0.342,0.006-0.6c0.009-0.258,0.013-0.433,0.013-0.525c0-0.317,0.006-0.66,0.019-1.031s0.023-0.664,0.031-0.881 s0.012-0.446,0.012-0.687c0-0.242-0.015-0.431-0.044-0.569c-0.029-0.137-0.073-0.271-0.131-0.4s-0.144-0.229-0.256-0.3 c-0.112-0.071-0.252-0.127-0.419-0.169c-0.442-0.1-1.004-0.154-1.687-0.162C9.996,5.138,9,5.238,8.559,5.455 C8.384,5.547,8.226,5.672,8.084,5.83c-0.15,0.183-0.171,0.283-0.063,0.3c0.5,0.075,0.854,0.254,1.062,0.537l0.075,0.15 c0.058,0.108,0.117,0.3,0.175,0.575c0.058,0.275,0.096,0.579,0.112,0.912c0.042,0.608,0.042,1.129,0,1.562 s-0.081,0.771-0.119,1.012c-0.038,0.242-0.094,0.437-0.169,0.587s-0.125,0.242-0.15,0.275s-0.046,0.054-0.062,0.062 c-0.108,0.042-0.221,0.063-0.337,0.063c-0.117,0-0.258-0.058-0.425-0.175c-0.167-0.117-0.339-0.277-0.519-0.481 c-0.179-0.204-0.381-0.489-0.606-0.856c-0.225-0.366-0.458-0.8-0.7-1.299l-0.2-0.362C6.033,8.459,5.862,8.119,5.646,7.674 C5.429,7.228,5.238,6.797,5.071,6.381c-0.067-0.175-0.167-0.308-0.3-0.4L4.708,5.943C4.666,5.91,4.6,5.874,4.508,5.837 C4.416,5.799,3.576,5.766,3.219,5.766L0.831,5.78c-0.35,0-0.621,0.08-0.746,0.239l-0.05,0.075c-0.025,0.042-0.038,0.108-0.038,0.2 s0.025,0.204,0.075,0.337c0.5,1.175,1.043,2.308,1.631,3.399C2.29,11.121,2.801,12,3.234,12.666 c0.433,0.667,0.875,1.296,1.325,1.887c0.45,0.592,0.748,0.971,0.893,1.137c0.146,0.167,0.26,0.292,0.344,0.375l0.312,0.3 c0.2,0.2,0.494,0.439,0.881,0.718c0.387,0.279,0.816,0.554,1.287,0.825c0.471,0.271,1.018,0.491,1.643,0.662 s1.218,0.206,1.824,0.206h1.437c0.291-0.025,0.512-0.117,0.662-0.275l0.05-0.063c0.033-0.05,0.065-0.127,0.094-0.231 s0.044-0.219,0.044-0.344c-0.009-0.358,0.019-0.681,0.081-0.968s0.133-0.504,0.213-0.65c0.079-0.146,0.169-0.269,0.269-0.368 c0.1-0.1,0.171-0.16,0.213-0.181c0.041-0.021,0.075-0.035,0.1-0.044c0.2-0.067,0.435-0.002,0.706,0.194s0.525,0.437,0.762,0.725 s0.523,0.61,0.856,0.968s0.625,0.625,0.875,0.8l0.25,0.15c0.167,0.1,0.383,0.192,0.65,0.275c0.266,0.083,0.401,0.062,0.7,0.062 l3.262-0.003c0.316,0,0.5-0.099,0.674-0.203c0.175-0.104,0.279-0.219,0.312-0.344s0.035-0.267,0.006-0.425 C23.935,17.693,23.905,17.582,23.876,17.52z"></path>
-					</svg>
-				</a>
-			</div>
-		</div>
-
-		@Html.Raw(Model.Post.Content)
-
-		<p>
-			@if (Model.Post.Labels != null && Model.Post.Labels.Count > 0)
-			{
-				<span class="comment">// @SharedLocalizer["Tags"]: @(Html.Raw(string.Join(", ", (Model.Post.Labels ?? new string[0]).Select(i => $"<a class=\"comment\" href=\"/Blog/Tags/{i}\">{i}</a>"))))</span>
-			}
-		</p>
+<article lang="en-us" allow-select class="article">
+	<h2>@Model.Post.Title</h2>
+	<p>
+		@DateTime.Parse(Model.Post.Published).ToShortDateString() | <a href="@Model.Post.Author.Url" target="_blank" rel="noopener noreferrer">@Model.Post.Author.DisplayName</a><br />
+	</p>
+	<div class="share-btns">
+		<a class="share-btn facebook" target="_blank" rel="noopener noreferrer" href="//www.facebook.com/sharer/sharer.php?u=@Context.Request.Scheme://@Context.Request.Host@Context.Request.Path" title="Facebook">
+			<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="24px" height="24px" viewBox="0 0 24 24" enable-background="new 0 0 24 24" xml:space="preserve" class="eapps-social-share-buttons-item-icon">
+				<path d="M5.677,12.998V8.123h3.575V6.224C9.252,2.949,11.712,0,14.736,0h3.94v4.874h-3.94 c-0.432,0-0.934,0.524-0.934,1.308v1.942h4.874v4.874h-4.874V24H9.252V12.998H5.677z"></path>
+			</svg>
+		</a>
+		<a class="share-btn twitter" target="_blank" rel="noopener noreferrer" href="//twitter.com/intent/tweet?url=@Context.Request.Scheme://@Context.Request.Host@Context.Request.Path&text=@Model.Post.Title" title="Twitter">
+			<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="24px" height="24px" viewBox="0 0 24 24" enable-background="new 0 0 24 24" xml:space="preserve" class="eapps-social-share-buttons-item-icon">
+				<path fill="%233E68C0" d="M21.535,7.063c0.311,6.923-4.852,14.642-13.99,14.642 c-2.78,0-5.368-0.815-7.545-2.213c2.611,0.308,5.217-0.415,7.287-2.038c-2.154-0.039-3.972-1.462-4.599-3.418 c0.771,0.148,1.53,0.105,2.223-0.084c-2.367-0.475-4.002-2.608-3.948-4.888c0.664,0.369,1.423,0.59,2.229,0.615 C1.001,8.215,0.38,5.32,1.67,3.108c2.428,2.978,6.055,4.938,10.145,5.143c-0.717-3.079,1.618-6.044,4.796-6.044 c1.415,0,2.694,0.598,3.592,1.554c1.121-0.221,2.174-0.631,3.126-1.195c-0.368,1.149-1.149,2.114-2.164,2.724 c0.995-0.119,1.944-0.384,2.826-0.776C23.331,5.503,22.497,6.37,21.535,7.063z"></path>
+			</svg>
+		</a>
+		<a class="share-btn linkedin" target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/sharing/share-offsite/?url=@Context.Request.Scheme://@Context.Request.Host@Context.Request.Path" title="LinkedIn">
+			<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="24px" height="24px" viewBox="0 0 24 24" enable-background="new 0 0 24 24" xml:space="preserve" class="eapps-social-share-buttons-item-icon">
+				<path fill="%233E68C0" d="M6.52,22h-4.13V8.667h4.13V22z M4.436,6.92 c-1.349,0-2.442-1.101-2.442-2.46C1.994,3.102,3.087,2,4.436,2s2.442,1.102,2.442,2.46C6.877,5.819,5.784,6.92,4.436,6.92z M21.994,22h-4.109c0,0,0-5.079,0-6.999c0-1.919-0.73-2.991-2.249-2.991c-1.652,0-2.515,1.116-2.515,2.991c0,2.054,0,6.999,0,6.999 h-3.96V8.667h3.96v1.796c0,0,1.191-2.202,4.02-2.202c2.828,0,4.853,1.727,4.853,5.298C21.994,17.129,21.994,22,21.994,22z"></path>
+			</svg>
+		</a>
+		<a class="share-btn vk" target="_blank" rel="noopener noreferrer" href="//vk.com/share.php?url=@Context.Request.Scheme://@Context.Request.Host@Context.Request.Path&title=@Model.Post.Title" title="VK">
+			<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="24px" height="24px" viewBox="0 0 24 24" enable-background="new 0 0 24 24" xml:space="preserve" class="eapps-social-share-buttons-item-icon">
+				<path fill="%233E68C0" d="M23.876,17.52c-0.029-0.063-0.056-0.115-0.081-0.156c-0.416-0.75-1.212-1.67-2.387-2.762l-0.025-0.025 l-0.012-0.012l-0.013-0.013h-0.013c-0.533-0.508-0.871-0.85-1.012-1.025c-0.259-0.333-0.317-0.671-0.175-1.012 c0.1-0.258,0.475-0.804,1.125-1.637c0.342-0.442,0.612-0.795,0.812-1.062c1.441-1.916,2.066-3.141,1.874-3.674l-0.074-0.125 c-0.05-0.075-0.096-0.116-0.304-0.178c-0.208-0.062-0.466-0.057-1.107-0.057l-3.03,0.021c-0.155,0-0.486-0.017-0.594,0.008 s-0.163,0.038-0.163,0.038L18.633,5.88l-0.05,0.038c-0.042,0.025-0.087,0.069-0.138,0.131c-0.05,0.062-0.091,0.135-0.125,0.219 c-0.392,1.008-0.837,1.945-1.337,2.811c-0.308,0.517-0.591,0.964-0.85,1.343c-0.258,0.379-0.475,0.658-0.65,0.837 c-0.175,0.179-0.333,0.323-0.475,0.431s-0.25,0.154-0.325,0.138c-0.075-0.017-0.146-0.033-0.213-0.05 c-0.117-0.075-0.21-0.177-0.281-0.306s-0.119-0.292-0.144-0.487c-0.025-0.196-0.04-0.364-0.044-0.506 c-0.004-0.141-0.002-0.342,0.006-0.6c0.009-0.258,0.013-0.433,0.013-0.525c0-0.317,0.006-0.66,0.019-1.031s0.023-0.664,0.031-0.881 s0.012-0.446,0.012-0.687c0-0.242-0.015-0.431-0.044-0.569c-0.029-0.137-0.073-0.271-0.131-0.4s-0.144-0.229-0.256-0.3 c-0.112-0.071-0.252-0.127-0.419-0.169c-0.442-0.1-1.004-0.154-1.687-0.162C9.996,5.138,9,5.238,8.559,5.455 C8.384,5.547,8.226,5.672,8.084,5.83c-0.15,0.183-0.171,0.283-0.063,0.3c0.5,0.075,0.854,0.254,1.062,0.537l0.075,0.15 c0.058,0.108,0.117,0.3,0.175,0.575c0.058,0.275,0.096,0.579,0.112,0.912c0.042,0.608,0.042,1.129,0,1.562 s-0.081,0.771-0.119,1.012c-0.038,0.242-0.094,0.437-0.169,0.587s-0.125,0.242-0.15,0.275s-0.046,0.054-0.062,0.062 c-0.108,0.042-0.221,0.063-0.337,0.063c-0.117,0-0.258-0.058-0.425-0.175c-0.167-0.117-0.339-0.277-0.519-0.481 c-0.179-0.204-0.381-0.489-0.606-0.856c-0.225-0.366-0.458-0.8-0.7-1.299l-0.2-0.362C6.033,8.459,5.862,8.119,5.646,7.674 C5.429,7.228,5.238,6.797,5.071,6.381c-0.067-0.175-0.167-0.308-0.3-0.4L4.708,5.943C4.666,5.91,4.6,5.874,4.508,5.837 C4.416,5.799,3.576,5.766,3.219,5.766L0.831,5.78c-0.35,0-0.621,0.08-0.746,0.239l-0.05,0.075c-0.025,0.042-0.038,0.108-0.038,0.2 s0.025,0.204,0.075,0.337c0.5,1.175,1.043,2.308,1.631,3.399C2.29,11.121,2.801,12,3.234,12.666 c0.433,0.667,0.875,1.296,1.325,1.887c0.45,0.592,0.748,0.971,0.893,1.137c0.146,0.167,0.26,0.292,0.344,0.375l0.312,0.3 c0.2,0.2,0.494,0.439,0.881,0.718c0.387,0.279,0.816,0.554,1.287,0.825c0.471,0.271,1.018,0.491,1.643,0.662 s1.218,0.206,1.824,0.206h1.437c0.291-0.025,0.512-0.117,0.662-0.275l0.05-0.063c0.033-0.05,0.065-0.127,0.094-0.231 s0.044-0.219,0.044-0.344c-0.009-0.358,0.019-0.681,0.081-0.968s0.133-0.504,0.213-0.65c0.079-0.146,0.169-0.269,0.269-0.368 c0.1-0.1,0.171-0.16,0.213-0.181c0.041-0.021,0.075-0.035,0.1-0.044c0.2-0.067,0.435-0.002,0.706,0.194s0.525,0.437,0.762,0.725 s0.523,0.61,0.856,0.968s0.625,0.625,0.875,0.8l0.25,0.15c0.167,0.1,0.383,0.192,0.65,0.275c0.266,0.083,0.401,0.062,0.7,0.062 l3.262-0.003c0.316,0,0.5-0.099,0.674-0.203c0.175-0.104,0.279-0.219,0.312-0.344s0.035-0.267,0.006-0.425 C23.935,17.693,23.905,17.582,23.876,17.52z"></path>
+			</svg>
+		</a>
 	</div>
 
-	<div class="post-comments" style="display: none !important;">
-		<h3>Comments: @Model.Post.Replies.TotalItems</h3>
-		<p>
-			<a class="comment" href="@Model.Post.Url" target="_blank" rel="noopener noreferrer">// Add comment on Blogpost</a>
-		</p>
-		<div>
-			@foreach (var i in Model.Post.Replies.Items.Where(i => i.InReplyTo == null))
+	@Html.Raw(Model.Post.Content)
+
+	<p>
+		@if (Model.Post.Labels != null && Model.Post.Labels.Count > 0)
+		{
+			<span class="comment">// @SharedLocalizer["Tags"]: @(Html.Raw(string.Join(", ", (Model.Post.Labels ?? new string[0]).Select(i => $"<a class=\"comment\" href=\"/Blog/Tags/{i}\">{i}</a>"))))</span>
+		}
+	</p>
+</article>
+
+<partial name="~/Views/Blog/BlogSidebar.cshtml" model="Model"/>
+
+<div class="post-comments" style="display: none !important;">
+	<h3>@SharedLocalizer["Comments"]: @Model.Post.Replies.TotalItems</h3>
+	<p>
+		<a class="comment" href="@Model.Post.Url" target="_blank" rel="noopener noreferrer">// @SharedLocalizer["Add comment on Blogspot"]</a>
+	</p>
+	<div>
+		@if (Model.Post.Replies.Items != null)
+			foreach (var i in Model.Post.Replies.Items.Where(i => i.InReplyTo == null))
 			{
 				@Html.Raw(GetCommentCard(i.Id))
 			}
-		</div>
 	</div>
-</article>
+</div>
 
-<aside>
-	<a class="twitter-timeline" data-lang="@SharedLocalizer["en"]" data-width="300" data-height="600" data-theme="light" href="https://twitter.com/xfox111?ref_src=twsrc%5Etfw">Tweets by xfox111</a>
+<script type="text/javascript">
+	if (document.querySelector("article.article *[allow-comments]"))
+		document.querySelector(".post-comments").removeAttribute("style");
 
-	<h3>@SharedLocalizer["Follow me on"]</h3>
-
-	<div class="follow-list">
-		@foreach (LinkModel link in Model.Links.Where(i => new[] { "twitter", "blogger", "github" }.Contains(i.Name)).OrderBy(i => i.Order))
-		{
-			<a class="socicon-@(link.Name)" href="@(link.Url)" target="_blank" rel="noopener noreferrer" title="@(link.Title)"></a>
-		}
-		<a class="socicon-rss" href="/Blog/RSS" target="_blank" rel="noopener noreferrer" title="RSS Feed"></a>
-		<a href="//buymeacoff.ee/xfox111" target="_blank" rel="noopener noreferrer" title="Buy me a coffee">
-			<img width="24" height="25" src="https://cdn.buymeacoffee.com/buttons/bmc-new-btn-logo.svg">
-		</a>
-	</div>
-</aside>
+	document.querySelectorAll("article.article img").forEach(i => i.addEventListener("click", () => window.open(i.src)));
+</script>
 
 @section Imports
 {
 	<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 	<link rel="stylesheet" type="text/css" href="~/css/Blog.css" />
-	<style type="text/css">
-		main
-		{
-			padding-top: 50px;
-		}
-	</style>
 }
 
 @functions
@@ -116,18 +103,16 @@
 		var comment = Model.Post.Replies.Items.FirstOrDefault(i => i.Id == commentId);
 		return $@"
 			<div class= ""post-comment"">
+				<img src=""{comment.Author.Image.Url}"" />
 				<div>
-					<img src=""{comment.Author.Image.Url}"" />
+					<p>
+						<a href=""{comment.Author.Url}"" target=""_blank"">{comment.Author.DisplayName}</a> | {DateTime.Parse(comment.Published).ToString()}
+					</p>
+					<p>
+						{comment.Content}
+					</p>
 					<div>
-						<span>
-							<a href=""{comment.Author.Url}"" target=""_blank"">{comment.Author.DisplayName}</a> | {DateTime.Parse(comment.Published).ToString()}
-						</span>
-						<p>
-							{comment.Content}
-						</p>
-						<div>
-							{(string.Join(string.Empty, Model.Post.Replies.Items.Where(i => i.InReplyTo?.Id == commentId).Select(i => GetCommentCard(i.Id))))}
-						</div>
+						{(string.Join(string.Empty, Model.Post.Replies.Items.Where(i => i.InReplyTo?.Id == commentId).Select(i => GetCommentCard(i.Id))))}
 					</div>
 				</div>
 			</div>

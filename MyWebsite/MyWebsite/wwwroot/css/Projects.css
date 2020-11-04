@@ -8,6 +8,11 @@ header
 	margin-bottom: 20px;
 }
 
+body
+{
+	background-color: whitesmoke;
+}
+
 h1
 {
 	margin: 0px;
@@ -31,8 +36,9 @@ h1
 article
 {
 	display: grid;
-	grid-row-gap: 10px;
+	grid-gap: 10px;
 	margin: 0px 10px;
+	grid-template-columns: 1fr 1fr;
 }
 
 .project-item
@@ -40,7 +46,31 @@ article
 	display: grid;
 	padding: 20px;
 	grid-row-gap: 20px;
-	background-color: whitesmoke;
+	grid-column-gap: 20px;
+	background-color: white;
+	box-shadow: 0px 0px 10px rgba(0, 0, 0, .1);
+	border-radius: 5px;
+	grid-template-rows: auto 1fr auto auto;
+	grid-template-columns: 1fr auto;
+}
+
+.project-item > *
+{
+	grid-column: 1/2;
+}
+
+	.project-item img
+	{
+		width: 150px;
+		height: 150px;
+		grid-column: 2/3;
+		grid-row: 1/5;
+		filter: drop-shadow(0px 0px 5px rgb(150, 150, 150));
+	}
+
+.project-item > p
+{
+	margin: 0px;
 }
 
 .badge-placeholder
@@ -58,3 +88,19 @@ article
 		display: inline-block;
 		background-size: contain;
 	}
+
+@media only screen and (max-width: 1024px)
+{
+	article
+	{
+		grid-template-columns: 1fr;
+	}
+}
+
+@media only screen and (max-width: 480px)
+{
+	.project-item img
+	{
+		display: none;
+	}
+}

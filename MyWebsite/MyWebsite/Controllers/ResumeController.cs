@@ -17,8 +17,8 @@ namespace MyWebsite.Controllers
 				return NotFound();
 			model.Resume.Content = model.Resume.Content
 				.Replace("%WEBSITE%", $"{Request.Scheme}://{Request.Host}/", true, CultureInfo.InvariantCulture)
-				.Replace("%PHONE_NUMBER%", "+7 (996) 929-19-69", true, CultureInfo.InvariantCulture)
-				.Replace("%EMAIL%", Database.Links.Find("outlook").Username, true, CultureInfo.InvariantCulture);
+				.Replace("%PHONE_NUMBER%", Database.Links.Find("phone")?.Username, true, CultureInfo.InvariantCulture)
+				.Replace("%EMAIL%", Database.Links.Find("outlook")?.Username, true, CultureInfo.InvariantCulture);
 			return View(model);
 		}
 

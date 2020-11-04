@@ -17,13 +17,11 @@
 		@foreach (ProjectModel project in Model.Projects.OrderBy(i => i.Order))
 		{
 			<div class="project-item">
-				<div>
-					<h1 allow-select>@project.Title</h1>
-					<p allow-select>
-						@Html.Raw(project.Description?.Replace("\n", "<br />"))
-					</p>
-					<a href="@(project.Link)" target="_blank" rel="noopener noreferrer">@project.LinkCaption</a>
-				</div>
+				<h1 allow-select>@project.Title</h1>
+				<p allow-select>
+					@Html.Raw(project.Description?.Replace("\n", "<br />"))
+				</p>
+				<a href="@(project.Link)" target="_blank" rel="noopener noreferrer">@project.LinkCaption</a>
 				<div class="badge-placeholder">
 					@foreach (string b in (project.Badges ?? "").Split(','))
 					{
@@ -31,6 +29,10 @@
 						<div style="background-image: url('../images/Badges/@(badge?.Image).png')" title="@(badge?.Description)"></div>
 					}
 				</div>
+				@if(Uri.IsWellFormedUriString(project.Logo, UriKind.RelativeOrAbsolute))
+				{
+					<img src="@project.Logo"/>
+				}
 			</div>
 		}
 	}

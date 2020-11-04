@@ -94,7 +94,7 @@ textarea
 	padding: 10px;
 	box-sizing: border-box;
 	height: 68vh;
-	font-family: 'Consolas';
+	font-family: "Consolas";
 }
 
 .select-container::after
@@ -141,6 +141,13 @@ th
 	text-align: left;
 }
 
+tr:nth-child(even)
+{
+	background: lightgray;
+	box-sizing: border-box;
+	margin: 5px;
+}
+
 td
 {
 	text-align: start;
@@ -150,6 +157,7 @@ table
 {
 	width: 100%;
 }
+
 
 .text-danger
 {

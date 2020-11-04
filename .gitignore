@@ -7,6 +7,10 @@
 [Bb]in/
 [Oo]bj/
 .vs/
+.vscode/
+
+MyWebsite/MyWebsite/wwwroot/assets/SharedFiles
+MyWebsite/MyWebsite/wwwroot/Projects/FoxTube/Screenshots
 
 /MyWebsite/.config
 /MyWebsite/MyWebsite/Properties/PublishProfiles

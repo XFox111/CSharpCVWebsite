@@ -120,6 +120,9 @@
   <data name="AboutMe" xml:space="preserve">
     <value>ОбоМне</value>
   </data>
+  <data name="Add comment on Blogspot" xml:space="preserve">
+    <value>Оставить комментарий на Blogspot</value>
+  </data>
   <data name="All links are clickable" xml:space="preserve">
     <value>Все ссылки кликабельны</value>
   </data>
@@ -131,6 +134,9 @@
   </data>
   <data name="Blog" xml:space="preserve">
     <value>Блог</value>
+  </data>
+  <data name="Comments" xml:space="preserve">
+    <value>Комментарии</value>
   </data>
   <data name="Contact information" xml:space="preserve">
     <value>Контактная информация</value>
