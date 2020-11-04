@@ -7,11 +7,26 @@ trigger:
 - master
 
 pool:
-  vmImage: 'ubuntu-latest'
+  vmImage: 'windows-latest'
 
 variables:
   buildConfiguration: 'Release'
 
 steps:
-- script: dotnet build --configuration $(buildConfiguration)
-  displayName: 'dotnet build $(buildConfiguration)'
+- task: DotNetCoreCLI@2
+  displayName: 'Building project'
+  inputs:
+    command: 'pack'
+    packagesToPack: '**/*.csproj'
+    configuration: '$(buildConfiguration)'
+    versioningScheme: 'byBuildNumber'
+
+- task: IISWebAppDeploy@2
+  displayName: 'Deployment'
+  inputs:
+    machinesList: '31.31.196.233'
+    AdminUserName: '$(webDeployLogin)'
+    AdminPassword: '$(webDeployPassword)'
+    WinRMProtocol: 'Https'
+    WebDeployPackage: '$(Build.ArtifactStagingDirectory)/*.zip'
+    WebsiteName: 'xfox111.net'
