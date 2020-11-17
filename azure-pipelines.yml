@@ -15,7 +15,7 @@ steps:
   inputs:
     secureFile: "WebDeploy.pubxml"
     
-- script: 'Move-Item $(wdConfig.secureFilePath) $(Build.Repository.LocalPath)\MyWebsite\MyWebsite\Properties\PublishProfiles\WebDeploy.pubxml'
+- script: 'move $(wdConfig.secureFilePath) $(Build.Repository.LocalPath)\MyWebsite\MyWebsite\Properties\PublishProfiles\WebDeploy.pubxml'
   displayName: "Move config to directory"
 
 - task: MSBuild@1
