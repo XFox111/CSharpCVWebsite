@@ -9,27 +9,24 @@ trigger:
 pool:
   vmImage: 'windows-latest'
 
-variables:
-  buildConfiguration: 'Release'
-
 steps:
-- task: DotNetCoreCLI@2
-  displayName: 'Building project'
+- task: DownloadSecureFile@1
+  name: wdConfig
   inputs:
-    command: 'pack'
-    packagesToPack: '**/*.csproj'
-    configuration: '$(buildConfiguration)'
-    versioningScheme: 'byPrereleaseNumber'
-    majorVersion: '1'
-    minorVersion: '0'
-    patchVersion: '0'
+    secureFile: "WebDeploy.pubxml"
+    
+- script: 'Move-Item $(wdConfig.secureFilePath) $(Build.Repository.LocalPath)\MyWebsite\MyWebsite\Properties\PublishProfiles\WebDeploy.pubxml'
+  displayName: "Move config to directory"
 
-- task: IISWebAppDeploy@2
-  displayName: 'Deployment'
+- task: MSBuild@1
+  displayName: "Deployment via Web Deploy"
   inputs:
-    machinesList: '31.31.196.233'
-    AdminUserName: '$(webDeployLogin)'
-    AdminPassword: '$(webDeployPassword)'
-    WinRMProtocol: 'Https'
-    WebDeployPackage: '$(Build.ArtifactStagingDirectory)/*.zip'
-    WebsiteName: 'xfox111.net'
+    solution: '**/*.sln'
+    msbuildArchitecture: 'x64'
+    platform: 'Any CPU'
+    configuration: 'Release'
+    msbuildArguments: |
+      '/p:DeployOnBuild=true'
+      '/p:PublishProfile=WebDeploy'
+      '/p:Password=$(webDeployPassword)'
+    restoreNugetPackages: true
