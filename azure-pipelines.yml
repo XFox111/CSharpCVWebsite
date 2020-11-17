@@ -21,12 +21,18 @@ steps:
     copy $(wdConfig.secureFilePath) $(Build.Repository.LocalPath)\MyWebsite\MyWebsite\Properties\PublishProfiles\WebDeploy.pubxml
   displayName: "Move config to directory"
 
-- task: MSBuild@1
-  displayName: "Deployment via Web Deploy"
+- task: DotNetCoreCLI@2
   inputs:
-    solution: '**/*.sln'
-    msbuildArchitecture: 'x64'
-    platform: 'Any CPU'
-    configuration: 'Release'
-    msbuildArguments: '-restore:true /p:DeployOnBuild=true /p:PublishProfile=WebDeploy /p:Password=$(webDeployPassword)'
-    restoreNugetPackages: true
+    command: 'custom'
+    custom: 'msbuild'
+    arguments: '$(Build.Repository.LocalPath)\MyWebsite\MyWebsite.sln -restore:true /p:DeployOnBuild=true /p:PublishProfile=WebDeploy /p:Configuration=Release /p:Platform="Any CPU" /p:Password=$(webDeployPassword)'
+
+# - task: MSBuild@1
+#   displayName: "Deployment via Web Deploy"
+#   inputs:
+#     solution: '**/*.sln'
+#     msbuildArchitecture: 'x64'
+#     platform: 'Any CPU'
+#     configuration: 'Release'
+#     msbuildArguments: '-restore:true /p:DeployOnBuild=true /p:PublishProfile=WebDeploy /p:Password=$(webDeployPassword)'
+#     restoreNugetPackages: true
