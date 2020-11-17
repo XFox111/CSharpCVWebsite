@@ -28,8 +28,5 @@ steps:
     msbuildArchitecture: 'x64'
     platform: 'Any CPU'
     configuration: 'Release'
-    msbuildArguments: |
-      /p:DeployOnBuild=true
-      /p:PublishProfile=WebDeploy
-      /p:Password=$(webDeployPassword)
+    msbuildArguments: '/p:DeployOnBuild=true /p:PublishProfile=WebDeploy /p:Password=$(webDeployPassword)'
     restoreNugetPackages: true
