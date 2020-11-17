@@ -1,7 +1,7 @@
 ﻿@model BlogPostViewModel
 @using System.Text.RegularExpressions
 @{
-	ViewData["Title"] = Model.Post.Title + " - Fox, Coffee and Science - " + SharedLocalizer["Blog"];
+	ViewData["Title"] = Model.Post.Title + " - Fox, Coffee and Science - " + SharedLocalizer["Blog"].Name;
 	string description = new System.Text.RegularExpressions.Regex(@"(?<=\<p\>\s{1,})(.|\s)*?\s*(?=\<\/p\>)").Match(Model.Post.Content).Value
 		.Replace("\n", "");
 	description = Regex.Replace(description, "<.*?>", string.Empty);

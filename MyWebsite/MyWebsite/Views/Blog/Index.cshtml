@@ -1,6 +1,6 @@
 ﻿@model BlogListViewModel
 @{
-	ViewData["Title"] = "Fox, Coffee and Science - " + SharedLocalizer["Blog"];
+	ViewData["Title"] = "Fox, Coffee and Science - " + SharedLocalizer["Blog"].Name;
 }
 
 @section OpenGraph
@@ -33,7 +33,7 @@
 
 <form method="get" action="https://xfox111.blogspot.com/search" target="_blank" rel="noopener noreferrer">
 	<input type="text" name="q" spellcheck="false" placeholder="@Localizer["Search"]" />
-	<input type="submit" value="&#xE094;" />
+	<input type="submit" value="&#xE71E;" />
 </form>
 
 <article>
@@ -70,7 +70,7 @@
 			<span>@(Model.PageNumber + 1)</span>
 			@if (!string.IsNullOrWhiteSpace(Model.Posts.NextPageToken))
 			{
-				<a asp-action="Index" asp-route-pageNumber="@(Model.PageNumber + 1)">@Localizer["Next"] &#xE00F;</a>
+				<a asp-action="Index" asp-route-pageNumber="@(Model.PageNumber + 1)">@Localizer["Next"] &#xE76C;</a>
 			}
 		</div>
 	}

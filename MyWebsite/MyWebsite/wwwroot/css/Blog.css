@@ -68,7 +68,7 @@ body
 
 	.post h2::after
 	{
-		content: " \E00F";
+		content: " \E76C";
 		font-size: initial;
 		margin: 10px 0px;
 	}
