@@ -1,0 +1,30 @@
+@model WishlistViewModel
+@{
+	ViewData["Title"] = Localizer["My wishlist"];
+}
+
+@section OpenGraph
+{
+	<meta name="author" content="@SharedLocalizer["Michael &apos;XFox&apos; Gordeev"]" />
+	<meta name="description" content="@SharedLocalizer["In case you don't know what to give me"]" />
+
+	<meta property="og:type" content="article" />
+	<meta property="og:site_name" content="@SharedLocalizer["Michael &apos;XFox&apos; Gordeev"]" />
+	<meta property="og:url" content="https://XFox111.NET/Wishlist" />
+	<meta property="og:locale" content="@SharedLocalizer["en"]" />
+	<meta property="og:image" content="https://xfox111.net/images/me.jpg" />
+	<meta property="og:description" content="@SharedLocalizer["In case you don't know what to give me"]" />
+	<meta property="og:title" content="@Localizer["My wishlist"]" />
+
+	<meta property="article:modified_time" content="@(((DateTime?)Model?.Wishlist?.LastUpdated)?.ToString("o"))" />
+}
+
+<header>
+	<h1>@Localizer["My wishlist"]</h1>
+	<p>@Localizer["In case you don't know what to give me"]</p>
+	<p>@Localizer["Last update"]: @Model?.Wishlist?.LastUpdated</p>
+</header>
+
+<article allow-select>
+	@Html.Raw(Model?.Content)
+</article>

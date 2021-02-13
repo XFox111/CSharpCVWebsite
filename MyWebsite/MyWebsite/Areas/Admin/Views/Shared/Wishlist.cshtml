@@ -1,0 +1,48 @@
+@model WishlistModel
+@{
+	ViewData["Title"] = "Wishlist";
+}
+
+<header>
+	&#xE760; <a asp-action="Index">Back to the list</a>
+	<h1>Edit wishlist</h1>
+	<p>
+		Previously updated on @Model?.LastUpdated
+	</p>
+
+	<a class="comment" asp-area="" asp-controller="Home" asp-action="Wishlist" target="_blank">// Open wishlist</a>
+</header>
+
+<article>
+	<form method="post">
+		<div asp-validation-summary="All" class="text-danger"></div>
+
+		<div class="cols">
+			<label asp-for="EnglishContent"></label>
+			<label asp-for="RussianContent"></label>
+			<textarea asp-for="EnglishContent" spellcheck="false" required></textarea>
+			<textarea asp-for="RussianContent" spellcheck="false" required></textarea>
+		</div>
+
+		<span asp-validation-for="EnglishContent" class="text-danger"></span>
+		<span asp-validation-for="RussianContent" class="text-danger"></span>
+
+		<br />
+		<input type="submit" value="Save" />
+	</form>
+</article>
+
+@section Imports
+{
+	<style>
+		.cols
+		{
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+		}
+		form
+		{
+			max-width: initial;
+		}
+	</style>
+}

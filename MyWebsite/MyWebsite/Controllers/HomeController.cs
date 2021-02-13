@@ -67,5 +67,9 @@ namespace MyWebsite.Controllers
 
 			return Redirect(Extensions.CheckNullOrWhitespace(Request.Headers["Referer"], "/"));
 		}
+
+		[Route("Wishlist")]
+		public IActionResult Wishlist() =>
+			View(new WishlistViewModel(Database, CultureInfo.CurrentUICulture));
 	}
 }

@@ -12,6 +12,7 @@ namespace MyWebsite.Models.Databases
 		public DbSet<ResumeModel> Resume { get; set; }
 		public DbSet<ShortLinkModel> ShortLinks { get; set; }
 		public DbSet<CustomData> CustomData { get; set; }
+		public DbSet<WishlistModel> Wishlist { get;set; }
 
 		public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options) =>
 			Database.EnsureCreated();
