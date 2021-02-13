@@ -24,9 +24,9 @@ namespace MyWebsite.Areas.Admin.Controllers
 		[HttpGet]
 		public IActionResult Create(string url, string id = "")
 		{
-			if (!string.IsNullOrWhiteSpace(id) && Database.ShortLinks.Find(id) != null)
+			if (string.IsNullOrWhiteSpace(url))
 			{
-				ModelState.AddModelError("Duplicate", "Link with such ID already exists");
+				ModelState.AddModelError(nameof(ArgumentNullException), "Provided url is empty or invalid");
 				return View(ViewPath, Database.ShortLinks.ToList());
 			}
 
@@ -36,11 +36,15 @@ namespace MyWebsite.Areas.Admin.Controllers
 				return View(ViewPath, Database.ShortLinks.ToList());
 			}
 
-			Database.ShortLinks.Add(new ShortLinkModel
-			{
-				Uri = uri,
-				LinkId = string.IsNullOrWhiteSpace(id) ? RandomString(6) : id
-			});
+			if (!string.IsNullOrWhiteSpace(id) && Database.ShortLinks.Find(id) is ShortLinkModel entry)
+				entry.Uri = uri;
+			else
+				Database.ShortLinks.Add(new ShortLinkModel
+				{
+					Uri = uri,
+					LinkId = string.IsNullOrWhiteSpace(id) ? RandomString(6) : id
+				});
+
 			Database.SaveChanges();
 			return RedirectToAction("Index");
 		}
